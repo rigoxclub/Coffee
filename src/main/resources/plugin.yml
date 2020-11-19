@@ -1,0 +1,9 @@
+name: VanillaCore
+version: ${project.version}
+main: club.rigox.vanillacore.VanillaCore
+api-version: 1.16
+authors: [ sebastn_chan ]
+website: https://rigox.club
+commands:
+  staff:
+    permission: staff.help
