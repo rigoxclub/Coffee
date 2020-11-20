@@ -1,1 +1,1 @@
-"# VanillaCore" 
+# VanillaCore
