@@ -2,6 +2,7 @@ package club.rigox.vanillacore.commands;
 
 import club.rigox.vanillacore.VanillaCore;
 import club.rigox.vanillacore.utils.CommandInterface;
+import club.rigox.vanillacore.utils.VanishUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -11,9 +12,12 @@ import static club.rigox.vanillacore.utils.MsgUtils.color;
 
 public class Staff implements CommandInterface {
     private final VanillaCore plugin;
+    private final VanishUtils vanishUtils;
 
     public Staff(VanillaCore plugin) {
         this.plugin = plugin;
+        vanishUtils = new VanishUtils(plugin);
+
     }
 
     @Override
@@ -28,24 +32,14 @@ public class Staff implements CommandInterface {
         if (plugin.getStaffMode().get(player)) {
             player.sendMessage(color("&cStaff mode disabled"));
             plugin.getStaffMode().replace(player, true, false);
-
-            for (Player all : Bukkit.getServer().getOnlinePlayers()) {
-                if (all != player) {
-                    all.showPlayer(player);
-                }
-            }
+            vanishUtils.showStaff(player);
             return true;
         }
 
-        for (Player all : Bukkit.getServer().getOnlinePlayers()) {
-            if (all != player) {
-                all.hidePlayer(player);
-            }
-
-        }
-
+        vanishUtils.hideStaff(player);
         player.sendMessage(color("&aStaff mode enabled"));
         plugin.getStaffMode().replace(player, false, true);
         return false;
     }
+
 }
