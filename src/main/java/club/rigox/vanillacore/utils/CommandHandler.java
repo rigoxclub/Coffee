@@ -1,15 +1,11 @@
 package club.rigox.vanillacore.utils;
 
-import club.rigox.vanillacore.utils.CommandInterface;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.command.TabExecutor;
 import org.bukkit.entity.Player;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 import static club.rigox.vanillacore.utils.MsgUtils.color;
 
@@ -40,8 +36,7 @@ public class CommandHandler implements CommandExecutor {
             return true;
         }
 
-        if (args.length == 0) {
-            getExecutor("staff").onCommand(sender, command, label, args);
+        if (args.length == 0) { getExecutor("staff").onCommand(sender, command, label, args);
             return true;
         }
 

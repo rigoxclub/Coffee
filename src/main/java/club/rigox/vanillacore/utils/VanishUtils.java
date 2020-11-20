@@ -2,7 +2,6 @@ package club.rigox.vanillacore.utils;
 
 import club.rigox.vanillacore.VanillaCore;
 import org.bukkit.Bukkit;
-import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 
 public class VanishUtils {
@@ -16,8 +15,6 @@ public class VanishUtils {
         for (Player all : Bukkit.getServer().getOnlinePlayers()) {
             all.hidePlayer(plugin, vanishedStaff);
         }
-
-
     }
 
     public void showStaff (Player vanishedStaff) {

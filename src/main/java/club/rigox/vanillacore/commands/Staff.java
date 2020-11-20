@@ -3,7 +3,6 @@ package club.rigox.vanillacore.commands;
 import club.rigox.vanillacore.VanillaCore;
 import club.rigox.vanillacore.utils.CommandInterface;
 import club.rigox.vanillacore.utils.VanishUtils;
-import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
