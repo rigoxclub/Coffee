@@ -10,6 +10,7 @@ import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityPickupItemEvent;
+import org.bukkit.event.entity.EntityTargetLivingEntityEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerPickupArrowEvent;
@@ -92,6 +93,17 @@ public class PlayerListener implements Listener {
         if (event.getEntity() instanceof Player) {
             Player player = (Player) event.getEntity();
             event.setCancelled(event.getEntity().hasPermission("staff.use") && plugin.getStaffMode().get(player));
+        }
+    }
+
+    @EventHandler
+    public void hidePlayerForEntities(EntityTargetLivingEntityEvent event) {
+
+        if (event.getTarget() instanceof Player) {
+            Player player = (Player) event.getTarget();
+            if (player.hasPermission("staff.use") && plugin.getStaffMode().get(player)) {
+                event.setCancelled(true);
+            }
         }
     }
 }
