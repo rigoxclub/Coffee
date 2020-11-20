@@ -6,4 +6,4 @@ authors: [ sebastn_chan ]
 website: https://rigox.club
 commands:
   staff:
-    permission: staff.help
+    description: Command 1.

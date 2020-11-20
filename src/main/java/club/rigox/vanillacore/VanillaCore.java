@@ -16,7 +16,7 @@ public final class VanillaCore extends JavaPlugin {
     public void onEnable() {
         instance = this;
 
-        this.getCommand("staff").setExecutor(new Staff(this));
+            this.getCommand("staff").setExecutor(new Staff(this));
         new PlayerListener(this);
     }
 

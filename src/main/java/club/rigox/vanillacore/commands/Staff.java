@@ -18,26 +18,26 @@ public class Staff implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+        Player player = (Player) sender;
+
         if (command.getName().equalsIgnoreCase("staff")) {
-            Player player = (Player) sender;
+
+            if (args[0].equalsIgnoreCase("help")) {
+                player.sendMessage(color("&aToma tu riki help papituki :)"));
+            }
 
             if (sender.hasPermission("staff.use")) {
-
                 if (plugin.getStaffMode().get(player)) {
                     plugin.getStaffMode().replace(player, true, false);
                     player.sendMessage(color("&cStaff mode disabled"));
                     return true;
                 }
-
                 plugin.getStaffMode().replace(player, false, true);
                 player.sendMessage(color("&aStaff mode enabled!"));
                 return true;
             }
 
-            if (args[0].equalsIgnoreCase("help")) {
-                sender.sendMessage(color("&aToma comando de ayuda :)"));
-                return true;
-            }
+            player.sendMessage(color("&cYou don't have permission to use this command."));
             return true;
         }
 
