@@ -14,6 +14,7 @@ import org.bukkit.event.entity.EntityTargetLivingEntityEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerPickupArrowEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
 
 import static club.rigox.vanillacore.utils.ConsoleUtils.debug;
 import static club.rigox.vanillacore.utils.MsgUtils.color;
@@ -33,6 +34,16 @@ public class PlayerListener implements Listener {
         if (player.hasPermission("staff.use")) {
             plugin.getStaffMode().put(player, false);
             debug(String.format("%s has been added to getStaffMode method with %s boolean", player,plugin.getStaffMode().get(player)));
+        }
+    }
+
+    @EventHandler
+    public void onPlayerLeave(PlayerQuitEvent event) {
+        Player player = event.getPlayer();
+
+        if (player.hasPermission("staff.use") && plugin.getStaffMode().get(player)) {
+            debug(String.format("%s has been removed of the getStaffMode method", player));
+            plugin.getStaffMode().remove(player);
         }
     }
 
