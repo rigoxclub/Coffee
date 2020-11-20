@@ -1,7 +1,9 @@
 package club.rigox.vanillacore;
 
+import club.rigox.vanillacore.commands.Help;
 import club.rigox.vanillacore.commands.Staff;
 import club.rigox.vanillacore.listeners.PlayerListener;
+import club.rigox.vanillacore.utils.CommandHandler;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -16,8 +18,8 @@ public final class VanillaCore extends JavaPlugin {
     public void onEnable() {
         instance = this;
 
-            this.getCommand("staff").setExecutor(new Staff(this));
         new PlayerListener(this);
+        registerCommands();
     }
 
     @Override
@@ -27,5 +29,12 @@ public final class VanillaCore extends JavaPlugin {
 
     public Map<Player, Boolean> getStaffMode() {
         return staffMode;
+    }
+
+    public void registerCommands() {
+        CommandHandler handler = new CommandHandler();
+        handler.register("staff", new Staff(this));
+        handler.register("help", new Help());
+        getCommand("staff").setExecutor(handler);
     }
 }
