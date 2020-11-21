@@ -1,7 +1,6 @@
 package club.rigox.vanillacore.commands;
 
 import club.rigox.vanillacore.VanillaCore;
-import club.rigox.vanillacore.player.Inventory;
 import club.rigox.vanillacore.player.StaffItems;
 import club.rigox.vanillacore.utils.CommandInterface;
 import club.rigox.vanillacore.player.Vanish;
@@ -10,8 +9,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import static club.rigox.vanillacore.utils.MsgUtils.color;
-import static club.rigox.vanillacore.player.Inventory.storeAndClearInventory;
-import static club.rigox.vanillacore.player.Inventory.restoreInventory;
+
 
 public class Staff implements CommandInterface {
     private final VanillaCore plugin;
@@ -34,21 +32,26 @@ public class Staff implements CommandInterface {
             return true;
         }
 
-        if (plugin.getStaffMode().get(player)) {
+        if (plugin.getStaffMode().get(player).isHidden()) {
             player.sendMessage(color("&cStaff mode disabled"));
-            plugin.getStaffMode().replace(player, true, false);
+
+            plugin.getStaffMode().get(player).unHide();
+
             vanish.showStaff(player);
-            restoreInventory(player);
+            plugin.getInventoryUtils().restoreInventory(player);
             return true;
         }
 
+        plugin.getInventoryUtils().storeAndClearInventory(player);
+
+        plugin.getStaffMode().get(player).hide();
+
         vanish.hideStaff(player);
-        storeAndClearInventory(player);
+
         staffItems.giveStaffItems(player);
 
 
         player.sendMessage(color("&aStaff mode enabled"));
-        plugin.getStaffMode().replace(player, false, true);
         return false;
     }
 

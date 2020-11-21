@@ -1,45 +1,38 @@
 package club.rigox.vanillacore.player;
 
+import club.rigox.vanillacore.Models.PlayerModel;
 import club.rigox.vanillacore.VanillaCore;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.HashMap;
-import java.util.Map;
+import java.util.LinkedHashMap;
 import java.util.UUID;
 
 public class Inventory {
     private VanillaCore plugin;
 
-    public Inventory (VanillaCore plugin) {
+    public Inventory(VanillaCore plugin) {
         this.plugin = plugin;
     }
 
-    static Map<UUID, ItemStack[]> items = new HashMap<UUID, ItemStack[]>();
-    static Map<UUID, ItemStack[]> armor = new HashMap<UUID, ItemStack[]>();
 
-    static Map<UUID, Float> exp = new HashMap<UUID, Float>();
-    static Map<UUID, Integer> food = new HashMap<UUID, Integer>();
-    static Map<UUID, Double> health = new HashMap<UUID, Double>();
 
-    public static void storeAndClearInventory (Player player) {
-        UUID uuid = player.getUniqueId();
-
-        ItemStack[] itemsContent = player.getInventory().getContents();
-        ItemStack[] armorContents = player.getInventory().getArmorContents();
+    public void storeAndClearInventory(Player player) {
 
         float playerExp = player.getExp();
         int playerFood = player.getFoodLevel();
 
         double playerHealth = player.getHealth();
 
-        items.put(uuid, itemsContent);
-        armor.put(uuid, armorContents);
 
-        exp.put(uuid, playerExp);
-        food.put(uuid, playerFood);
+        PlayerModel staffMember = plugin.getStaffMode().get(player);
 
-        health.put(uuid, playerHealth);
+
+        staffMember.setFullInventory(player.getInventory());
+        staffMember.setHealth(playerHealth);
+        staffMember.setFoodLevel(playerFood);
+        staffMember.setExp(playerExp);
 
         player.getInventory().clear();
         player.setHealth(20);
@@ -49,16 +42,17 @@ public class Inventory {
         remArmor(player);
     }
 
-    public static void restoreInventory (Player player) {
-        UUID uuid = player.getUniqueId();
+    public void restoreInventory(Player player) {
 
-        ItemStack[] itemsContent = items.get(uuid);
-        ItemStack[] armorContents = armor.get(uuid);
+        PlayerModel staffMember = plugin.getStaffMode().get(player);
 
-        float playerExp = exp.get(uuid);
-        int playerFood = food.get(uuid);
+        ItemStack[] itemsContent = staffMember.getInventory();
+        ItemStack[] armorContents = staffMember.getInventory();
 
-        double playerHealth = health.get(uuid);
+        float playerExp = staffMember.getExp();
+        int playerFood = staffMember.getFoodLevel();
+
+        double playerHealth = staffMember.getHealth();
 
         if (itemsContent != null) {
             player.getInventory().setContents(itemsContent);
@@ -81,7 +75,7 @@ public class Inventory {
 
     }
 
-    public static void remArmor(Player player){
+    public void remArmor(Player player) {
         player.getInventory().setHelmet(null);
         player.getInventory().setChestplate(null);
         player.getInventory().setLeggings(null);

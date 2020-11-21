@@ -1,5 +1,6 @@
 package club.rigox.vanillacore.listeners;
 
+import club.rigox.vanillacore.Models.PlayerModel;
 import club.rigox.vanillacore.VanillaCore;
 import com.destroystokyo.paper.event.player.PlayerPickupExperienceEvent;
 import org.bukkit.Bukkit;
@@ -32,8 +33,8 @@ public class PlayerListener implements Listener {
         Player player = event.getPlayer();
 
         if (player.hasPermission("staff.use")) {
-            plugin.getStaffMode().put(player, false);
-            debug(String.format("%s has been added to getStaffMode method with %s boolean", player,plugin.getStaffMode().get(player)));
+            plugin.getStaffMode().put(player, new PlayerModel(null, 0, 0, 0));
+            debug(String.format("%s has been added to getStaffMode method with %s boolean", player, plugin.getStaffMode().get(player)));
         }
     }
 
@@ -41,7 +42,7 @@ public class PlayerListener implements Listener {
     public void onPlayerLeave(PlayerQuitEvent event) {
         Player player = event.getPlayer();
 
-        if (player.hasPermission("staff.use") && plugin.getStaffMode().get(player)) {
+        if (player.hasPermission("staff.use") && plugin.getStaffMode().containsKey(player)) {
             debug(String.format("%s has been removed of the getStaffMode method", player));
             plugin.getStaffMode().remove(player);
         }
@@ -50,7 +51,7 @@ public class PlayerListener implements Listener {
     @EventHandler
     public void onPlayerBlockBreak(BlockBreakEvent event) {
 
-        if (event.getPlayer().hasPermission("staff.use") && plugin.getStaffMode().get(event.getPlayer())) {
+        if (event.getPlayer().hasPermission("staff.use") && plugin.getStaffMode().get(event.getPlayer()).isHidden()) {
 
             event.getPlayer().sendMessage(color("&cYou can't break blocks while in staff mode!"));
             event.setCancelled(true);
@@ -60,7 +61,7 @@ public class PlayerListener implements Listener {
     @EventHandler
     public void onPlayerBlockPlace(BlockPlaceEvent event) {
 
-        if (event.getPlayer().hasPermission("staff.use") && plugin.getStaffMode().get(event.getPlayer())) {
+        if (event.getPlayer().hasPermission("staff.use") && plugin.getStaffMode().get(event.getPlayer()).isHidden()) {
 
             event.getPlayer().sendMessage(color("&cYou can't place blocks while in staff mode!"));
             event.setCancelled(true);
@@ -70,13 +71,13 @@ public class PlayerListener implements Listener {
     @EventHandler
     public void onExperiencePickup(PlayerPickupExperienceEvent event) {
 
-        event.setCancelled(event.getPlayer().hasPermission("staff.use") && plugin.getStaffMode().get(event.getPlayer()));
+        event.setCancelled(event.getPlayer().hasPermission("staff.use") && plugin.getStaffMode().get(event.getPlayer()).isHidden());
     }
 
     @EventHandler
     public void onArrowPickup(PlayerPickupArrowEvent event) {
 
-        event.setCancelled(event.getPlayer().hasPermission("staff.use") && plugin.getStaffMode().get(event.getPlayer()));
+        event.setCancelled(event.getPlayer().hasPermission("staff.use") && plugin.getStaffMode().get(event.getPlayer()).isHidden());
     }
 
     @EventHandler
@@ -84,14 +85,14 @@ public class PlayerListener implements Listener {
 
         if (event.getEntity() instanceof Player) {
             Player player = (Player) event.getEntity();
-            event.setCancelled(event.getEntity().hasPermission("staff.use") && plugin.getStaffMode().get(player));
+            event.setCancelled(event.getEntity().hasPermission("staff.use") && plugin.getStaffMode().get(player).isHidden());
         }
     }
 
     @EventHandler
     public void onItemDrop(PlayerDropItemEvent event) {
 
-        if (event.getPlayer().hasPermission("staff.use") && plugin.getStaffMode().get(event.getPlayer())) {
+        if (event.getPlayer().hasPermission("staff.use") && plugin.getStaffMode().get(event.getPlayer()).isHidden()) {
             event.getPlayer().sendMessage(color("&cYou can't drop items while in staff mode"));
             event.setCancelled(true);
 
@@ -103,7 +104,7 @@ public class PlayerListener implements Listener {
 
         if (event.getEntity() instanceof Player) {
             Player player = (Player) event.getEntity();
-            event.setCancelled(event.getEntity().hasPermission("staff.use") && plugin.getStaffMode().get(player));
+            event.setCancelled(event.getEntity().hasPermission("staff.use") && plugin.getStaffMode().get(player).isHidden());
         }
     }
 
@@ -112,7 +113,7 @@ public class PlayerListener implements Listener {
 
         if (event.getTarget() instanceof Player) {
             Player player = (Player) event.getTarget();
-            if (player.hasPermission("staff.use") && plugin.getStaffMode().get(player)) {
+            if (player.hasPermission("staff.use") && plugin.getStaffMode().get(player).isHidden()) {
                 event.setCancelled(true);
             }
         }

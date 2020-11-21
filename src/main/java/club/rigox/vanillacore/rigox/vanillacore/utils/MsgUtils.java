@@ -1,4 +1,4 @@
-package club.rigox.vanillacore.utils;
+package club.rigox.vanillacore.rigox.vanillacore.utils;
 
 import org.bukkit.ChatColor;
 

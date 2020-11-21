@@ -1,4 +1,4 @@
-package club.rigox.vanillacore;
+package club.rigox.vanillacore.rigox.vanillacore;
 
 import club.rigox.vanillacore.Models.PlayerModel;
 import club.rigox.vanillacore.commands.Help;
