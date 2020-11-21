@@ -1,13 +1,13 @@
-package club.rigox.vanillacore.utils;
+package club.rigox.vanillacore.player;
 
 import club.rigox.vanillacore.VanillaCore;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
-public class VanishUtils {
+public class Vanish {
     private final VanillaCore plugin;
 
-    public VanishUtils (VanillaCore plugin) {
+    public Vanish(VanillaCore plugin) {
         this.plugin = plugin;
     }
 
