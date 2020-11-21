@@ -48,9 +48,6 @@ public class Staff implements CommandInterface {
 
         vanish.hideStaff(player);
 
-        staffItems.giveStaffItems(player);
-
-
         player.sendMessage(color("&aStaff mode enabled"));
         return false;
     }

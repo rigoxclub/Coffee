@@ -1,31 +1,29 @@
 package club.rigox.vanillacore.Models;
 
+import club.rigox.vanillacore.utils.ConsoleUtils;
+import org.bukkit.Bukkit;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class PlayerModel {
-
-    private PlayerInventory playerInventory;
-
     private float exp;
     private int foodLevel;
-    private double health;
+    private double health = 20; // Por si llega a dar un error, mejor darles toda la vida antes que matarlos xd
 
     private boolean isHidden;
 
-    public PlayerModel(PlayerInventory playerInventory, float exp, int foodLevel, double health) {
-        this.playerInventory = playerInventory;
-        this.exp = exp;
-        this.foodLevel = foodLevel;
-        this.health = health;
-    }
+    private ItemStack[] inventory;
+    private ItemStack[] armor;
 
     public void hide() {
         this.isHidden = true;
     }
 
-    public void unHide(){
+    public void unHide() {
         this.isHidden = false;
     }
 
@@ -42,16 +40,13 @@ public class PlayerModel {
     }
 
     public void setArmor(ItemStack[] armor) {
-        this.playerInventory.setArmorContents(armor);
+        this.armor = (armor);
     }
 
     public void setInventory(ItemStack[] inv) {
-        this.playerInventory.setContents(inv);
+        this.inventory = inv;
     }
 
-    public void setFullInventory(PlayerInventory playerInventory) {
-        this.playerInventory = playerInventory;
-    }
 
     //Geters
     public double getHealth() {
@@ -68,15 +63,11 @@ public class PlayerModel {
 
 
     public ItemStack[] getInventory() {
-        return this.playerInventory.getContents();
+        return this.inventory;
     }
 
     public ItemStack[] getArmor() {
-        return this.playerInventory.getArmorContents();
-    }
-
-    public Inventory getFullInventory() {
-        return playerInventory;
+        return this.armor;
     }
 
     public boolean isHidden() {

@@ -33,8 +33,8 @@ public class PlayerListener implements Listener {
         Player player = event.getPlayer();
 
         if (player.hasPermission("staff.use")) {
-            plugin.getStaffMode().put(player, new PlayerModel(null, 0, 0, 0));
-            debug(String.format("%s has been added to getStaffMode method with %s boolean", player, plugin.getStaffMode().get(player)));
+            plugin.getStaffMode().put(player, new PlayerModel());
+            debug(String.format("%s has been added to getStaffMode method", player.getName()));
         }
     }
 
@@ -43,7 +43,7 @@ public class PlayerListener implements Listener {
         Player player = event.getPlayer();
 
         if (player.hasPermission("staff.use") && plugin.getStaffMode().containsKey(player)) {
-            debug(String.format("%s has been removed of the getStaffMode method", player));
+            debug(String.format("%s has been removed of the getStaffMode method", player.getName()));
             plugin.getStaffMode().remove(player);
         }
     }
