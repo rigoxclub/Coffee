@@ -6,10 +6,6 @@ import club.rigox.vanillacore.utils.ConsoleUtils;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.UUID;
-
 public class Inventory {
     private VanillaCore plugin;
 
@@ -21,6 +17,8 @@ public class Inventory {
     public void storeAndClearInventory(Player player) {
 
         float playerExp = player.getExp();
+        int playerExpLevel = player.getLevel();
+
         int playerFood = player.getFoodLevel();
 
         double playerHealth = player.getHealth();
@@ -34,23 +32,25 @@ public class Inventory {
         staffMember.setInventory(player.getInventory().getContents());
         staffMember.setArmor(player.getInventory().getArmorContents());
 
-
         ConsoleUtils.debug(String.format("Saving player %s heath %s", player.getName(), playerHealth));
         staffMember.setHealth(playerHealth);
         staffMember.setFoodLevel(playerFood);
         staffMember.setExp(playerExp);
-
+        staffMember.setExpLevel(playerExpLevel);
 
         //  Clearing player inv
         //  Setting the player health to max
         //  Setting the food level to max
         //  Setting exp to 0
+        //  Setting expLevel to 0
         //  Removing all armor
 
         player.getInventory().clear();
         player.setHealth(20);
         player.setFoodLevel(20);
         player.setExp(0);
+        player.setLevel(0);
+
         remArmor(player);
     }
 
@@ -67,6 +67,7 @@ public class Inventory {
 
         float playerExp = staffMember.getExp();
         int playerFood = staffMember.getFoodLevel();
+        int playerExpLevel = staffMember.getExpLevel();
 
         double playerHealth = staffMember.getHealth();
 
@@ -86,6 +87,10 @@ public class Inventory {
         if (playerExp != 0) {
             player.setExp(playerExp);
 
+        }
+
+        if (playerExpLevel != 0) {
+            player.setLevel(playerExpLevel);
         }
 
         if (armorContents != null) {

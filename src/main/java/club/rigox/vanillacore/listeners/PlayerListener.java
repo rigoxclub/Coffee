@@ -2,6 +2,7 @@ package club.rigox.vanillacore.listeners;
 
 import club.rigox.vanillacore.Models.PlayerModel;
 import club.rigox.vanillacore.VanillaCore;
+import club.rigox.vanillacore.player.Inventory;
 import com.destroystokyo.paper.event.player.PlayerPickupExperienceEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -43,8 +44,9 @@ public class PlayerListener implements Listener {
         Player player = event.getPlayer();
 
         if (player.hasPermission("staff.use") && plugin.getStaffMode().containsKey(player)) {
-            debug(String.format("%s has been removed of the getStaffMode method", player.getName()));
+            plugin.getInventoryUtils().restoreInventory(player);
             plugin.getStaffMode().remove(player);
+            debug(String.format("%s has been removed of the getStaffMode method", player.getName()));
         }
     }
 

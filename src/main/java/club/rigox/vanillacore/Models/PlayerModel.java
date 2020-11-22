@@ -1,16 +1,10 @@
 package club.rigox.vanillacore.Models;
 
-import club.rigox.vanillacore.utils.ConsoleUtils;
-import org.bukkit.Bukkit;
-import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.PlayerInventory;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class PlayerModel {
     private float exp;
+    private int expLevel;
     private int foodLevel;
     private double health = 20; // Por si llega a dar un error, mejor darles toda la vida antes que matarlos xd
 
@@ -35,6 +29,10 @@ public class PlayerModel {
         this.exp = exp;
     }
 
+    public void setExpLevel(int expLevel) {
+        this.expLevel = expLevel;
+    }
+
     public void setHealth(double health) {
         this.health = health;
     }
@@ -55,6 +53,10 @@ public class PlayerModel {
 
     public float getExp() {
         return exp;
+    }
+
+    public int getExpLevel() {
+        return expLevel;
     }
 
     public int getFoodLevel() {
