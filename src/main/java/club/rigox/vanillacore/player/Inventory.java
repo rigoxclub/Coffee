@@ -7,7 +7,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 public class Inventory {
-    private VanillaCore plugin;
+    private final VanillaCore plugin;
 
     public Inventory(VanillaCore plugin) {
         this.plugin = plugin;
@@ -58,12 +58,10 @@ public class Inventory {
 
         PlayerModel staffMember = plugin.getStaffMode().get(player);
 
-
         if(staffMember == null) return; //TODO: Error message.
 
         ItemStack[] itemsContent = staffMember.getInventory();
         ItemStack[] armorContents = staffMember.getArmor();
-
 
         float playerExp = staffMember.getExp();
         int playerFood = staffMember.getFoodLevel();
@@ -74,31 +72,32 @@ public class Inventory {
         if (itemsContent != null) {
 
             player.getInventory().setContents(itemsContent);
-
             player.setFoodLevel(playerFood);
-
-            ConsoleUtils.debug(String.format("Player %s heath %s", player.getName(), playerHealth));
-
             player.setHealth(playerHealth);
+
+            ConsoleUtils.debug("Restored successfully Inventory, FoodLevel and Health");
         } else {
             player.getInventory().clear();
+            ConsoleUtils.debug("Inventory has been cleared because the inventory is empty");
         }
 
         if (playerExp != 0) {
             player.setExp(playerExp);
-
+            ConsoleUtils.debug("Restored successfully player experience");
         }
 
         if (playerExpLevel != 0) {
             player.setLevel(playerExpLevel);
+            ConsoleUtils.debug("Restored successfully player experience level");
         }
 
         if (armorContents != null) {
             player.getInventory().setArmorContents(armorContents);
+            ConsoleUtils.debug("Restored successfully player armor");
         } else {
             remArmor(player);
+            ConsoleUtils.debug("Armor has been cleared because it's empty");
         }
-
     }
 
     public void remArmor(Player player) {

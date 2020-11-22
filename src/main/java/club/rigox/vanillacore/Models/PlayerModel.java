@@ -9,6 +9,7 @@ public class PlayerModel {
     private double health = 20; // Por si llega a dar un error, mejor darles toda la vida antes que matarlos xd
 
     private boolean isHidden;
+    private boolean isFrozed;
 
     private ItemStack[] inventory;
     private ItemStack[] armor;
@@ -19,6 +20,14 @@ public class PlayerModel {
 
     public void unHide() {
         this.isHidden = false;
+    }
+
+    public void freeze() {
+        this.isFrozed = true;
+    }
+
+    public void unfreeze() {
+        this.isFrozed = false;
     }
 
     public void setFoodLevel(int foodLevel) {
@@ -74,5 +83,9 @@ public class PlayerModel {
 
     public boolean isHidden() {
         return isHidden;
+    }
+
+    public boolean isFrozed() {
+        return isFrozed;
     }
 }

@@ -7,3 +7,7 @@ website: https://rigox.club
 commands:
   staff:
     description: Command 1.
+  freeze:
+    description: Command freeze
+  unfreeze:
+    description: Command unfreze

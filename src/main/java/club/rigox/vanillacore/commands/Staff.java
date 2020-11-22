@@ -43,6 +43,7 @@ public class Staff implements CommandInterface {
         }
 
         plugin.getInventoryUtils().storeAndClearInventory(player);
+        staffItems.giveStaffItems(player);
 
         plugin.getStaffMode().get(player).hide();
 

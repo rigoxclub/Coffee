@@ -1,8 +1,10 @@
 package club.rigox.vanillacore;
 
 import club.rigox.vanillacore.Models.PlayerModel;
+import club.rigox.vanillacore.commands.Freeze;
 import club.rigox.vanillacore.commands.Help;
 import club.rigox.vanillacore.commands.Staff;
+import club.rigox.vanillacore.commands.Unfreeze;
 import club.rigox.vanillacore.listeners.PlayerListener;
 import club.rigox.vanillacore.utils.CommandHandler;
 
@@ -19,6 +21,7 @@ public final class VanillaCore extends JavaPlugin {
     public static VanillaCore instance;
 
     private Map<Player, PlayerModel> staffMode = new LinkedHashMap<>();
+    private Map<Player, Boolean> isFrozed = new LinkedHashMap<>();
 
     private Inventory inventoryUtils;
 
@@ -45,10 +48,15 @@ public final class VanillaCore extends JavaPlugin {
         return staffMode;
     }
 
+
+
     public void registerCommands() {
         CommandHandler handler = new CommandHandler();
         handler.register("staff", new Staff(this));
         handler.register("help", new Help());
         getCommand("staff").setExecutor(handler);
+
+        this.getCommand("freeze").setExecutor(new Freeze(this));
+        this.getCommand("unfreeze").setExecutor(new Unfreeze(this));
     }
 }

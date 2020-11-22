@@ -5,6 +5,7 @@ import club.rigox.vanillacore.VanillaCore;
 import club.rigox.vanillacore.player.Inventory;
 import com.destroystokyo.paper.event.player.PlayerPickupExperienceEvent;
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -13,10 +14,8 @@ import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityPickupItemEvent;
 import org.bukkit.event.entity.EntityTargetLivingEntityEvent;
-import org.bukkit.event.player.PlayerDropItemEvent;
-import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.event.player.PlayerPickupArrowEvent;
-import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.event.player.*;
+import org.bukkit.potion.PotionEffectType;
 
 import static club.rigox.vanillacore.utils.ConsoleUtils.debug;
 import static club.rigox.vanillacore.utils.MsgUtils.color;
@@ -43,81 +42,22 @@ public class PlayerListener implements Listener {
     public void onPlayerLeave(PlayerQuitEvent event) {
         Player player = event.getPlayer();
 
-        if (player.hasPermission("staff.use") && plugin.getStaffMode().containsKey(player)) {
+        if (plugin.getStaffMode().containsKey(player)) {
             plugin.getInventoryUtils().restoreInventory(player);
             plugin.getStaffMode().remove(player);
+            player.removePotionEffect(PotionEffectType.BLINDNESS);
             debug(String.format("%s has been removed of the getStaffMode method", player.getName()));
         }
+
     }
 
     @EventHandler
-    public void onPlayerBlockBreak(BlockBreakEvent event) {
+    public void onPlayerMove(PlayerMoveEvent event) {
+        Player player = event.getPlayer();
 
-        if (event.getPlayer().hasPermission("staff.use") && plugin.getStaffMode().get(event.getPlayer()).isHidden()) {
-
-            event.getPlayer().sendMessage(color("&cYou can't break blocks while in staff mode!"));
-            event.setCancelled(true);
-        }
-    }
-
-    @EventHandler
-    public void onPlayerBlockPlace(BlockPlaceEvent event) {
-
-        if (event.getPlayer().hasPermission("staff.use") && plugin.getStaffMode().get(event.getPlayer()).isHidden()) {
-
-            event.getPlayer().sendMessage(color("&cYou can't place blocks while in staff mode!"));
-            event.setCancelled(true);
-        }
-    }
-
-    @EventHandler
-    public void onExperiencePickup(PlayerPickupExperienceEvent event) {
-
-        event.setCancelled(event.getPlayer().hasPermission("staff.use") && plugin.getStaffMode().get(event.getPlayer()).isHidden());
-    }
-
-    @EventHandler
-    public void onArrowPickup(PlayerPickupArrowEvent event) {
-
-        event.setCancelled(event.getPlayer().hasPermission("staff.use") && plugin.getStaffMode().get(event.getPlayer()).isHidden());
-    }
-
-    @EventHandler
-    public void onItemPickUp(EntityPickupItemEvent event) {
-
-        if (event.getEntity() instanceof Player) {
-            Player player = (Player) event.getEntity();
-            event.setCancelled(event.getEntity().hasPermission("staff.use") && plugin.getStaffMode().get(player).isHidden());
-        }
-    }
-
-    @EventHandler
-    public void onItemDrop(PlayerDropItemEvent event) {
-
-        if (event.getPlayer().hasPermission("staff.use") && plugin.getStaffMode().get(event.getPlayer()).isHidden()) {
-            event.getPlayer().sendMessage(color("&cYou can't drop items while in staff mode"));
-            event.setCancelled(true);
-
-        }
-    }
-
-    @EventHandler
-    public void onDamage(EntityDamageEvent event) {
-
-        if (event.getEntity() instanceof Player) {
-            Player player = (Player) event.getEntity();
-            event.setCancelled(event.getEntity().hasPermission("staff.use") && plugin.getStaffMode().get(player).isHidden());
-        }
-    }
-
-    @EventHandler
-    public void hidePlayerForEntities(EntityTargetLivingEntityEvent event) {
-
-        if (event.getTarget() instanceof Player) {
-            Player player = (Player) event.getTarget();
-            if (player.hasPermission("staff.use") && plugin.getStaffMode().get(player).isHidden()) {
-                event.setCancelled(true);
-            }
+        if (plugin.getStaffMode().get(player).isFrozed()) {
+            Location location = player.getLocation();
+            player.teleport(location);
         }
     }
 }
