@@ -1,6 +1,6 @@
 package club.rigox.vanillacore;
 
-import club.rigox.vanillacore.Models.PlayerModel;
+import club.rigox.vanillacore.models.PlayerModel;
 import club.rigox.vanillacore.commands.Freeze;
 import club.rigox.vanillacore.commands.Help;
 import club.rigox.vanillacore.commands.Staff;
@@ -20,7 +20,7 @@ import java.util.Map;
 public final class VanillaCore extends JavaPlugin {
     public static VanillaCore instance;
 
-    private Map<Player, PlayerModel> staffMode = new LinkedHashMap<>();
+    private Map<Player, PlayerModel> playerModel = new LinkedHashMap<>();
     private Map<Player, Boolean> isFrozed = new LinkedHashMap<>();
 
     private Inventory inventoryUtils;
@@ -44,8 +44,8 @@ public final class VanillaCore extends JavaPlugin {
         return this.inventoryUtils;
     }
 
-    public Map<Player, PlayerModel> getStaffMode() {
-        return staffMode;
+    public Map<Player, PlayerModel> getPlayerModel() {
+        return playerModel;
     }
 
 

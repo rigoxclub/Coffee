@@ -32,10 +32,10 @@ public class Staff implements CommandInterface {
             return true;
         }
 
-        if (plugin.getStaffMode().get(player).isHidden()) {
+        if (plugin.getPlayerModel().get(player).isHidden()) {
             player.sendMessage(color("&cStaff mode disabled"));
 
-            plugin.getStaffMode().get(player).unHide();
+            plugin.getPlayerModel().get(player).unHide();
 
             vanish.showStaff(player);
             plugin.getInventoryUtils().restoreInventory(player);
@@ -45,7 +45,7 @@ public class Staff implements CommandInterface {
         plugin.getInventoryUtils().storeAndClearInventory(player);
         staffItems.giveStaffItems(player);
 
-        plugin.getStaffMode().get(player).hide();
+        plugin.getPlayerModel().get(player).hide();
 
         vanish.hideStaff(player);
 

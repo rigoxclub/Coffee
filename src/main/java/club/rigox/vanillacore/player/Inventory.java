@@ -1,6 +1,6 @@
 package club.rigox.vanillacore.player;
 
-import club.rigox.vanillacore.Models.PlayerModel;
+import club.rigox.vanillacore.models.PlayerModel;
 import club.rigox.vanillacore.VanillaCore;
 import club.rigox.vanillacore.utils.ConsoleUtils;
 import org.bukkit.entity.Player;
@@ -24,7 +24,7 @@ public class Inventory {
         double playerHealth = player.getHealth();
 
 
-        PlayerModel staffMember = plugin.getStaffMode().get(player);
+        PlayerModel staffMember = plugin.getPlayerModel().get(player);
 
         if(staffMember == null) return; //TODO: Error message.
 
@@ -56,7 +56,7 @@ public class Inventory {
 
     public void restoreInventory(Player player) {
 
-        PlayerModel staffMember = plugin.getStaffMode().get(player);
+        PlayerModel staffMember = plugin.getPlayerModel().get(player);
 
         if(staffMember == null) return; //TODO: Error message.
 

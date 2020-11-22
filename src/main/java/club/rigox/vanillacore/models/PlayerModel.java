@@ -1,4 +1,4 @@
-package club.rigox.vanillacore.Models;
+package club.rigox.vanillacore.models;
 
 import org.bukkit.inventory.ItemStack;
 
@@ -53,6 +53,7 @@ public class PlayerModel {
     public void setInventory(ItemStack[] inv) {
         this.inventory = inv;
     }
+
 
 
     //Geters

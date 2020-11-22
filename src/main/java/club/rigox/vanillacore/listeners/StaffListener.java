@@ -27,9 +27,13 @@ public class StaffListener implements Listener {
     @EventHandler
     public void onPlayerBlockBreak(BlockBreakEvent event) {
 
-        if (event.getPlayer().hasPermission("staff.use") && plugin.getStaffMode().get(event.getPlayer()).isHidden()) {
-
+        if (plugin.getPlayerModel().get(event.getPlayer()).isHidden()) {
             event.getPlayer().sendMessage(color("&cYou can't break blocks while in staff mode!"));
+            event.setCancelled(true);
+        }
+
+        if (plugin.getPlayerModel().get(event.getPlayer()).isFrozed()) {
+            event.getPlayer().sendMessage(color("&cYou can't break blocks while frozed!"));
             event.setCancelled(true);
         }
     }
@@ -37,9 +41,13 @@ public class StaffListener implements Listener {
     @EventHandler
     public void onPlayerBlockPlace(BlockPlaceEvent event) {
 
-        if (event.getPlayer().hasPermission("staff.use") && plugin.getStaffMode().get(event.getPlayer()).isHidden()) {
-
+        if (plugin.getPlayerModel().get(event.getPlayer()).isHidden()) {
             event.getPlayer().sendMessage(color("&cYou can't place blocks while in staff mode!"));
+            event.setCancelled(true);
+        }
+
+        if (plugin.getPlayerModel().get(event.getPlayer()).isFrozed()) {
+            event.getPlayer().sendMessage(color("&cYou can't place blocks while frozed!"));
             event.setCancelled(true);
         }
     }
@@ -47,13 +55,16 @@ public class StaffListener implements Listener {
     @EventHandler
     public void onExperiencePickup(PlayerPickupExperienceEvent event) {
 
-        event.setCancelled(event.getPlayer().hasPermission("staff.use") && plugin.getStaffMode().get(event.getPlayer()).isHidden());
+        event.setCancelled(plugin.getPlayerModel().get(event.getPlayer()).isHidden());
+        event.setCancelled(plugin.getPlayerModel().get(event.getPlayer()).isFrozed());
     }
 
     @EventHandler
     public void onArrowPickup(PlayerPickupArrowEvent event) {
 
-        event.setCancelled(event.getPlayer().hasPermission("staff.use") && plugin.getStaffMode().get(event.getPlayer()).isHidden());
+        event.setCancelled(plugin.getPlayerModel().get(event.getPlayer()).isHidden());
+        event.setCancelled(plugin.getPlayerModel().get(event.getPlayer()).isFrozed());
+
     }
 
     @EventHandler
@@ -61,17 +72,21 @@ public class StaffListener implements Listener {
 
         if (event.getEntity() instanceof Player) {
             Player player = (Player) event.getEntity();
-            event.setCancelled(event.getEntity().hasPermission("staff.use") && plugin.getStaffMode().get(player).isHidden());
+            event.setCancelled(plugin.getPlayerModel().get(player).isHidden());
         }
     }
 
     @EventHandler
     public void onItemDrop(PlayerDropItemEvent event) {
 
-        if (event.getPlayer().hasPermission("staff.use") && plugin.getStaffMode().get(event.getPlayer()).isHidden()) {
-            event.getPlayer().sendMessage(color("&cYou can't drop items while in staff mode"));
+        if (plugin.getPlayerModel().get(event.getPlayer()).isHidden()) {
+            event.getPlayer().sendMessage(color("&cYou can't drop items while in staff mode!"));
             event.setCancelled(true);
+        }
 
+        if (plugin.getPlayerModel().get(event.getPlayer()).isFrozed()) {
+            event.getPlayer().sendMessage(color("&cYou can't drop items while frozed!"));
+            event.setCancelled(true);
         }
     }
 
@@ -80,7 +95,8 @@ public class StaffListener implements Listener {
 
         if (event.getEntity() instanceof Player) {
             Player player = (Player) event.getEntity();
-            event.setCancelled(event.getEntity().hasPermission("staff.use") && plugin.getStaffMode().get(player).isHidden());
+            event.setCancelled(plugin.getPlayerModel().get(player).isHidden());
+            event.setCancelled(plugin.getPlayerModel().get(player).isFrozed());
         }
     }
 
@@ -89,7 +105,11 @@ public class StaffListener implements Listener {
 
         if (event.getTarget() instanceof Player) {
             Player player = (Player) event.getTarget();
-            if (player.hasPermission("staff.use") && plugin.getStaffMode().get(player).isHidden()) {
+            if (plugin.getPlayerModel().get(player).isHidden()) {
+                event.setCancelled(true);
+            }
+
+            if (plugin.getPlayerModel().get(player).isFrozed()) {
                 event.setCancelled(true);
             }
         }
