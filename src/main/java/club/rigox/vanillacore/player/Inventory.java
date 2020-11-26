@@ -24,7 +24,7 @@ public class Inventory {
         double playerHealth = player.getHealth();
 
 
-        PlayerModel staffMember = plugin.getPlayerModel().get(player);
+        PlayerModel staffMember = plugin.getPlayers().get(player);
 
         if(staffMember == null) return; //TODO: Error message.
 
@@ -56,7 +56,7 @@ public class Inventory {
 
     public void restoreInventory(Player player) {
 
-        PlayerModel staffMember = plugin.getPlayerModel().get(player);
+        PlayerModel staffMember = plugin.getPlayers().get(player);
 
         if(staffMember == null) return; //TODO: Error message.
 

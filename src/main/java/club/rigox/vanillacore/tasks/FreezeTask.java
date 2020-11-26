@@ -27,8 +27,4 @@ public class FreezeTask extends BukkitRunnable {
         target.sendTitle(color("&c&lYOU ARE FROZED!"), color(String.format("&ePlease follow %s instructions in the chat.", staff.getName())), 10, 40, 10);
 
     }
-
-    public void stop() {
-        this.stop();
-    }
 }

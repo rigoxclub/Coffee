@@ -24,19 +24,20 @@ public class PlayerListener implements Listener {
     public void onPlayerJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
 
-        if (player.hasPermission("staff.use")) {
-            plugin.getPlayerModel().put(player, new PlayerModel());
-            debug(String.format("%s has been added to getPlayerModel method", player.getName()));
-        }
+        //Si vas a usar el PlayerModel para todos, no tenes que hacer esto sino es obvio que te va a dar nullpointer master
+//        if (player.hasPermission("staff.use")) {
+        plugin.getPlayers().put(player, new PlayerModel());
+//            debug(String.format("%s has been added to getPlayerModel method", player.getName()));
+//        }
     }
 
     @EventHandler
     public void onPlayerLeave(PlayerQuitEvent event) {
         Player player = event.getPlayer();
 
-        if (plugin.getPlayerModel().containsKey(player)) {
+        if (plugin.getPlayers().containsKey(player)) {
             plugin.getInventoryUtils().restoreInventory(player);
-            plugin.getPlayerModel().remove(player);
+            plugin.getPlayers().remove(player);
             player.removePotionEffect(PotionEffectType.BLINDNESS);
             debug(String.format("%s has been removed of the getPlayerModel method", player.getName()));
         }
@@ -45,11 +46,17 @@ public class PlayerListener implements Listener {
 
     @EventHandler
     public void onPlayerMove(PlayerMoveEvent event) {
+
+        if(!plugin.getPlayers().get(event.getPlayer()).isFrozed()) return; // Al pedo todo lo demas si el tipo no esta freezeado xd
+
+        if (event.getTo().getX() == event.getFrom().getX() && event.getFrom().getZ() == event.getTo().getZ()) return; // No canceles al pedo cuando mueven la cabeza xd
+
         Player player = event.getPlayer();
 
-        if (plugin.getPlayerModel().get(player).isFrozed()) {
-            Location location = player.getLocation();
-            player.teleport(location);
+        if (plugin.getPlayers().get(player).isFrozed()) {
+            event.setCancelled(true); //Pa que tepearlo?
+//            Location location = player.getLocation();
+//            player.teleport(location);
         }
     }
 }

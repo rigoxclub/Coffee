@@ -1,8 +1,14 @@
 package club.rigox.vanillacore.models;
 
+import club.rigox.vanillacore.VanillaCore;
+import club.rigox.vanillacore.tasks.FreezeTask;
+import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.scheduler.BukkitTask;
 
-public class    PlayerModel {
+//Poneme los paquetes en mayusculas hdp
+public class PlayerModel {
     private float exp;
     private int expLevel;
     private int foodLevel;
@@ -13,6 +19,7 @@ public class    PlayerModel {
 
     private ItemStack[] inventory;
     private ItemStack[] armor;
+    private BukkitTask task;
 
     public void hide() {
         this.isHidden = true;
@@ -22,12 +29,14 @@ public class    PlayerModel {
         this.isHidden = false;
     }
 
-    public void freeze() {
+    public void freeze(Player target, Player staff) {
         this.isFrozed = true;
+        this.task = new FreezeTask(VanillaCore.instance, target, staff).runTaskTimer(VanillaCore.instance, 0L, 3 * 20);
     }
 
     public void unfreeze() {
         this.isFrozed = false;
+        Bukkit.getScheduler().cancelTask(this.task.getTaskId());
     }
 
     public void setFoodLevel(int foodLevel) {
@@ -53,7 +62,6 @@ public class    PlayerModel {
     public void setInventory(ItemStack[] inv) {
         this.inventory = inv;
     }
-
 
 
     //Geters
