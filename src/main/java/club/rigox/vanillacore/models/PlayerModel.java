@@ -2,7 +2,7 @@ package club.rigox.vanillacore.models;
 
 import org.bukkit.inventory.ItemStack;
 
-public class PlayerModel {
+public class    PlayerModel {
     private float exp;
     private int expLevel;
     private int foodLevel;

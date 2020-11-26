@@ -45,15 +45,6 @@ public class Freeze implements CommandExecutor {
             target.sendMessage(color(String.format("&8&l* &fYou have been frozed by &c%s", staff.getName())));
             target.getInventory().setHelmet(new ItemStack(Material.ICE));
 
-            BukkitTask freezeSound = new BukkitRunnable() {
-                @Override
-                public void run() {
-                    target.playSound(target.getLocation(), Sound.BLOCK_GLASS_BREAK, 3.0F, 1F);
-                    target.playEffect(target.getLocation(), Effect.STEP_SOUND, Material.ICE);
-                    target.sendTitle(color("&c&lYOU ARE FROZED!"), color(String.format("&ePlease follow %s instructions in the chat.", staff.getName())), 10, 40, 10);
-                }
-            }.runTaskTimer(plugin, 0, 3 * 20);
-
             return true;
         }
         return false;
