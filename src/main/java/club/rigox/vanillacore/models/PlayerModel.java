@@ -73,7 +73,6 @@ public class    PlayerModel {
         return foodLevel;
     }
 
-
     public ItemStack[] getInventory() {
         return this.inventory;
     }
