@@ -29,6 +29,9 @@ public class PlayerListener implements Listener {
         plugin.getPlayers().put(player, new PlayerModel());
 //            debug(String.format("%s has been added to getPlayerModel method", player.getName()));
 //        }
+        if (player.hasPermission("staff.use")) {
+            plugin.getPlayers().get(player).setStaff();
+        }
     }
 
     @EventHandler
@@ -42,6 +45,9 @@ public class PlayerListener implements Listener {
             debug(String.format("%s has been removed of the getPlayerModel method", player.getName()));
         }
 
+        if (plugin.getPlayers().get(player).isFrozed()) {
+            for (Player staff : plugin.getPlayers().get(player).isStaff())
+        }
     }
 
     @EventHandler

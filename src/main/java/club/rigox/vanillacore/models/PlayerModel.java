@@ -16,6 +16,7 @@ public class PlayerModel {
 
     private boolean isHidden;
     private boolean isFrozed;
+    Player staff;
 
     private ItemStack[] inventory;
     private ItemStack[] armor;
@@ -63,6 +64,9 @@ public class PlayerModel {
         this.inventory = inv;
     }
 
+//    public void setStaff(Player player) {
+//        player.put
+//    }
 
     //Geters
     public double getHealth() {
@@ -95,5 +99,9 @@ public class PlayerModel {
 
     public boolean isFrozed() {
         return isFrozed;
+    }
+
+    public Player getStaff() {
+        return staff;
     }
 }
