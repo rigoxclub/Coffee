@@ -11,6 +11,7 @@ import org.bukkit.event.player.*;
 import org.bukkit.potion.PotionEffectType;
 
 import static club.rigox.vanillacore.utils.ConsoleUtils.debug;
+import static club.rigox.vanillacore.utils.MsgUtils.color;
 
 public class PlayerListener implements Listener {
     private final VanillaCore plugin;
@@ -24,14 +25,11 @@ public class PlayerListener implements Listener {
     public void onPlayerJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
 
-        //Si vas a usar el PlayerModel para todos, no tenes que hacer esto sino es obvio que te va a dar nullpointer master
+//        Si vas a usar el PlayerModel para todos, no tenes que hacer esto sino es obvio que te va a dar nullpointer master
 //        if (player.hasPermission("staff.use")) {
         plugin.getPlayers().put(player, new PlayerModel());
 //            debug(String.format("%s has been added to getPlayerModel method", player.getName()));
 //        }
-        if (player.hasPermission("staff.use")) {
-            plugin.getPlayers().get(player).setStaff();
-        }
     }
 
     @EventHandler
@@ -43,10 +41,6 @@ public class PlayerListener implements Listener {
             plugin.getPlayers().remove(player);
             player.removePotionEffect(PotionEffectType.BLINDNESS);
             debug(String.format("%s has been removed of the getPlayerModel method", player.getName()));
-        }
-
-        if (plugin.getPlayers().get(player).isFrozed()) {
-            for (Player staff : plugin.getPlayers().get(player).isStaff())
         }
     }
 

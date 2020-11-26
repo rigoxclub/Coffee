@@ -24,20 +24,24 @@ public class Unfreeze implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (command.getName().equalsIgnoreCase("unfreeze")) {
+            Player target = plugin.getServer().getPlayer(args[0]);
+            Player staff = (Player) sender;
 
             if (!(sender instanceof Player)) {
                 sender.sendMessage(color("&cOnly users can execute this command!"));
                 return true;
             }
 
+            if (!staff.hasPermission("staff.use")) {
+                 staff.sendMessage(color("&cYou don't have permission to execute this"));
+                 return true;
+            }
 
             if(args.length != 1){
                 sender.sendMessage(color("&8&l* &fCommand usage: &b/unfreeze (player)"));
                 return true;
             }
 
-            Player target = plugin.getServer().getPlayer(args[0]);
-            Player staff = (Player) sender;
             if (target == null) {
                 sender.sendMessage(color("&cPlayer offline"));
                 return true;

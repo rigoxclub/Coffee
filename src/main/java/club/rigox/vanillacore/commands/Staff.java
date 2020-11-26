@@ -22,13 +22,16 @@ public class Staff implements CommandExecutor {
         vanish = new Vanish(plugin);
         staffItems = new StaffItems(plugin);
         plugin.getServer().getPluginCommand("staff").setExecutor(this);
-
     }
 
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) {
         Player player = (Player) sender;
 
+        if (!(sender instanceof Player)) {
+            sender.sendMessage(color("&cOnly players can execute this command"));
+            return true;
+        }
 
         if (!(player.hasPermission("staff.use"))) {
             player.sendMessage(color("&cYou don't have enough permission to use this!"));

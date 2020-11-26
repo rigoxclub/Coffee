@@ -25,17 +25,23 @@ public class Freeze implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+        Player target = plugin.getServer().getPlayer(args[0]);
+        Player staff = (Player) sender;
+
         if (!(sender instanceof Player)) {
             sender.sendMessage(color("&cOnly users can execute this command!"));
             return true;
+        }
+
+        if (!staff.hasPermission("staff.use")) {
+            sender.sendMessage(color("&cYou don't have permission to perform this!d"));
+           return true;
         }
 
         if(args.length != 1){
             sender.sendMessage(color("&8&l* &fCommand usage: &b/freeze (player)"));
             return true;
         }
-        Player target = plugin.getServer().getPlayer(args[0]);
-        Player staff = (Player) sender;
 
         if (target == null) {
             sender.sendMessage(color("&cPlayer offline"));

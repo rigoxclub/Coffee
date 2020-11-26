@@ -47,7 +47,6 @@ public final class VanillaCore extends JavaPlugin {
         return players;
     }
 
-
     public void registerCommands() {
 
         new Freeze(this);
