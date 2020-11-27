@@ -7,7 +7,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitTask;
 
-//Poneme los paquetes en mayusculas hdp
 public class PlayerModel {
     private float exp;
     private int expLevel;
@@ -63,7 +62,8 @@ public class PlayerModel {
         this.inventory = inv;
     }
 
-    //Geters
+
+    // GETTERS
     public double getHealth() {
         return health;
     }

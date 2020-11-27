@@ -8,35 +8,46 @@ import club.rigox.vanillacore.commands.Unfreeze;
 import club.rigox.vanillacore.listeners.PlayerListener;
 
 import club.rigox.vanillacore.player.Inventory;
-import club.rigox.vanillacore.utils.CommandHandler;
+import org.bukkit.configuration.InvalidConfigurationException;
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
 
+import java.io.File;
+import java.io.IOException;
 import java.util.LinkedHashMap;
 import java.util.Map;
+
+import static club.rigox.vanillacore.utils.ConsoleUtils.warn;
 
 public final class VanillaCore extends JavaPlugin {
     public static VanillaCore instance;
 
     private Map<Player, PlayerModel> players = new LinkedHashMap<>();
-
     private Inventory inventoryUtils;
+
+    private FileConfiguration lang;
+    private FileConfiguration setting;
+    private FileConfiguration scoreboard;
 
     @Override
     public void onEnable() {
         instance = this;
-
         this.inventoryUtils = new Inventory(this);
 
         new PlayerListener(this);
         new StaffListener(this);
         registerCommands();
+
+        this.lang = createConfig("lang");
+        this.setting = createConfig("settings");
+        this.scoreboard = createConfig("scoreboard");
     }
 
     @Override
     public void onDisable() {
-
     }
 
     public Inventory getInventoryUtils() {
@@ -48,20 +59,37 @@ public final class VanillaCore extends JavaPlugin {
     }
 
     public void registerCommands() {
-
         new Freeze(this);
         new Unfreeze(this);
         new Staff(this);
+    }
 
+    public FileConfiguration createConfig(String configName) {
+        File configFile = new File(getDataFolder(), configName + ".yml");
+        if (!configFile.exists()) {
+            configFile.getParentFile().mkdirs();
+            saveResource(configName + ".yml", false);
+        }
 
-//        A la verga con tu commandHandler, si haces mas sub-comandos usalo xd
+        FileConfiguration cfg = new YamlConfiguration();
+        try {
+            cfg.load(configFile);
+        } catch (IOException | InvalidConfigurationException e) {
+            warn(String.format("A error occurred while copying the config %s to the plugin data folder. Error: %s", configName + ".yml", e));
+            e.printStackTrace();
+        }
+        return cfg;
+    }
 
-//        CommandHandler handler = new CommandHandler();
-//        handler.register("staff", new Staff(this));
-//        handler.register("help", new Help());
-//        getCommand("staff").setExecutor(handler);
-//
-//        this.getCommand("freeze").setExecutor(new Freeze(this));
-//        this.getCommand("unfreeze").setExecutor(new Unfreeze(this));
+    public FileConfiguration getLang() {
+        return lang;
+    }
+
+    public FileConfiguration getSetting() {
+        return setting;
+    }
+
+    public FileConfiguration getScoreboard() {
+        return scoreboard;
     }
 }

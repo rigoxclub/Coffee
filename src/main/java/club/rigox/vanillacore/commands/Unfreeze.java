@@ -24,39 +24,46 @@ public class Unfreeze implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (command.getName().equalsIgnoreCase("unfreeze")) {
-            Player target = plugin.getServer().getPlayer(args[0]);
             Player staff = (Player) sender;
 
             if (!(sender instanceof Player)) {
-                sender.sendMessage(color("&cOnly users can execute this command!"));
+                sender.sendMessage(color(plugin.getLang().getString("only-users")));
                 return true;
             }
 
             if (!staff.hasPermission("staff.use")) {
-                 staff.sendMessage(color("&cYou don't have permission to execute this"));
+                 staff.sendMessage(color(plugin.getLang().getString("no-staff-permission")));
                  return true;
             }
 
             if(args.length != 1){
-                sender.sendMessage(color("&8&l* &fCommand usage: &b/unfreeze (player)"));
+                sender.sendMessage(color(plugin.getLang().getString("command-usage.base") + plugin.getLang().getString("command-usage.unfreeze")));
                 return true;
             }
 
+            Player target = plugin.getServer().getPlayer(args[0]);
+
             if (target == null) {
-                sender.sendMessage(color("&cPlayer offline"));
+                sender.sendMessage(color(plugin.getLang().getString("player.offline")));
                 return true;
             }
 
             if (!plugin.getPlayers().get(target).isFrozed()) {
-                sender.sendMessage(color("&cPlayer is not frozen!"));
+                sender.sendMessage(color(plugin.getLang().getString("player.not-frozen")));
                 return true;
             }
 
             plugin.getPlayers().get(target).unfreeze();
             target.removePotionEffect(PotionEffectType.BLINDNESS);
             plugin.getInventoryUtils().restoreInventory(target);
-            target.sendMessage(color(String.format("&8&l* &fYou have been unfrozed by &c%s", staff.getName())));
-            target.sendTitle(color("&a&lYOU HAVE BEEN UNFROZED!"), color(String.format("&eThank you for your time.", staff.getName())), 10, 40, 10);
+            target.sendMessage(color(String.format(plugin.getLang().getString("unfreeze.player-unfrozed"), staff.getName())));
+
+            // TITLE AND SUBTITLE
+            target.sendTitle(color(plugin.getSetting().getString("titles.unfreeze.title")),
+                    color(String.format(plugin.getSetting().getString("titles.unfreeze.subtitle"), staff.getName())),
+                    plugin.getSetting().getInt("titles.unfreeze.options.fadein"),
+                    plugin.getSetting().getInt("titles.unfreeze.options.stay"),
+                    plugin.getSetting().getInt("titles.unfreeze.options.fadeout"));;
 
             return true;
         }

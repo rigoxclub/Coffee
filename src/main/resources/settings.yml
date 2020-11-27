@@ -1,0 +1,17 @@
+debug: true
+
+titles:
+  freeze:
+    title: "&c&lYOU ARE FROZED!"
+    subtitle: "&ePlease follow %s instructions in the chat."
+    options:
+      fadein: 10
+      stay: 40
+      fadeout: 10
+  unfreeze:
+    title: "&a&lYOU HAVE BEEN UNFROZED!"
+    subtitle: "&eThank you for your time."
+    options:
+      fadein: 10
+      stay: 40
+      fadeout: 10

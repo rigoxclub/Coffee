@@ -24,7 +24,11 @@ public class FreezeTask extends BukkitRunnable {
     public void run() {
         target.playSound(target.getLocation(), Sound.BLOCK_GLASS_BREAK, 3.0F, 1F);
         target.playEffect(target.getLocation(), Effect.STEP_SOUND, Material.ICE);
-        target.sendTitle(color("&c&lYOU ARE FROZED!"), color(String.format("&ePlease follow %s instructions in the chat.", staff.getName())), 10, 40, 10);
+        target.sendTitle(color(plugin.getSetting().getString("titles.freeze.title")),
+                color(String.format(plugin.getSetting().getString("titles.freeze.subtitle"), staff.getName())),
+                plugin.getSetting().getInt("titles.freeze.options.fadein"),
+                plugin.getSetting().getInt("titles.freeze.options.stay"),
+                plugin.getSetting().getInt("titles.freeze.options.fadeout"));;
 
     }
 }

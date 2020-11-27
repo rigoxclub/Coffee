@@ -1,0 +1,24 @@
+only-users: "&cOnly users can execute this command."
+no-staff-permission: "&cYou don't have permission to perform this command."
+
+command-usage:
+  base: "&8&l* &fCommand usage: &b"
+  freeze: "/freeze (player)"
+  unfreeze: "/unfreeze (player)"
+
+player:
+  offline: "&cThe player is offline!"
+  already-frozed: "&cThe player is already frozed!"
+  not-frozen: "&cThe player is not frozen."
+
+freeze:
+  # %s = Staff player who frozed the player.
+  player-frozed: "&8&l* &fYou have been frozed by &c%s"
+
+unfreeze:
+  # %s = Staff player who frozed the player.
+  player-unfrozed: "&8&l* &fYou have been unfrozed by &c%s"
+
+staff-mode:
+  enabled: "&aStaff mode enabled!"
+  disabled: "&cStaff mode disabled!"
