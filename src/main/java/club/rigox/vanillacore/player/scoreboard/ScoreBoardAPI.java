@@ -1,37 +1,30 @@
 package club.rigox.vanillacore.player.scoreboard;
 
-import com.imarcomc.skyblock.Main;
+import club.rigox.vanillacore.VanillaCore;
 import org.bukkit.Bukkit;
-import org.bukkit.configuration.Configuration;
 import org.bukkit.entity.Player;
 
 import java.security.SecureRandom;
 
-
-import static com.imarcomc.skyblock.Utils.Console.C;
-
 public class ScoreBoardAPI {
-    private Main plugin;
+    private final VanillaCore plugin;
 
-    private Configuration Lang;
 
-    public ScoreBoardAPI(Main plugin) {
+    public ScoreBoardAPI(VanillaCore plugin) {
         this.plugin = plugin;
-        this.Lang = plugin.getLang();
     }
 
-    public ScoreboardCreator setScoreBoard(Player p, boolean health) {
+    public ScoreboardCreator setScoreBoard(Player p, String type, boolean health) {
 
         p.setScoreboard(Bukkit.getScoreboardManager().getNewScoreboard());
 
         ScoreboardCreator scoreboard = new ScoreboardCreator(randomString(8), health);
 
-        scoreboard.setName(C(Lang.getString("Scoreboard.Title")));
+        scoreboard.setName(plugin.getScoreboard().getString(type + ".title"));
 
-
-        int i = Lang.getStringList("Scoreboard.Body").size();
-        for (String line : Lang.getStringList("Scoreboard.Body")) {
-            scoreboard.lines(i, plugin.getUtils().parseField(line, p));
+        int i = plugin.getScoreboard().getStringList(type + ".body").size();
+        for (String line : plugin.getScoreboard().getStringList(type + ".body")) {
+            scoreboard.lines(i, plugin.parseField(line, p));
             i--;
         }
 

@@ -8,6 +8,8 @@ import club.rigox.vanillacore.commands.Unfreeze;
 import club.rigox.vanillacore.listeners.PlayerListener;
 
 import club.rigox.vanillacore.player.Inventory;
+import me.clip.placeholderapi.PlaceholderAPI;
+import org.bukkit.Bukkit;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -21,6 +23,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 import static club.rigox.vanillacore.utils.ConsoleUtils.warn;
+import static club.rigox.vanillacore.utils.MsgUtils.color;
 
 public final class VanillaCore extends JavaPlugin {
     public static VanillaCore instance;
@@ -44,6 +47,11 @@ public final class VanillaCore extends JavaPlugin {
         this.lang = createConfig("lang");
         this.setting = createConfig("settings");
         this.scoreboard = createConfig("scoreboard");
+
+        if (Bukkit.getPluginManager().getPlugin("PlaceholderAPI") == null) {
+            warn("Could not find PlaceholderAPI! This plugin is required.");
+            Bukkit.getPluginManager().disablePlugin(this);
+        }
     }
 
     @Override
@@ -91,5 +99,9 @@ public final class VanillaCore extends JavaPlugin {
 
     public FileConfiguration getScoreboard() {
         return scoreboard;
+    }
+
+    public String parseField(String field, Player p) {
+        return PlaceholderAPI.setPlaceholders(p, field);
     }
 }

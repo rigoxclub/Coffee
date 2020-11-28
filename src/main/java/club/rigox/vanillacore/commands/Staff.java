@@ -3,6 +3,7 @@ package club.rigox.vanillacore.commands;
 import club.rigox.vanillacore.VanillaCore;
 import club.rigox.vanillacore.player.StaffItems;
 import club.rigox.vanillacore.player.Vanish;
+import club.rigox.vanillacore.player.scoreboard.ScoreBoardAPI;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -15,12 +16,14 @@ public class Staff implements CommandExecutor {
     private final VanillaCore plugin;
     private final Vanish vanish;
     private final StaffItems staffItems;
+    private final ScoreBoardAPI scoreBoardAPI;
 
     public Staff(VanillaCore plugin) {
         this.plugin = plugin;
         vanish = new Vanish(plugin);
         staffItems = new StaffItems(plugin);
         plugin.getServer().getPluginCommand("staff").setExecutor(this);
+        scoreBoardAPI = new ScoreBoardAPI(plugin);
     }
 
     @Override
@@ -54,6 +57,7 @@ public class Staff implements CommandExecutor {
 
             plugin.getPlayers().get(player).unHide();
             plugin.getInventoryUtils().restoreInventory(player);
+            scoreBoardAPI.setScoreBoard(player, "general", true);
             return true;
         }
 
@@ -65,6 +69,8 @@ public class Staff implements CommandExecutor {
         vanish.hideStaff(player);
 
         player.sendMessage(color(plugin.getLang().getString("staff-mode.enabled")));
+
+        scoreBoardAPI.setScoreBoard(player, "staff-mode", true);
         return false;
     }
 

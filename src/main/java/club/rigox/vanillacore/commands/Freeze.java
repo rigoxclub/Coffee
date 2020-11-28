@@ -1,6 +1,7 @@
 package club.rigox.vanillacore.commands;
 
 import club.rigox.vanillacore.VanillaCore;
+import club.rigox.vanillacore.player.scoreboard.ScoreBoardAPI;
 import club.rigox.vanillacore.tasks.FreezeTask;
 import org.bukkit.*;
 import org.bukkit.command.Command;
@@ -17,11 +18,12 @@ import static club.rigox.vanillacore.utils.MsgUtils.color;
 public class Freeze implements CommandExecutor {
     private final VanillaCore plugin;
     private FreezeTask task;
+    private ScoreBoardAPI scoreBoardAPI;
 
     public Freeze(VanillaCore plugin) {
         this.plugin = plugin;
         plugin.getServer().getPluginCommand("freeze").setExecutor(this);
-
+        scoreBoardAPI = new ScoreBoardAPI(plugin);
     }
 
     @Override
@@ -60,6 +62,7 @@ public class Freeze implements CommandExecutor {
         plugin.getInventoryUtils().storeAndClearInventory(target);
         target.sendMessage(color(String.format(plugin.getLang().getString("freeze.player-frozed"), staff.getName())));
         target.getInventory().setHelmet(new ItemStack(Material.ICE));
+        scoreBoardAPI.setScoreBoard(target, "freeze", true);
         
         this.task = new FreezeTask(VanillaCore.instance, target, staff);
 
