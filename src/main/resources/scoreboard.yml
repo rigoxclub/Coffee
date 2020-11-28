@@ -15,9 +15,9 @@ staff-mode:
   title: "&c&lRigox &7| &fStaff Mode"
   body:
     - ""
-    - "&fPlayer: &b%username%"
+    - "&fPlayer: &b%player_name%"
     - ""
-    - "Vanish: &aEnabled"
+    - "Vanish: &e%vanillacore_vanished%"
     - ""
     - "&crigox.club"
 

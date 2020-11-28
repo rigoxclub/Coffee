@@ -7,6 +7,7 @@ import club.rigox.vanillacore.commands.Staff;
 import club.rigox.vanillacore.commands.Unfreeze;
 import club.rigox.vanillacore.listeners.PlayerListener;
 
+import club.rigox.vanillacore.placeholders.PlaceholderHook;
 import club.rigox.vanillacore.player.Inventory;
 import me.clip.placeholderapi.PlaceholderAPI;
 import org.bukkit.Bukkit;
@@ -39,6 +40,8 @@ public final class VanillaCore extends JavaPlugin {
     public void onEnable() {
         instance = this;
         this.inventoryUtils = new Inventory(this);
+
+        new PlaceholderHook(this).register();
 
         new PlayerListener(this);
         new StaffListener(this);
