@@ -38,7 +38,7 @@ public class PlaceholderHook extends PlaceholderExpansion {
         }
 
         if (identifier.equals("vanished")) {
-            boolean isVanished = plugin.getPlayers().get(player).isHidden();
+            boolean isVanished = plugin.getPlayers().get(player).isVanished();
             return isVanished ? "&aEnabled" : "&eDisabled";
         }
 

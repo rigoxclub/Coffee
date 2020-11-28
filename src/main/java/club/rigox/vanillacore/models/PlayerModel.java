@@ -15,6 +15,7 @@ public class PlayerModel {
 
     private boolean isHidden;
     private boolean isFrozed;
+    private boolean isVanished;
 
     private ItemStack[] inventory;
     private ItemStack[] armor;
@@ -26,6 +27,14 @@ public class PlayerModel {
 
     public void unHide() {
         this.isHidden = false;
+    }
+
+    public void vanish() {
+        this.isVanished = true;
+    }
+
+    public void unvanish() {
+        this.isVanished = false;
     }
 
     public void freeze(Player target, Player staff) {
@@ -94,5 +103,9 @@ public class PlayerModel {
 
     public boolean isFrozed() {
         return isFrozed;
+    }
+
+    public boolean isVanished() {
+        return isVanished;
     }
 }

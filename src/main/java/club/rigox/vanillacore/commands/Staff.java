@@ -55,6 +55,7 @@ public class Staff implements CommandExecutor {
 
             vanish.showStaff(player);
 
+            plugin.getPlayers().get(player).unvanish();
             plugin.getPlayers().get(player).unHide();
             plugin.getInventoryUtils().restoreInventory(player);
             scoreBoardAPI.setScoreBoard(player, "general", true);
@@ -63,6 +64,7 @@ public class Staff implements CommandExecutor {
 
         plugin.getPlayers().get(player).hide();
         plugin.getInventoryUtils().storeAndClearInventory(player);
+        plugin.getPlayers().get(player).vanish();
 
         staffItems.giveStaffItems(player);
 

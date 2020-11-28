@@ -15,3 +15,9 @@ titles:
       fadein: 10
       stay: 40
       fadeout: 10
+
+staff-items:
+  LIME_DYE:
+    name: "&aVanish Enabled &7(Right Click)"
+  GRAY_DYE:
+    name: "&cVanish Disabled &7(Right Click)"
