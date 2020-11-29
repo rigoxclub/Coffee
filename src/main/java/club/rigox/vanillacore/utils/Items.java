@@ -11,24 +11,29 @@ public class Items {
 
     private final VanillaCore plugin;
 
-    private final ItemStack vanishEnableItem;
-    private final ItemStack vanishDisableItem;
+
+    private ItemStack vanishEnableItem;
+    private ItemStack vanishDisableItem;
 
     public Items(VanillaCore plugin) {
 
         this.plugin = plugin;
 
         //Enable item
-        vanishEnableItem = new ItemStack(Material.GRAY_DYE);
-        ItemMeta meta = vanishEnableItem.getItemMeta();
+        ItemStack i = new ItemStack(Material.GRAY_DYE);
+        ItemMeta meta = i.getItemMeta();
         meta.setDisplayName(color(plugin.getSetting().getString("staff-items.GRAY_DYE.name")));
-        vanishEnableItem.setItemMeta(meta);
+        i.setItemMeta(meta);
+
+        this.vanishEnableItem = i;
 
         //Disable item
-        vanishDisableItem = new ItemStack(Material.LIME_DYE);
-        ItemMeta meta1 = vanishDisableItem.getItemMeta();
+        ItemStack a = new ItemStack(Material.LIME_DYE);
+        ItemMeta meta1 = a.getItemMeta();
         meta1.setDisplayName(color(plugin.getSetting().getString("staff-items.LIME_DYE.name")));
-        vanishDisableItem.setItemMeta(meta1);
+        a.setItemMeta(meta1);
+
+        this.vanishDisableItem = a;
 
     }
 

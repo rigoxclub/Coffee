@@ -1,9 +1,11 @@
 package club.rigox.vanillacore.commands;
 
 import club.rigox.vanillacore.VanillaCore;
+import club.rigox.vanillacore.player.FlyStatus;
 import club.rigox.vanillacore.player.StaffItems;
 import club.rigox.vanillacore.player.Vanish;
 import club.rigox.vanillacore.player.scoreboard.ScoreBoardAPI;
+import org.bukkit.GameMode;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -17,6 +19,7 @@ public class Staff implements CommandExecutor {
     private final Vanish vanish;
     private final StaffItems staffItems;
     private final ScoreBoardAPI scoreBoardAPI;
+    private final FlyStatus flyStatus;
 
     public Staff(VanillaCore plugin) {
         this.plugin = plugin;
@@ -24,6 +27,7 @@ public class Staff implements CommandExecutor {
         staffItems = new StaffItems(plugin);
         plugin.getServer().getPluginCommand("staff").setExecutor(this);
         scoreBoardAPI = new ScoreBoardAPI(plugin);
+        flyStatus = new FlyStatus(plugin);
     }
 
     @Override
@@ -51,14 +55,8 @@ public class Staff implements CommandExecutor {
 
 
         if (plugin.getPlayers().get(player).isHidden()) {
-            /**
-             * Disable player vanish
-             */
             vanish.showStaff(player);
 
-            /**
-             *  Update PlayerModel for Listeners and Placeholders
-             */
             plugin.getPlayers().get(player).unvanish();
             plugin.getPlayers().get(player).unHide();
 
@@ -66,17 +64,14 @@ public class Staff implements CommandExecutor {
 
             scoreBoardAPI.setScoreBoard(player, "general", true);
 
+            player.setGameMode(GameMode.SURVIVAL);
+            flyStatus.disable(player);
+
             player.sendMessage(color(plugin.getLang().getString("staff-mode.disabled")));
             return true;
         }
-        /**
-         * Enable player vanish
-         */
         vanish.hideStaff(player);
 
-        /**
-         *  Update PlayerModel for Listeners and Placeholders
-         */
         plugin.getPlayers().get(player).hide();
         plugin.getPlayers().get(player).vanish();
 
@@ -84,6 +79,9 @@ public class Staff implements CommandExecutor {
         staffItems.giveStaffItems(player);
 
         scoreBoardAPI.setScoreBoard(player, "staff-mode", true);
+
+        player.setGameMode(GameMode.ADVENTURE);
+        flyStatus.enable(player);
 
         player.sendMessage(color(plugin.getLang().getString("staff-mode.enabled")));
         return false;

@@ -42,6 +42,10 @@ public final class VanillaCore extends JavaPlugin {
     public void onEnable() {
         instance = this;
 
+        this.lang = createConfig("lang");
+        this.setting = createConfig("settings");
+        this.scoreboard = createConfig("scoreboard");
+
         this.inventoryUtils = new Inventory(this);
 
         new PlaceholderHook(this).register();
@@ -49,10 +53,6 @@ public final class VanillaCore extends JavaPlugin {
         new PlayerListener(this);
         new StaffListener(this);
         registerCommands();
-
-        this.lang = createConfig("lang");
-        this.setting = createConfig("settings");
-        this.scoreboard = createConfig("scoreboard");
 
         if (Bukkit.getPluginManager().getPlugin("PlaceholderAPI") == null) {
             warn("Could not find PlaceholderAPI! This plugin is required.");

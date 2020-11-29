@@ -23,51 +23,47 @@ public class Unfreeze implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        if (command.getName().equalsIgnoreCase("unfreeze")) {
-            Player staff = (Player) sender;
+        Player staff = (Player) sender;
 
-            if (!(sender instanceof Player)) {
-                sender.sendMessage(color(plugin.getLang().getString("only-users")));
-                return true;
-            }
-
-            if (!staff.hasPermission("staff.use")) {
-                 staff.sendMessage(color(plugin.getLang().getString("no-staff-permission")));
-                 return true;
-            }
-
-            if(args.length != 1){
-                sender.sendMessage(color(plugin.getLang().getString("command-usage.base") + plugin.getLang().getString("command-usage.unfreeze")));
-                return true;
-            }
-
-            Player target = plugin.getServer().getPlayer(args[0]);
-
-            if (target == null) {
-                sender.sendMessage(color(plugin.getLang().getString("player.offline")));
-                return true;
-            }
-
-            if (!plugin.getPlayers().get(target).isFrozed()) {
-                sender.sendMessage(color(plugin.getLang().getString("player.not-frozen")));
-                return true;
-            }
-
-            plugin.getPlayers().get(target).unfreeze();
-            target.removePotionEffect(PotionEffectType.BLINDNESS);
-            plugin.getInventoryUtils().restoreInventory(target);
-            target.sendMessage(color(String.format(plugin.getLang().getString("unfreeze.player-unfrozed"), staff.getName())));
-            scoreBoardAPI.setScoreBoard(target, "general", true);
-
-            // TITLE AND SUBTITLE
-            target.sendTitle(color(plugin.getSetting().getString("titles.unfreeze.title")),
-                    color(String.format(plugin.getSetting().getString("titles.unfreeze.subtitle"), staff.getName())),
-                    plugin.getSetting().getInt("titles.unfreeze.options.fadein"),
-                    plugin.getSetting().getInt("titles.unfreeze.options.stay"),
-                    plugin.getSetting().getInt("titles.unfreeze.options.fadeout"));;
-
+        if (!(sender instanceof Player)) {
+            sender.sendMessage(color(plugin.getLang().getString("only-users")));
             return true;
         }
+
+        if (!staff.hasPermission("staff.use")) {
+            staff.sendMessage(color(plugin.getLang().getString("no-staff-permission")));
+            return true;
+        }
+
+        if(args.length != 1){
+            sender.sendMessage(color(plugin.getLang().getString("command-usage.base") + plugin.getLang().getString("command-usage.unfreeze")));
+            return true;
+        }
+
+        Player target = plugin.getServer().getPlayer(args[0]);
+
+        if (target == null) {
+            sender.sendMessage(color(plugin.getLang().getString("player.offline")));
+            return true;
+        }
+
+        if (!plugin.getPlayers().get(target).isFrozed()) {
+            sender.sendMessage(color(plugin.getLang().getString("player.not-frozen")));
+            return true;
+        }
+
+        plugin.getPlayers().get(target).unfreeze();
+        target.removePotionEffect(PotionEffectType.BLINDNESS);
+        plugin.getInventoryUtils().restoreInventory(target);
+        target.sendMessage(color(String.format(plugin.getLang().getString("unfreeze.player-unfrozed"), staff.getName())));
+        scoreBoardAPI.setScoreBoard(target, "general", true);
+
+        // TITLE AND SUBTITLE
+        target.sendTitle(color(plugin.getSetting().getString("titles.unfreeze.title")),
+                color(String.format(plugin.getSetting().getString("titles.unfreeze.subtitle"), staff.getName())),
+                plugin.getSetting().getInt("titles.unfreeze.options.fadein"),
+                plugin.getSetting().getInt("titles.unfreeze.options.stay"),
+                plugin.getSetting().getInt("titles.unfreeze.options.fadeout"));
         return false;
     }
 }
