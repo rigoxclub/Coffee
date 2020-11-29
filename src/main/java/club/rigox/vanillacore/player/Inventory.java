@@ -9,6 +9,9 @@ import org.bukkit.inventory.ItemStack;
 public class Inventory {
     private final VanillaCore plugin;
 
+    private final ItemStack[] armorEmpty = new ItemStack[4];
+    private final ItemStack[] inventoryEmpty = new ItemStack[36];
+
     public Inventory(VanillaCore plugin) {
         this.plugin = plugin;
     }
@@ -26,7 +29,7 @@ public class Inventory {
 
         PlayerModel staffMember = plugin.getPlayers().get(player);
 
-        if(staffMember == null) return; //TODO: Error message.
+        if (staffMember == null) return; //TODO: Error message.
 
         // Me di cuenta que el PlayerInventory mantiene las props de tu inv osea se estaba actualizando xd
         staffMember.setInventory(player.getInventory().getContents());
@@ -45,7 +48,8 @@ public class Inventory {
         //  Setting expLevel to 0
         //  Removing all armor
 
-        player.getInventory().clear();
+        player.getInventory().setArmorContents(armorEmpty);
+        player.getInventory().setContents(inventoryEmpty);
         player.setHealth(20);
         player.setFoodLevel(20);
         player.setExp(0);
@@ -58,7 +62,7 @@ public class Inventory {
 
         PlayerModel staffMember = plugin.getPlayers().get(player);
 
-        if(staffMember == null) return; //TODO: Error message.
+        if (staffMember == null) return; //TODO: Error message.
 
         ItemStack[] itemsContent = staffMember.getInventory();
         ItemStack[] armorContents = staffMember.getArmor();

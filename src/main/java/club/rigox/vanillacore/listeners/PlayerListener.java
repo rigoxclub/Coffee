@@ -26,7 +26,7 @@ public class PlayerListener implements Listener {
     public void onPlayerJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
         plugin.getPlayers().put(player, new PlayerModel());
-        scoreBoardAPI.setScoreBoard(player, "general",true);
+        scoreBoardAPI.setScoreBoard(player, "general", true);
     }
 
     @EventHandler
@@ -44,9 +44,15 @@ public class PlayerListener implements Listener {
     @EventHandler
     public void onPlayerMove(PlayerMoveEvent event) {
 
-        if(!plugin.getPlayers().get(event.getPlayer()).isFrozed()) return; // Al pedo todo lo demas si el tipo no esta freezeado xd
 
-        if (event.getTo().getX() == event.getFrom().getX() && event.getFrom().getZ() == event.getTo().getZ()) return; // No canceles al pedo cuando mueven la cabeza xd
+        if (plugin.getFlyingPlayers().contains(event.getPlayer()) && event.getPlayer().isOnGround())
+            plugin.getFlyingPlayers().remove(event.getPlayer());
+
+        if (!plugin.getPlayers().get(event.getPlayer()).isFrozed())
+            return; // Al pedo todo lo demas si el tipo no esta freezeado xd
+
+        if (event.getTo().getX() == event.getFrom().getX() && event.getFrom().getZ() == event.getTo().getZ())
+            return; // No canceles al pedo cuando mueven la cabeza xd
 
         Player player = event.getPlayer();
 

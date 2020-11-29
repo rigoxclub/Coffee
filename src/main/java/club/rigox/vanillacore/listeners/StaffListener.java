@@ -2,6 +2,7 @@ package club.rigox.vanillacore.listeners;
 
 import club.rigox.vanillacore.VanillaCore;
 import club.rigox.vanillacore.player.Vanish;
+import club.rigox.vanillacore.utils.Items;
 import com.destroystokyo.paper.event.player.PlayerPickupExperienceEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -25,10 +26,14 @@ public class StaffListener implements Listener {
     private final VanillaCore plugin;
     private final Vanish vanish;
 
+    private final Items items;
+
     public StaffListener(VanillaCore plugin) {
         Bukkit.getServer().getPluginManager().registerEvents(this, plugin);
         this.plugin = plugin;
         vanish = new Vanish(plugin);
+
+        this.items = new Items(plugin);
     }
 
     @EventHandler
@@ -97,6 +102,7 @@ public class StaffListener implements Listener {
             if (plugin.getPlayers().get(player).isHidden() || plugin.getPlayers().get(player).isFrozed())
                 event.setCancelled(true);
 
+
             if (event.getCause() == EntityDamageEvent.DamageCause.FALL && plugin.getFlyingPlayers().contains(player)) {
                 plugin.getFlyingPlayers().remove(player);
                 event.setCancelled(true);
@@ -122,11 +128,11 @@ public class StaffListener implements Listener {
         String name = plugin.getSetting().getString("staff-items." + e.getItem().getType().name() + ".name");
 
         if (name == plugin.getSetting().getString("staff-items.LIME_DYE.name")) {
-            ItemStack vanishItem = new ItemStack(Material.GRAY_DYE);
-            ItemMeta meta = vanishItem.getItemMeta();
-            meta.setDisplayName(color(plugin.getSetting().getString("staff-items.GRAY_DYE.name")));
-            vanishItem.setItemMeta(meta);
-            player.getInventory().setItem(4, vanishItem);
+//            ItemStack vanishItem = new ItemStack(Material.GRAY_DYE);
+//            ItemMeta meta = vanishItem.getItemMeta();
+//            meta.setDisplayName(color(plugin.getSetting().getString("staff-items.GRAY_DYE.name")));
+//            vanishItem.setItemMeta(meta);
+            player.getInventory().setItem(4, items.getVanishEnableItem());
 
             vanish.showStaff(player);
             plugin.getPlayers().get(player).unvanish();
@@ -134,11 +140,16 @@ public class StaffListener implements Listener {
         }
 
         if (name == plugin.getSetting().getString("staff-items.GRAY_DYE.name")) {
-            ItemStack vanishItem = new ItemStack(Material.LIME_DYE);
-            ItemMeta meta = vanishItem.getItemMeta();
-            meta.setDisplayName(color(plugin.getSetting().getString("staff-items.LIME_DYE.name")));
-            vanishItem.setItemMeta(meta);
-            player.getInventory().setItem(4, vanishItem);
+
+
+            //No uses el new aca xq creas 2000 instancias de un item nuevo xd
+
+//            ItemStack vanishItem = new ItemStack(Material.LIME_DYE);
+//            ItemMeta meta = vanishItem.getItemMeta();
+//            meta.setDisplayName(color(plugin.getSetting().getString("staff-items.LIME_DYE.name")));
+//            vanishItem.setItemMeta(meta);
+
+            player.getInventory().setItem(4, items.getVanishDisableItem());
 
             vanish.hideStaff(player);
             plugin.getPlayers().get(player).vanish();

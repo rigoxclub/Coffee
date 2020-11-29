@@ -41,6 +41,7 @@ public final class VanillaCore extends JavaPlugin {
     @Override
     public void onEnable() {
         instance = this;
+
         this.inventoryUtils = new Inventory(this);
 
         new PlaceholderHook(this).register();
@@ -89,7 +90,7 @@ public final class VanillaCore extends JavaPlugin {
         try {
             cfg.load(configFile);
         } catch (IOException | InvalidConfigurationException e) {
-            warn(String.format("A error occurred while copying the config %s to the plugin data folder. Error: %s", configName + ".yml", e));
+            warn(String.format("A error occurred while copying the config %s.yml to the plugin data folder. Error: %s", configName, e));
             e.printStackTrace();
         }
         return cfg;
