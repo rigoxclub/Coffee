@@ -126,7 +126,7 @@ public class StaffListener implements Listener {
         Player player = e.getPlayer();
         if (!player.getInventory().getItemInMainHand().hasItemMeta()) return;
 
-        if (e.getAction().equals(Action.RIGHT_CLICK_AIR)) {
+        if (e.getAction().equals(Action.RIGHT_CLICK_AIR) || e.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
             String name = plugin.getSetting().getString("staff-items." + e.getItem().getType().name() + ".name");
 
             if (name.equals(plugin.getSetting().getString("staff-items.LIME_DYE.name"))) {
