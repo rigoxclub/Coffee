@@ -2,6 +2,7 @@ package club.rigox.vanillacore.listeners;
 
 import club.rigox.vanillacore.VanillaCore;
 import club.rigox.vanillacore.player.Vanish;
+import club.rigox.vanillacore.utils.ConsoleUtils;
 import club.rigox.vanillacore.utils.Items;
 import com.destroystokyo.paper.event.player.PlayerPickupExperienceEvent;
 import org.bukkit.Bukkit;
@@ -126,25 +127,30 @@ public class StaffListener implements Listener {
         Player player = e.getPlayer();
         if (!player.getInventory().getItemInMainHand().hasItemMeta()) return;
 
-        if (e.getAction().equals(Action.RIGHT_CLICK_AIR) || e.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
-            String name = plugin.getSetting().getString("staff-items." + e.getItem().getType().name() + ".name");
 
-            if (name.equals(plugin.getSetting().getString("staff-items.LIME_DYE.name"))) {
-                player.getInventory().setItem(4, items.getVanishEnableItem());
+        //No uese el item del evento xq te va a dar null pajin.
+        // Miras el suelo y te toma DIRT xd
 
-                vanish.showStaff(player);
-                plugin.getPlayers().get(player).unvanish();
-                player.sendMessage(color("&cVanish disabled!"));
-            }
+        String name = plugin.getSetting().getString("staff-items." + e.getPlayer().getInventory().getItemInMainHand().getType().name() + ".name");
 
-            if (name.equals(plugin.getSetting().getString("staff-items.GRAY_DYE.name"))) {
-                player.getInventory().setItem(4, items.getVanishDisableItem());
+        ConsoleUtils.debug(String.format("Item %s", name));
+        if (name.equals(plugin.getSetting().getString("staff-items.LIME_DYE.name"))) {
+            player.getInventory().setItem(4, items.getVanishEnableItem());
+            vanish.showStaff(player);
+            plugin.getPlayers().get(player).unvanish();
+            player.sendMessage(color("&cVanish disabled!"));
+            return;
+        }
 
-                vanish.hideStaff(player);
-                plugin.getPlayers().get(player).vanish();
-                player.sendMessage(color("&aVanish enabled!"));
+        if (name.equals(plugin.getSetting().getString("staff-items.GRAY_DYE.name"))) {
 
-            }
+            player.getInventory().setItem(4, items.getVanishDisableItem());
+
+            vanish.hideStaff(player);
+            plugin.getPlayers().get(player).vanish();
+            player.sendMessage(color("&aVanish enabled!"));
+
+            return;
         }
     }
 
