@@ -37,6 +37,8 @@ public class PlayerModel {
         this.isVanished = false;
     }
 
+
+
     public void freeze(Player target, Player staff) {
         this.isFrozed = true;
         this.task = new FreezeTask(VanillaCore.instance, target, staff).runTaskTimer(VanillaCore.instance, 0L, 3 * 20);

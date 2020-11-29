@@ -13,3 +13,5 @@ commands:
     description: Command freeze
   unfreeze:
     description: Command unfreze
+  fly:
+    description: Command fly

@@ -51,28 +51,41 @@ public class Staff implements CommandExecutor {
 
 
         if (plugin.getPlayers().get(player).isHidden()) {
-            player.sendMessage(color(plugin.getLang().getString("staff-mode.disabled")));
-
+            /**
+             * Disable player vanish
+             */
             vanish.showStaff(player);
 
+            /**
+             *  Update PlayerModel for Listeners and Placeholders
+             */
             plugin.getPlayers().get(player).unvanish();
             plugin.getPlayers().get(player).unHide();
+
             plugin.getInventoryUtils().restoreInventory(player);
+
             scoreBoardAPI.setScoreBoard(player, "general", true);
+
+            player.sendMessage(color(plugin.getLang().getString("staff-mode.disabled")));
             return true;
         }
-
-        plugin.getPlayers().get(player).hide();
-        plugin.getInventoryUtils().storeAndClearInventory(player);
-        plugin.getPlayers().get(player).vanish();
-
-        staffItems.giveStaffItems(player);
-
+        /**
+         * Enable player vanish
+         */
         vanish.hideStaff(player);
 
-        player.sendMessage(color(plugin.getLang().getString("staff-mode.enabled")));
+        /**
+         *  Update PlayerModel for Listeners and Placeholders
+         */
+        plugin.getPlayers().get(player).hide();
+        plugin.getPlayers().get(player).vanish();
+
+        plugin.getInventoryUtils().storeAndClearInventory(player);
+        staffItems.giveStaffItems(player);
 
         scoreBoardAPI.setScoreBoard(player, "staff-mode", true);
+
+        player.sendMessage(color(plugin.getLang().getString("staff-mode.enabled")));
         return false;
     }
 

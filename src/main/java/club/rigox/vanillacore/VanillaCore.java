@@ -1,5 +1,6 @@
 package club.rigox.vanillacore;
 
+import club.rigox.vanillacore.commands.Fly;
 import club.rigox.vanillacore.listeners.StaffListener;
 import club.rigox.vanillacore.models.PlayerModel;
 import club.rigox.vanillacore.commands.Freeze;
@@ -20,8 +21,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.*;
 
 import static club.rigox.vanillacore.utils.ConsoleUtils.warn;
 import static club.rigox.vanillacore.utils.MsgUtils.color;
@@ -30,6 +30,8 @@ public final class VanillaCore extends JavaPlugin {
     public static VanillaCore instance;
 
     private Map<Player, PlayerModel> players = new LinkedHashMap<>();
+    private Set<Player> flyingPlayers = new LinkedHashSet<>();
+
     private Inventory inventoryUtils;
 
     private FileConfiguration lang;
@@ -73,6 +75,7 @@ public final class VanillaCore extends JavaPlugin {
         new Freeze(this);
         new Unfreeze(this);
         new Staff(this);
+        new Fly(this);
     }
 
     public FileConfiguration createConfig(String configName) {
@@ -102,6 +105,10 @@ public final class VanillaCore extends JavaPlugin {
 
     public FileConfiguration getScoreboard() {
         return scoreboard;
+    }
+
+    public Set<Player> getFlyingPlayers() {
+        return flyingPlayers;
     }
 
     public String parseField(String field, Player p) {
