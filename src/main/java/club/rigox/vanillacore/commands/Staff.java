@@ -61,7 +61,6 @@ public class Staff implements CommandExecutor {
             plugin.getPlayers().get(player).unHide();
 
             plugin.getInventoryUtils().restoreInventory(player);
-
             scoreBoardAPI.setScoreBoard(player, "general", true);
 
             player.setGameMode(GameMode.SURVIVAL);

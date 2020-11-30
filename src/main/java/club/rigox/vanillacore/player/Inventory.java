@@ -110,4 +110,12 @@ public class Inventory {
         player.getInventory().setLeggings(null);
         player.getInventory().setBoots(null);
     }
+
+    public void restoreOnServerStop() {
+        for (Player all : plugin.getServer().getOnlinePlayers()) {
+            if (plugin.getPlayers().get(all).isHidden() || plugin.getPlayers().get(all).isFrozed()) {
+                restoreInventory(all);
+            }
+        }
+    }
 }

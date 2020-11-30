@@ -102,8 +102,9 @@ public class StaffListener implements Listener {
             if (plugin.getPlayers().get(player).isHidden() || plugin.getPlayers().get(player).isFrozed())
                 event.setCancelled(true);
 
-
-            if (event.getCause() == EntityDamageEvent.DamageCause.FALL && plugin.getPlayers().get(player).isFlying()) {
+//            No funca esto atm
+//            if (event.getCause().equals(EntityDamageEvent.DamageCause.FALL) && plugin.getPlayers().get(player).isFlying()) {
+            if (plugin.getPlayers().get(player).isFlying()) {
                 event.setCancelled(true);
                 plugin.getPlayers().get(player).removeFly();
             }

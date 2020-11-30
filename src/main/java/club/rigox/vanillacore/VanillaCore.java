@@ -35,6 +35,7 @@ public final class VanillaCore extends JavaPlugin {
     private FileConfiguration lang;
     private FileConfiguration setting;
     private FileConfiguration scoreboard;
+    private FileConfiguration inventories;
 
     @Override
     public void onEnable() {
@@ -43,6 +44,7 @@ public final class VanillaCore extends JavaPlugin {
         this.lang = createConfig("lang");
         this.setting = createConfig("settings");
         this.scoreboard = createConfig("scoreboard");
+        this.inventories = createConfig("inventories");
 
         this.inventoryUtils = new Inventory(this);
 
@@ -60,6 +62,7 @@ public final class VanillaCore extends JavaPlugin {
 
     @Override
     public void onDisable() {
+        inventoryUtils.restoreOnServerStop();
     }
 
     public Inventory getInventoryUtils() {
@@ -108,5 +111,9 @@ public final class VanillaCore extends JavaPlugin {
 
     public String parseField(String field, Player p) {
         return PlaceholderAPI.setPlaceholders(p, field);
+    }
+
+    public FileConfiguration getInventories() {
+        return inventories;
     }
 }
