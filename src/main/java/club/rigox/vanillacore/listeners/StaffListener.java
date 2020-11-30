@@ -11,6 +11,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityPickupItemEvent;
 import org.bukkit.event.entity.EntityTargetLivingEntityEvent;
+import org.bukkit.event.entity.FoodLevelChangeEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerPickupArrowEvent;
@@ -106,6 +107,8 @@ public class StaffListener implements Listener {
                 event.setCancelled(true);
                 plugin.getPlayers().get(player).removeFly();
             }
+
+            debug(String.format("%s received Damage %s", player, event.getCause()));
         }
     }
 
@@ -115,6 +118,18 @@ public class StaffListener implements Listener {
             Player player = (Player) event.getTarget();
             if (plugin.getPlayers().get(player).isHidden() || plugin.getPlayers().get(player).isFrozed()) {
                 event.setCancelled(true);
+            }
+        }
+    }
+
+    @EventHandler
+    public void onFoodLevelChange(FoodLevelChangeEvent event) {
+        if (event.getEntity() instanceof Player) {
+            Player player = (Player) event.getEntity();
+
+            if (plugin.getPlayers().get(player).isHidden()) {
+                event.setCancelled(true);
+                debug(String.format("Cancelled FoodLevelChangeEvent to %s", player));
             }
         }
     }
