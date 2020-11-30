@@ -21,7 +21,12 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerPickupArrowEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import sun.security.util.Debug;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
+
+import static club.rigox.vanillacore.utils.ConsoleUtils.debug;
 import static club.rigox.vanillacore.utils.MsgUtils.color;
 
 public class StaffListener implements Listener {
@@ -122,34 +127,49 @@ public class StaffListener implements Listener {
         }
     }
 
+    Map<Player, Long> dropQueue = new LinkedHashMap<>();
     @EventHandler
     public void onPlayerUse(PlayerInteractEvent e) {
         Player player = e.getPlayer();
+
         if (!player.getInventory().getItemInMainHand().hasItemMeta()) return;
-
-
-        //No uese el item del evento xq te va a dar null pajin.
-        // Miras el suelo y te toma DIRT xd
 
         String name = plugin.getSetting().getString("staff-items." + e.getPlayer().getInventory().getItemInMainHand().getType().name() + ".name");
 
-        ConsoleUtils.debug(String.format("Item %s", name));
+        if (dropQueue.containsKey(player)) {
+            long cooldown = dropQueue.get(player);
+
+            if (cooldown >= System.currentTimeMillis()) {
+                debug("Updating the current time in millis.");
+                e.setCancelled(true);
+                debug(String.format("Cooldown time: %s", cooldown - System.currentTimeMillis()));
+                return;
+            }
+
+            if (cooldown <= System.currentTimeMillis()) {
+                debug("Removed the user from the list.");
+                dropQueue.remove(e.getPlayer());
+            }
+        }
+
+        debug(String.format("Item %s", name));
         if (name.equals(plugin.getSetting().getString("staff-items.LIME_DYE.name"))) {
             player.getInventory().setItem(4, items.getVanishEnableItem());
+
             vanish.showStaff(player);
             plugin.getPlayers().get(player).unvanish();
             player.sendMessage(color("&cVanish disabled!"));
+            dropQueue.put(player, System.currentTimeMillis() + 3000);
             return;
         }
 
         if (name.equals(plugin.getSetting().getString("staff-items.GRAY_DYE.name"))) {
-
             player.getInventory().setItem(4, items.getVanishDisableItem());
 
             vanish.hideStaff(player);
             plugin.getPlayers().get(player).vanish();
             player.sendMessage(color("&aVanish enabled!"));
-
+            dropQueue.put(player, System.currentTimeMillis() + 3000);
             return;
         }
     }
