@@ -17,8 +17,7 @@ import static club.rigox.vanillacore.utils.MsgUtils.color;
 
 public class Freeze implements CommandExecutor {
     private final VanillaCore plugin;
-    private FreezeTask task;
-    private ScoreBoardAPI scoreBoardAPI;
+    private final ScoreBoardAPI scoreBoardAPI;
 
     public Freeze(VanillaCore plugin) {
         this.plugin = plugin;
@@ -63,8 +62,6 @@ public class Freeze implements CommandExecutor {
         target.sendMessage(color(String.format(plugin.getLang().getString("freeze.player-frozed"), staff.getName())));
         target.getInventory().setHelmet(new ItemStack(Material.ICE));
         scoreBoardAPI.setScoreBoard(target, "freeze", true);
-        
-        this.task = new FreezeTask(VanillaCore.instance, target, staff);
 
         return true;
 
