@@ -8,7 +8,6 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
-import static club.rigox.vanillacore.utils.ConsoleUtils.debug;
 import static club.rigox.vanillacore.utils.MsgUtils.color;
 
 public class Fly implements CommandExecutor {

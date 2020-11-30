@@ -2,26 +2,18 @@ package club.rigox.vanillacore.listeners;
 
 import club.rigox.vanillacore.VanillaCore;
 import club.rigox.vanillacore.player.Vanish;
-import club.rigox.vanillacore.utils.ConsoleUtils;
 import club.rigox.vanillacore.utils.Items;
 import com.destroystokyo.paper.event.player.PlayerPickupExperienceEvent;
 import org.bukkit.Bukkit;
-import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.block.Action;
-import org.bukkit.event.block.BlockBreakEvent;
-import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityPickupItemEvent;
 import org.bukkit.event.entity.EntityTargetLivingEntityEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerPickupArrowEvent;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
-import sun.security.util.Debug;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
