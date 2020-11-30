@@ -13,8 +13,7 @@ public class FlyStatus {
     public void enable(Player player) {
         player.setAllowFlight(true);
         player.setFlying(true);
-        plugin.getFlyingPlayers().add(player);
-
+        plugin.getPlayers().get(player).setFly();
     }
 
     public void disable(Player player) {

@@ -33,7 +33,8 @@ public class PlayerListener implements Listener {
     public void onPlayerLeave(PlayerQuitEvent event) {
         Player player = event.getPlayer();
 
-        if (plugin.getPlayers().containsKey(player)) {
+        // Modificado xq anteriormente te reiniciaba el inventario por mas que no estes en staff y rip inv
+        if (plugin.getPlayers().get(player).isHidden() || plugin.getPlayers().get(player).isFrozed()) {
             plugin.getInventoryUtils().restoreInventory(player);
             plugin.getPlayers().remove(player);
             player.removePotionEffect(PotionEffectType.BLINDNESS);
@@ -43,18 +44,16 @@ public class PlayerListener implements Listener {
 
     @EventHandler
     public void onPlayerMove(PlayerMoveEvent event) {
+        Player player = event.getPlayer();
 
+        if (plugin.getPlayers().get(player).isFlying() && player.isOnGround())
+            plugin.getPlayers().get(player).removeFly();
 
-        if (plugin.getFlyingPlayers().contains(event.getPlayer()) && event.getPlayer().isOnGround())
-            plugin.getFlyingPlayers().remove(event.getPlayer());
-
-        if (!plugin.getPlayers().get(event.getPlayer()).isFrozed())
+        if (!plugin.getPlayers().get(player).isFrozed())
             return; // Al pedo todo lo demas si el tipo no esta freezeado xd
 
         if (event.getTo().getX() == event.getFrom().getX() && event.getFrom().getZ() == event.getTo().getZ())
             return; // No canceles al pedo cuando mueven la cabeza xd
-
-        Player player = event.getPlayer();
 
         if (plugin.getPlayers().get(player).isFrozed()) {
             event.setCancelled(true);

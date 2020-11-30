@@ -57,7 +57,7 @@ public class Staff implements CommandExecutor {
         if (plugin.getPlayers().get(player).isHidden()) {
             vanish.showStaff(player);
 
-            plugin.getPlayers().get(player).unvanish();
+            plugin.getPlayers().get(player).unVanish();
             plugin.getPlayers().get(player).unHide();
 
             plugin.getInventoryUtils().restoreInventory(player);

@@ -24,13 +24,11 @@ import java.io.IOException;
 import java.util.*;
 
 import static club.rigox.vanillacore.utils.ConsoleUtils.warn;
-import static club.rigox.vanillacore.utils.MsgUtils.color;
 
 public final class VanillaCore extends JavaPlugin {
     public static VanillaCore instance;
 
     private Map<Player, PlayerModel> players = new LinkedHashMap<>();
-    private Set<Player> flyingPlayers = new LinkedHashSet<>();
 
     private Inventory inventoryUtils;
 
@@ -106,10 +104,6 @@ public final class VanillaCore extends JavaPlugin {
 
     public FileConfiguration getScoreboard() {
         return scoreboard;
-    }
-
-    public Set<Player> getFlyingPlayers() {
-        return flyingPlayers;
     }
 
     public String parseField(String field, Player p) {

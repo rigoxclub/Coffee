@@ -22,6 +22,6 @@ public class Vanish {
         for (Player all : Bukkit.getServer().getOnlinePlayers()) {
             all.showPlayer(plugin, vanishedStaff);
         }
-        plugin.getPlayers().get(vanishedStaff).unvanish();
+        plugin.getPlayers().get(vanishedStaff).unVanish();
     }
 }
