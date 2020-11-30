@@ -127,7 +127,7 @@ public class StaffListener implements Listener {
         }
     }
 
-    Map<Player, Long> dropQueue = new LinkedHashMap<>();
+    Map<Player, Long> toggleCooldown = new LinkedHashMap<>();
     @EventHandler
     public void onPlayerUse(PlayerInteractEvent e) {
         Player player = e.getPlayer();
@@ -136,8 +136,8 @@ public class StaffListener implements Listener {
 
         String name = plugin.getSetting().getString("staff-items." + e.getPlayer().getInventory().getItemInMainHand().getType().name() + ".name");
 
-        if (dropQueue.containsKey(player)) {
-            long cooldown = dropQueue.get(player);
+        if (toggleCooldown.containsKey(player)) {
+            long cooldown = toggleCooldown.get(player);
 
             if (cooldown >= System.currentTimeMillis()) {
                 debug("Updating the current time in millis.");
@@ -148,7 +148,8 @@ public class StaffListener implements Listener {
 
             if (cooldown <= System.currentTimeMillis()) {
                 debug("Removed the user from the list.");
-                dropQueue.remove(e.getPlayer());
+                toggleCooldown.remove(e.getPlayer());
+                // not return cuz I don't wanna double click to toggle :haha:
             }
         }
 
@@ -157,9 +158,8 @@ public class StaffListener implements Listener {
             player.getInventory().setItem(4, items.getVanishEnableItem());
 
             vanish.showStaff(player);
-            plugin.getPlayers().get(player).unvanish();
             player.sendMessage(color("&cVanish disabled!"));
-            dropQueue.put(player, System.currentTimeMillis() + 3000);
+            toggleCooldown.put(player, System.currentTimeMillis() + 1000);
             return;
         }
 
@@ -167,9 +167,8 @@ public class StaffListener implements Listener {
             player.getInventory().setItem(4, items.getVanishDisableItem());
 
             vanish.hideStaff(player);
-            plugin.getPlayers().get(player).vanish();
             player.sendMessage(color("&aVanish enabled!"));
-            dropQueue.put(player, System.currentTimeMillis() + 3000);
+            toggleCooldown.put(player, System.currentTimeMillis() + 1000);
             return;
         }
     }

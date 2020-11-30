@@ -15,11 +15,13 @@ public class Vanish {
         for (Player all : Bukkit.getServer().getOnlinePlayers()) {
             all.hidePlayer(plugin, vanishedStaff);
         }
+        plugin.getPlayers().get(vanishedStaff).vanish();
     }
 
     public void showStaff (Player vanishedStaff) {
         for (Player all : Bukkit.getServer().getOnlinePlayers()) {
             all.showPlayer(plugin, vanishedStaff);
         }
+        plugin.getPlayers().get(vanishedStaff).unvanish();
     }
 }
