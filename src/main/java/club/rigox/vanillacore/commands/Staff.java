@@ -3,7 +3,7 @@ package club.rigox.vanillacore.commands;
 import club.rigox.vanillacore.VanillaCore;
 import club.rigox.vanillacore.player.FlyStatus;
 import club.rigox.vanillacore.player.StaffItems;
-import club.rigox.vanillacore.player.Vanish;
+import club.rigox.vanillacore.player.ToggleVanish;
 import club.rigox.vanillacore.player.scoreboard.ScoreBoardAPI;
 import org.bukkit.GameMode;
 import org.bukkit.command.Command;
@@ -16,14 +16,14 @@ import static club.rigox.vanillacore.utils.MsgUtils.color;
 
 public class Staff implements CommandExecutor {
     private final VanillaCore plugin;
-    private final Vanish vanish;
+    private final ToggleVanish toggleVanish;
     private final StaffItems staffItems;
     private final ScoreBoardAPI scoreBoardAPI;
     private final FlyStatus flyStatus;
 
     public Staff(VanillaCore plugin) {
         this.plugin = plugin;
-        vanish = new Vanish(plugin);
+        toggleVanish = new ToggleVanish(plugin);
         staffItems = new StaffItems(plugin);
         plugin.getServer().getPluginCommand("staff").setExecutor(this);
         scoreBoardAPI = new ScoreBoardAPI(plugin);
@@ -55,7 +55,7 @@ public class Staff implements CommandExecutor {
 
 
         if (plugin.getPlayers().get(player).isHidden()) {
-            vanish.showStaff(player);
+            toggleVanish.showStaff(player);
 
             plugin.getPlayers().get(player).unVanish();
             plugin.getPlayers().get(player).unHide();
@@ -69,7 +69,7 @@ public class Staff implements CommandExecutor {
             player.sendMessage(color(plugin.getLang().getString("staff-mode.disabled")));
             return true;
         }
-        vanish.hideStaff(player);
+        toggleVanish.hideStaff(player);
 
         plugin.getPlayers().get(player).hide();
         plugin.getPlayers().get(player).vanish();

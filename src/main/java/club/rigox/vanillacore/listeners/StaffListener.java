@@ -1,7 +1,7 @@
 package club.rigox.vanillacore.listeners;
 
 import club.rigox.vanillacore.VanillaCore;
-import club.rigox.vanillacore.player.Vanish;
+import club.rigox.vanillacore.player.ToggleVanish;
 import club.rigox.vanillacore.utils.Items;
 import com.destroystokyo.paper.event.player.PlayerPickupExperienceEvent;
 import org.bukkit.Bukkit;
@@ -24,14 +24,14 @@ import static club.rigox.vanillacore.utils.MsgUtils.color;
 
 public class StaffListener implements Listener {
     private final VanillaCore plugin;
-    private final Vanish vanish;
+    private final ToggleVanish toggleVanish;
 
     private final Items items;
 
     public StaffListener(VanillaCore plugin) {
         Bukkit.getServer().getPluginManager().registerEvents(this, plugin);
         this.plugin = plugin;
-        vanish = new Vanish(plugin);
+        toggleVanish = new ToggleVanish(plugin);
 
         this.items = new Items(plugin);
     }
@@ -165,7 +165,7 @@ public class StaffListener implements Listener {
         if (name.equals(plugin.getSetting().getString("staff-items.LIME_DYE.name"))) {
             player.getInventory().setItem(4, items.getVanishEnableItem());
 
-            vanish.showStaff(player);
+            toggleVanish.showStaff(player);
             player.sendMessage(color("&cVanish disabled!"));
             toggleCooldown.put(player, System.currentTimeMillis() + 1000);
             return;
@@ -174,7 +174,7 @@ public class StaffListener implements Listener {
         if (name.equals(plugin.getSetting().getString("staff-items.GRAY_DYE.name"))) {
             player.getInventory().setItem(4, items.getVanishDisableItem());
 
-            vanish.hideStaff(player);
+            toggleVanish.hideStaff(player);
             player.sendMessage(color("&aVanish enabled!"));
             toggleCooldown.put(player, System.currentTimeMillis() + 1000);
             return;

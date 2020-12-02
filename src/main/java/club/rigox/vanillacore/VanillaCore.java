@@ -1,11 +1,8 @@
 package club.rigox.vanillacore;
 
-import club.rigox.vanillacore.commands.Fly;
+import club.rigox.vanillacore.commands.*;
 import club.rigox.vanillacore.listeners.StaffListener;
 import club.rigox.vanillacore.models.PlayerModel;
-import club.rigox.vanillacore.commands.Freeze;
-import club.rigox.vanillacore.commands.Staff;
-import club.rigox.vanillacore.commands.Unfreeze;
 import club.rigox.vanillacore.listeners.PlayerListener;
 
 import club.rigox.vanillacore.placeholders.PlaceholderHook;

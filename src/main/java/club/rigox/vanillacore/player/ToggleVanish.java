@@ -4,10 +4,10 @@ import club.rigox.vanillacore.VanillaCore;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
-public class Vanish {
+public class ToggleVanish {
     private final VanillaCore plugin;
 
-    public Vanish(VanillaCore plugin) {
+    public ToggleVanish(VanillaCore plugin) {
         this.plugin = plugin;
     }
 
