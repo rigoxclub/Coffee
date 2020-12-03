@@ -1,7 +1,6 @@
 package club.rigox.vanillacore.commands;
 
 import club.rigox.vanillacore.VanillaCore;
-import club.rigox.vanillacore.player.scoreboard.ScoreBoardAPI;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -13,12 +12,10 @@ import static club.rigox.vanillacore.utils.MsgUtils.color;
 public class Unfreeze implements CommandExecutor {
 
     private final VanillaCore plugin;
-    private final ScoreBoardAPI scoreBoardAPI;
 
     public Unfreeze (VanillaCore plugin) {
         this.plugin = plugin;
         plugin.getServer().getPluginCommand("unfreeze").setExecutor(this);
-        scoreBoardAPI = new ScoreBoardAPI(plugin);
     }
 
     @Override
@@ -56,7 +53,7 @@ public class Unfreeze implements CommandExecutor {
         target.removePotionEffect(PotionEffectType.BLINDNESS);
         plugin.getInventoryUtils().restoreInventory(target);
         target.sendMessage(color(String.format(plugin.getLang().getString("unfreeze.player-unfrozed"), staff.getName())));
-        scoreBoardAPI.setScoreBoard(target, "general", true);
+        plugin.getScoreBoardAPI().setScoreBoard(target, "general", true);
 
         // TITLE AND SUBTITLE
         target.sendTitle(color(plugin.getSetting().getString("titles.unfreeze.title")),

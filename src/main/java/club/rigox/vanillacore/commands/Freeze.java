@@ -17,12 +17,10 @@ import static club.rigox.vanillacore.utils.MsgUtils.color;
 
 public class Freeze implements CommandExecutor {
     private final VanillaCore plugin;
-    private final ScoreBoardAPI scoreBoardAPI;
 
     public Freeze(VanillaCore plugin) {
         this.plugin = plugin;
         plugin.getServer().getPluginCommand("freeze").setExecutor(this);
-        scoreBoardAPI = new ScoreBoardAPI(plugin);
     }
 
     @Override
@@ -61,7 +59,7 @@ public class Freeze implements CommandExecutor {
         plugin.getInventoryUtils().storeAndClearInventory(target);
         target.sendMessage(color(String.format(plugin.getLang().getString("freeze.player-frozed"), staff.getName())));
         target.getInventory().setHelmet(new ItemStack(Material.ICE));
-        scoreBoardAPI.setScoreBoard(target, "freeze", true);
+        plugin.getScoreBoardAPI().setScoreBoard(target, "freeze", true);
 
         return true;
 

@@ -18,14 +18,12 @@ public class Staff implements CommandExecutor {
     private final VanillaCore plugin;
     private final ToggleVanish toggleVanish;
     private final StaffItems staffItems;
-    private final ScoreBoardAPI scoreBoardAPI;
 
     public Staff(VanillaCore plugin) {
         this.plugin = plugin;
         toggleVanish = new ToggleVanish(plugin);
         staffItems = new StaffItems(plugin);
         plugin.getServer().getPluginCommand("staff").setExecutor(this);
-        scoreBoardAPI = new ScoreBoardAPI(plugin);
     }
 
     @Override
@@ -59,7 +57,7 @@ public class Staff implements CommandExecutor {
             plugin.getPlayers().get(player).unHide();
 
             plugin.getInventoryUtils().restoreInventory(player);
-            scoreBoardAPI.setScoreBoard(player, "general", true);
+            plugin.getScoreBoardAPI().setScoreBoard(player, "general", true);
 
             player.setGameMode(GameMode.SURVIVAL);
             plugin.getFlyStatus().disable(player);
@@ -76,7 +74,7 @@ public class Staff implements CommandExecutor {
         plugin.getInventoryUtils().storeAndClearInventory(player);
         staffItems.giveStaffItems(player);
 
-        scoreBoardAPI.setScoreBoard(player, "staff-mode", true);
+        plugin.getScoreBoardAPI().setScoreBoard(player, "staff-mode", true);
 
         player.setGameMode(GameMode.ADVENTURE);
         plugin.getFlyStatus().enable(player);

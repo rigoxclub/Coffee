@@ -34,11 +34,10 @@ public class Invsee implements CommandExecutor {
                 return true;
             }
 
-//            Commented cuz I want to test it lol
-//            if (target.equals(sender)) {
-//                sender.sendMessage(color("._."));
-//                return true;
-//            }
+            if (target.equals(sender)) {
+                sender.sendMessage(color("&cYou can't open your inventory!"));
+                return true;
+            }
 
             player.openInventory(target.getInventory());
             player.sendMessage(color(String.format("&aOpening inventory of %s", target.getName())));

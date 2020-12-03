@@ -30,6 +30,7 @@ public final class VanillaCore extends JavaPlugin {
 
     private Inventory inventoryUtils;
     private FlyStatus flyStatus;
+    private ScoreBoardAPI scoreBoardAPI;
 
     private FileConfiguration lang;
     private FileConfiguration setting;
@@ -45,6 +46,7 @@ public final class VanillaCore extends JavaPlugin {
 
         this.inventoryUtils = new Inventory(this);
         this.flyStatus = new FlyStatus(this);
+        this.scoreBoardAPI = new ScoreBoardAPI(this);
 
         new PlaceholderHook(this).register();
 
@@ -114,5 +116,9 @@ public final class VanillaCore extends JavaPlugin {
 
     public FlyStatus getFlyStatus() {
         return flyStatus;
+    }
+
+    public ScoreBoardAPI getScoreBoardAPI() {
+        return scoreBoardAPI;
     }
 }

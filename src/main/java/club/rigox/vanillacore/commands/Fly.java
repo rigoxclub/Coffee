@@ -1,7 +1,6 @@
 package club.rigox.vanillacore.commands;
 
 import club.rigox.vanillacore.VanillaCore;
-import club.rigox.vanillacore.player.FlyStatus;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
