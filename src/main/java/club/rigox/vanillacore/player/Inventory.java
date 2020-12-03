@@ -113,7 +113,7 @@ public class Inventory {
 
     public void restoreOnServerStop() {
         for (Player all : plugin.getServer().getOnlinePlayers()) {
-            if (plugin.getPlayers().get(all).isHidden() || plugin.getPlayers().get(all).isFrozed()) {
+            if (plugin.getPlayers().get(all).hasGod() || plugin.getPlayers().get(all).isFrozed()) {
                 restoreInventory(all);
             }
         }

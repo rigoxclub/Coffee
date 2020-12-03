@@ -18,3 +18,5 @@ commands:
     description: Command fly
   invsee:
     description: Command invsee
+  god:
+    description: Command god

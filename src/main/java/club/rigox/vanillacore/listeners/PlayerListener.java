@@ -38,7 +38,7 @@ public class PlayerListener implements Listener {
         Player player = event.getPlayer();
 
         // Modificado xq anteriormente te reiniciaba el inventario por mas que no estes en staff y rip inv
-        if (plugin.getPlayers().get(player).isHidden() || plugin.getPlayers().get(player).isFrozed()) {
+        if (plugin.getPlayers().get(player).hasGod() || plugin.getPlayers().get(player).isFrozed()) {
             plugin.getInventoryUtils().restoreInventory(player);
             plugin.getPlayers().remove(player);
             player.removePotionEffect(PotionEffectType.BLINDNESS);

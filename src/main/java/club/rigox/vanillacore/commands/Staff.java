@@ -50,11 +50,11 @@ public class Staff implements CommandExecutor {
         }
 
 
-        if (plugin.getPlayers().get(player).isHidden()) {
+        if (plugin.getPlayers().get(player).hasGod()) {
             toggleVanish.showStaff(player);
 
             plugin.getPlayers().get(player).unVanish();
-            plugin.getPlayers().get(player).unHide();
+            plugin.getPlayers().get(player).disableGod();
 
             plugin.getInventoryUtils().restoreInventory(player);
             plugin.getScoreBoardAPI().setScoreBoard(player, "general", true);
@@ -68,7 +68,7 @@ public class Staff implements CommandExecutor {
         
         toggleVanish.hideStaff(player);
 
-        plugin.getPlayers().get(player).hide();
+        plugin.getPlayers().get(player).enableGod();
         plugin.getPlayers().get(player).vanish();
 
         plugin.getInventoryUtils().storeAndClearInventory(player);

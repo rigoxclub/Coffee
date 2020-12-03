@@ -39,7 +39,7 @@ public class StaffListener implements Listener {
 
 //    @EventHandler
 //    public void onPlayerBlockBreak(BlockBreakEvent event) {
-//        if (!(plugin.getPlayers().get(event.getPlayer()).isHidden() || plugin.getPlayers().get(event.getPlayer()).isFrozed())) {
+//        if (!(plugin.getPlayers().get(event.getPlayer()).hasGod() || plugin.getPlayers().get(event.getPlayer()).isFrozed())) {
 //            return;
 //        }
 //
@@ -50,7 +50,7 @@ public class StaffListener implements Listener {
 //    @EventHandler
 //    public void onPlayerBlockPlace(BlockPlaceEvent event) {
 //
-//        if (!(plugin.getPlayers().get(event.getPlayer()).isHidden() || plugin.getPlayers().get(event.getPlayer()).isFrozed())) {
+//        if (!(plugin.getPlayers().get(event.getPlayer()).hasGod() || plugin.getPlayers().get(event.getPlayer()).isFrozed())) {
 //            return;
 //        }
 //
@@ -61,7 +61,7 @@ public class StaffListener implements Listener {
     @EventHandler
     public void onExperiencePickup(PlayerPickupExperienceEvent event) {
 
-        if (!(plugin.getPlayers().get(event.getPlayer()).isHidden() || plugin.getPlayers().get(event.getPlayer()).isFrozed())) {
+        if (!(plugin.getPlayers().get(event.getPlayer()).hasGod() || plugin.getPlayers().get(event.getPlayer()).isFrozed())) {
             return;
         }
 
@@ -71,7 +71,7 @@ public class StaffListener implements Listener {
     @EventHandler
     public void onArrowPickup(PlayerPickupArrowEvent event) {
 
-        if (!(plugin.getPlayers().get(event.getPlayer()).isHidden() || plugin.getPlayers().get(event.getPlayer()).isFrozed())) {
+        if (!(plugin.getPlayers().get(event.getPlayer()).hasGod() || plugin.getPlayers().get(event.getPlayer()).isFrozed())) {
             return;
         }
 
@@ -82,13 +82,13 @@ public class StaffListener implements Listener {
     public void onItemPickUp(EntityPickupItemEvent event) {
         if (event.getEntity() instanceof Player) {
             Player player = (Player) event.getEntity();
-            event.setCancelled(plugin.getPlayers().get(player).isHidden());
+            event.setCancelled(plugin.getPlayers().get(player).hasGod());
         }
     }
 
     @EventHandler
     public void onItemDrop(PlayerDropItemEvent event) {
-        if (!(plugin.getPlayers().get(event.getPlayer()).isHidden() || plugin.getPlayers().get(event.getPlayer()).isFrozed())) {
+        if (!(plugin.getPlayers().get(event.getPlayer()).hasGod() || plugin.getPlayers().get(event.getPlayer()).isFrozed())) {
             return;
         }
 
@@ -100,7 +100,7 @@ public class StaffListener implements Listener {
     public void onDamage(EntityDamageEvent event) {
         if (event.getEntity() instanceof Player) {
             Player player = (Player) event.getEntity();
-            if (plugin.getPlayers().get(player).isHidden() || plugin.getPlayers().get(player).isFrozed()) {
+            if (plugin.getPlayers().get(player).hasGod() || plugin.getPlayers().get(player).isFrozed()) {
                 event.setCancelled(true);
                 return;
             }
@@ -122,7 +122,7 @@ public class StaffListener implements Listener {
     public void hidePlayerForEntities(EntityTargetLivingEntityEvent event) {
         if (event.getTarget() instanceof Player) {
             Player player = (Player) event.getTarget();
-            if (plugin.getPlayers().get(player).isHidden() || plugin.getPlayers().get(player).isFrozed()) {
+            if (plugin.getPlayers().get(player).hasGod() || plugin.getPlayers().get(player).isFrozed()) {
                 event.setCancelled(true);
             }
         }
@@ -133,7 +133,7 @@ public class StaffListener implements Listener {
         if (event.getEntity() instanceof Player) {
             Player player = (Player) event.getEntity();
 
-            if (plugin.getPlayers().get(player).isHidden()) {
+            if (plugin.getPlayers().get(player).hasGod()) {
                 event.setCancelled(true);
                 debug(String.format("Cancelled FoodLevelChangeEvent to %s", player));
             }
@@ -190,7 +190,7 @@ public class StaffListener implements Listener {
     @EventHandler
     public void onClickSlot(InventoryClickEvent e) {
         Player player = (Player) e.getWhoClicked();
-        if (plugin.getPlayers().get(player).isHidden()) {
+        if (plugin.getPlayers().get(player).hasGod()) {
             e.setCancelled(true);
         }
     }

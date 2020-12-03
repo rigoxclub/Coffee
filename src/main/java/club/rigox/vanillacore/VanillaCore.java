@@ -55,7 +55,6 @@ public final class VanillaCore extends JavaPlugin {
         loadHooks();
         registerListeners();
         registerCommands();
-
     }
 
     @Override
@@ -69,6 +68,7 @@ public final class VanillaCore extends JavaPlugin {
         new Staff(this);
         new Fly(this);
         new Invsee(this);
+        new God(this);
     }
 
     public void registerListeners() {

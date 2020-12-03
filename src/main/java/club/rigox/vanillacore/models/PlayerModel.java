@@ -13,7 +13,7 @@ public class PlayerModel {
     private int foodLevel;
     private double health = 20; // Por si llega a dar un error, mejor darles toda la vida antes que matarlos xd
 
-    private boolean isHidden;
+    private boolean hasGod;
     private boolean isFrozed;
     private boolean isVanished;
     private boolean isFlying;
@@ -22,12 +22,12 @@ public class PlayerModel {
     private ItemStack[] armor;
     private BukkitTask task;
 
-    public void hide() {
-        this.isHidden = true;
+    public void enableGod() {
+        this.hasGod = true;
     }
 
-    public void unHide() {
-        this.isHidden = false;
+    public void disableGod() {
+        this.hasGod = false;
     }
 
     public void vanish() {
@@ -106,8 +106,8 @@ public class PlayerModel {
         return this.armor;
     }
 
-    public boolean isHidden() {
-        return isHidden;
+    public boolean hasGod() {
+        return hasGod;
     }
 
     public boolean isFrozed() {
