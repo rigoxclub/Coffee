@@ -10,6 +10,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.*;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerPickupArrowEvent;
@@ -83,7 +84,6 @@ public class StaffListener implements Listener {
 
             debug(String.format("Value of player flying is %s for %s", plugin.getPlayers().get(player).isFlying(), player));
             debug(String.format("%s received Damage %s", player, event.getCause()));
-            return;
         }
     }
 
@@ -97,6 +97,15 @@ public class StaffListener implements Listener {
                 player.sendMessage(color("&cYou can't attack while in vanish or frozed!"));
 
             }
+        }
+    }
+
+    @EventHandler
+    public void onPlayerChat(AsyncPlayerChatEvent event) {
+        Player player = event.getPlayer();
+        if (plugin.getPlayers().get(player).isVanished()) {
+            event.setCancelled(true);
+            player.sendMessage(color("&cYou can't send messages while vanished!"));
         }
     }
 
