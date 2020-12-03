@@ -21,3 +21,5 @@ staff-items:
     name: "&aVanish Enabled &7(Right Click)"
   GRAY_DYE:
     name: "&cVanish Disabled &7(Right Click)"
+  ICE:
+    name: "&cFreeze &7(Right Click)"

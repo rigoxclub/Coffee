@@ -64,7 +64,6 @@ public final class VanillaCore extends JavaPlugin {
 
     public void registerCommands() {
         new Freeze(this);
-        new Unfreeze(this);
         new Staff(this);
         new Fly(this);
         new Invsee(this);

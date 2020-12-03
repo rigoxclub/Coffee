@@ -8,8 +8,6 @@ command-usage:
 
 player:
   offline: "&cThe player is offline!"
-  already-frozed: "&cThe player is already frozed!"
-  not-frozen: "&cThe player is not frozen."
 
 freeze:
   # %s = Staff player who frozed the player.

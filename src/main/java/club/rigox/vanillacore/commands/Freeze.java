@@ -49,8 +49,30 @@ public class Freeze implements CommandExecutor {
             return true;
         }
 
+        if (target.equals(staff)) {
+            sender.sendMessage(color("&cCuesta eso eh"));
+            return true;
+        }
+
+        if (target.hasPermission("vanillacore.freeze.bypass")) {
+            sender.sendMessage(color("&cYou can't freeze this player! This down has bypass :haha:"));
+            return true;
+
+        }
+
         if (plugin.getPlayers().get(target).isFrozed()) {
-            sender.sendMessage(color(plugin.getLang().getString("player.already-frozed")));
+            plugin.getPlayers().get(target).unfreeze();
+            target.removePotionEffect(PotionEffectType.BLINDNESS);
+            plugin.getInventoryUtils().restoreInventory(target);
+            target.sendMessage(color(String.format(plugin.getLang().getString("unfreeze.player-unfrozed"), staff.getName())));
+            plugin.getScoreBoardAPI().setScoreBoard(target, "general", true);
+
+            // TITLE AND SUBTITLE
+            target.sendTitle(color(plugin.getSetting().getString("titles.unfreeze.title")),
+                    color(String.format(plugin.getSetting().getString("titles.unfreeze.subtitle"), staff.getName())),
+                    plugin.getSetting().getInt("titles.unfreeze.options.fadein"),
+                    plugin.getSetting().getInt("titles.unfreeze.options.stay"),
+                    plugin.getSetting().getInt("titles.unfreeze.options.fadeout"));
             return true;
         }
 
