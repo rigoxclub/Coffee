@@ -1,10 +1,8 @@
 package club.rigox.vanillacore.commands;
 
 import club.rigox.vanillacore.VanillaCore;
-import club.rigox.vanillacore.player.FlyStatus;
-import club.rigox.vanillacore.player.StaffItems;
 import club.rigox.vanillacore.player.ToggleVanish;
-import club.rigox.vanillacore.player.scoreboard.ScoreBoardAPI;
+import club.rigox.vanillacore.utils.Items;
 import org.bukkit.GameMode;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -17,12 +15,12 @@ import static club.rigox.vanillacore.utils.MsgUtils.color;
 public class Staff implements CommandExecutor {
     private final VanillaCore plugin;
     private final ToggleVanish toggleVanish;
-    private final StaffItems staffItems;
+    private final Items items;
 
     public Staff(VanillaCore plugin) {
         this.plugin = plugin;
         toggleVanish = new ToggleVanish(plugin);
-        staffItems = new StaffItems(plugin);
+        items = new Items(plugin);
         plugin.getServer().getPluginCommand("staff").setExecutor(this);
     }
 
@@ -72,7 +70,7 @@ public class Staff implements CommandExecutor {
         plugin.getPlayers().get(player).vanish();
 
         plugin.getInventoryUtils().storeAndClearInventory(player);
-        staffItems.giveStaffItems(player);
+        items.giveItems(player);
 
         plugin.getScoreBoardAPI().setScoreBoard(player, "staff-mode", true);
 

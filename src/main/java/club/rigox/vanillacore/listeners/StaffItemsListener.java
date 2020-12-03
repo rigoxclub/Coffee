@@ -7,6 +7,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 
 import java.util.LinkedHashMap;
@@ -74,6 +75,19 @@ public class StaffItemsListener implements Listener {
             player.sendMessage(color("&aVanish enabled!"));
             toggleCooldown.put(player, System.currentTimeMillis() + 1000);
             plugin.getScoreBoardAPI().setScoreBoard(player, "staff-mode", true);
+        }
+    }
+
+    @EventHandler
+    public void onInteractEntity(PlayerInteractEntityEvent e) {
+        Player player = e.getPlayer();
+
+        if (!player.getInventory().getItemInMainHand().hasItemMeta()) return;
+
+        String name = plugin.getSetting().getString("staff-items." + e.getPlayer().getInventory().getItemInMainHand().getType().name() + ".name");
+
+        if (name.equals(plugin.getSetting().getString("staff-items.ICE.name"))) {
+//            player.getInventory().setItem();
         }
     }
 }

@@ -1,9 +1,7 @@
 package club.rigox.vanillacore.commands;
 
 import club.rigox.vanillacore.VanillaCore;
-import club.rigox.vanillacore.player.scoreboard.ScoreBoardAPI;
-import club.rigox.vanillacore.tasks.FreezeTask;
-import org.bukkit.*;
+import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -65,6 +63,7 @@ public class Freeze implements CommandExecutor {
             target.removePotionEffect(PotionEffectType.BLINDNESS);
             plugin.getInventoryUtils().restoreInventory(target);
             target.sendMessage(color(String.format(plugin.getLang().getString("unfreeze.player-unfrozed"), staff.getName())));
+            staff.sendMessage(color(String.format("&8&l* &fYou frozed &b%s", target.getName())));
             plugin.getScoreBoardAPI().setScoreBoard(target, "general", true);
 
             // TITLE AND SUBTITLE
@@ -80,6 +79,7 @@ public class Freeze implements CommandExecutor {
         target.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 99999, 50));
         plugin.getInventoryUtils().storeAndClearInventory(target);
         target.sendMessage(color(String.format(plugin.getLang().getString("freeze.player-frozed"), staff.getName())));
+        staff.sendMessage(color(String.format("&8&l* &fYou frozed &b%s", target.getName())));
         target.getInventory().setHelmet(new ItemStack(Material.ICE));
         plugin.getScoreBoardAPI().setScoreBoard(target, "freeze", true);
 

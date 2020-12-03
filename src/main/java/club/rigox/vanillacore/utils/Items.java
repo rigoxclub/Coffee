@@ -2,6 +2,7 @@ package club.rigox.vanillacore.utils;
 
 import club.rigox.vanillacore.VanillaCore;
 import org.bukkit.Material;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -10,7 +11,7 @@ import static club.rigox.vanillacore.utils.MsgUtils.color;
 public class Items {
     private final ItemStack vanishEnableItem;
     private final ItemStack vanishDisableItem;
-//    private final ItemStack freezeItem;
+    private final ItemStack freezeItem;
 
     public Items(VanillaCore plugin) {
 
@@ -31,13 +32,18 @@ public class Items {
         this.vanishDisableItem = a;
 
         // Freeze item
-//        ItemStack freeze = new ItemStack(Material.ICE);
-//        ItemMeta meta2 = freeze.getItemMeta();
-//        meta2.setDisplayName(color(plugin.getSetting().getString("staff-items.ICE.name")));
-//        freeze.setItemMeta(meta2);
-//
-//        this.freezeItem = freeze;
+        ItemStack freeze = new ItemStack(Material.ICE);
+        ItemMeta meta2 = freeze.getItemMeta();
+        meta2.setDisplayName(color(plugin.getSetting().getString("staff-items.ICE.name")));
+        freeze.setItemMeta(meta2);
 
+        this.freezeItem = freeze;
+
+    }
+
+    public void giveItems(Player player) {
+        player.getInventory().setItem(4, getVanishDisableItem());
+        player.getInventory().setItem(1, getFreezeItem());
     }
 
     public ItemStack getVanishEnableItem() {
@@ -48,7 +54,7 @@ public class Items {
         return vanishDisableItem;
     }
 
-//    public ItemStack getFreezeItem() {
-//        return freezeItem;
-//    }
+    public ItemStack getFreezeItem() {
+        return freezeItem;
+    }
 }
