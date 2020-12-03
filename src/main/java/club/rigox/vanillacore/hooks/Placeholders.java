@@ -4,10 +4,10 @@ import club.rigox.vanillacore.VanillaCore;
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
 import org.bukkit.entity.Player;
 
-public class PlaceholderAPI extends PlaceholderExpansion {
+public class Placeholders extends PlaceholderExpansion {
     private VanillaCore plugin;
 
-    public PlaceholderAPI(VanillaCore plugin) {
+    public Placeholders(VanillaCore plugin) {
         this.plugin = plugin;
     }
 
