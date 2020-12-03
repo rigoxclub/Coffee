@@ -89,11 +89,14 @@ public class StaffListener implements Listener {
 
     @EventHandler
     public void onPlayerAttack(EntityDamageByEntityEvent event) {
-        Player player = (Player) event.getDamager();
+        if (event.getDamager() instanceof Player) {
+            Player player = (Player) event.getDamager();
 
-        if (plugin.getPlayers().get(player).isVanished()) {
-            event.setCancelled(true);
-            player.sendMessage(color("&cYou can't attack while in vanish!"));
+            if (plugin.getPlayers().get(player).isVanished() || plugin.getPlayers().get(player).isFrozed()) {
+                event.setCancelled(true);
+                player.sendMessage(color("&cYou can't attack while in vanish or frozed!"));
+
+            }
         }
     }
 
