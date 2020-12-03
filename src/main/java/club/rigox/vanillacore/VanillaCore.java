@@ -1,13 +1,13 @@
 package club.rigox.vanillacore;
 
 import club.rigox.vanillacore.commands.*;
+import club.rigox.vanillacore.listeners.PlayerListener;
 import club.rigox.vanillacore.listeners.StaffListener;
 import club.rigox.vanillacore.models.PlayerModel;
-import club.rigox.vanillacore.listeners.PlayerListener;
-
 import club.rigox.vanillacore.placeholders.PlaceholderHook;
 import club.rigox.vanillacore.player.FlyStatus;
 import club.rigox.vanillacore.player.Inventory;
+import club.rigox.vanillacore.player.scoreboard.ScoreBoardAPI;
 import me.clip.placeholderapi.PlaceholderAPI;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.InvalidConfigurationException;
@@ -16,10 +16,10 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
-
 import java.io.File;
 import java.io.IOException;
-import java.util.*;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 import static club.rigox.vanillacore.utils.ConsoleUtils.warn;
 
@@ -34,7 +34,6 @@ public final class VanillaCore extends JavaPlugin {
     private FileConfiguration lang;
     private FileConfiguration setting;
     private FileConfiguration scoreboard;
-    private FileConfiguration inventories;
 
     @Override
     public void onEnable() {
@@ -43,7 +42,6 @@ public final class VanillaCore extends JavaPlugin {
         this.lang = createConfig("lang");
         this.setting = createConfig("settings");
         this.scoreboard = createConfig("scoreboard");
-        this.inventories = createConfig("inventories");
 
         this.inventoryUtils = new Inventory(this);
         this.flyStatus = new FlyStatus(this);
@@ -112,10 +110,6 @@ public final class VanillaCore extends JavaPlugin {
 
     public String parseField(String field, Player p) {
         return PlaceholderAPI.setPlaceholders(p, field);
-    }
-
-    public FileConfiguration getInventories() {
-        return inventories;
     }
 
     public FlyStatus getFlyStatus() {
