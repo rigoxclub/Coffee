@@ -46,40 +46,21 @@ public final class VanillaCore extends JavaPlugin {
         instance = this;
         this.luckPerms = getServer().getServicesManager().load(LuckPerms.class);
 
-        this.lang = createConfig("lang");
-        this.setting = createConfig("settings");
-        this.scoreboard = createConfig("scoreboard");
+        loadConfigs();
 
         this.inventoryUtils = new Inventory(this);
         this.flyStatus = new FlyStatus(this);
         this.scoreBoardAPI = new ScoreBoardAPI(this);
 
-
-        new PlaceholderAPI(this).register();
-
-        new PlayerListener(this);
-        new StaffListener(this);
-        new LuckpermsHook(this, this.luckPerms).register();
-
+        loadHooks();
+        registerListeners();
         registerCommands();
 
-        if (Bukkit.getPluginManager().getPlugin("PlaceholderAPI") == null) {
-            warn("Could not find PlaceholderAPI! This plugin is required.");
-            Bukkit.getPluginManager().disablePlugin(this);
-        }
     }
 
     @Override
     public void onDisable() {
         inventoryUtils.restoreOnServerStop();
-    }
-
-    public Inventory getInventoryUtils() {
-        return this.inventoryUtils;
-    }
-
-    public Map<Player, PlayerModel> getPlayers() {
-        return players;
     }
 
     public void registerCommands() {
@@ -90,21 +71,36 @@ public final class VanillaCore extends JavaPlugin {
         new Invsee(this);
     }
 
-    public FileConfiguration createConfig(String configName) {
-        File configFile = new File(getDataFolder(), configName + ".yml");
-        if (!configFile.exists()) {
-            configFile.getParentFile().mkdirs();
-            saveResource(configName + ".yml", false);
+    public void registerListeners() {
+        new PlayerListener(this);
+        new StaffListener(this);
+    }
+
+    public void loadConfigs() {
+        this.lang = createConfig("lang");
+        this.setting = createConfig("settings");
+        this.scoreboard = createConfig("scoreboard");
+    }
+
+    public void loadHooks() {
+        new PlaceholderAPI(this).register();
+        if (Bukkit.getPluginManager().getPlugin("PlaceholderAPI") == null) {
+            warn("Could not find PlaceholderAPI! This plugin is required.");
+            Bukkit.getPluginManager().disablePlugin(this);
         }
 
-        FileConfiguration cfg = new YamlConfiguration();
-        try {
-            cfg.load(configFile);
-        } catch (IOException | InvalidConfigurationException e) {
-            warn(String.format("A error occurred while copying the config %s.yml to the plugin data folder. Error: %s", configName, e));
-            e.printStackTrace();
+        new LuckpermsHook(this, this.luckPerms).register();
+        if (Bukkit.getPluginManager().getPlugin("LuckPerms") == null) {
+            warn("Could not find LuckPerms! This plugin is required.");
         }
-        return cfg;
+    }
+
+    public Inventory getInventoryUtils() {
+        return this.inventoryUtils;
+    }
+
+    public Map<Player, PlayerModel> getPlayers() {
+        return players;
     }
 
     public FileConfiguration getLang() {
@@ -129,5 +125,22 @@ public final class VanillaCore extends JavaPlugin {
 
     public ScoreBoardAPI getScoreBoardAPI() {
         return scoreBoardAPI;
+    }
+
+    public FileConfiguration createConfig(String configName) {
+        File configFile = new File(getDataFolder(), configName + ".yml");
+        if (!configFile.exists()) {
+            configFile.getParentFile().mkdirs();
+            saveResource(configName + ".yml", false);
+        }
+
+        FileConfiguration cfg = new YamlConfiguration();
+        try {
+            cfg.load(configFile);
+        } catch (IOException | InvalidConfigurationException e) {
+            warn(String.format("A error occurred while copying the config %s.yml to the plugin data folder. Error: %s", configName, e));
+            e.printStackTrace();
+        }
+        return cfg;
     }
 }

@@ -6,6 +6,7 @@ authors: [ sebastn_chan ]
 website: https://rigox.club
 depend:
   - PlaceholderAPI
+  - LuckPerms
 commands:
   staff:
     description: Command 1.
