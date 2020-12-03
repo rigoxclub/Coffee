@@ -1,6 +1,7 @@
 package club.rigox.vanillacore.listeners;
 
 import club.rigox.vanillacore.VanillaCore;
+import club.rigox.vanillacore.models.PlayerModel;
 import club.rigox.vanillacore.player.ToggleVanish;
 import club.rigox.vanillacore.utils.Items;
 import org.bukkit.Bukkit;
@@ -87,10 +88,36 @@ public class StaffItemsListener implements Listener {
 
         String name = plugin.getSetting().getString("staff-items." + e.getPlayer().getInventory().getItemInMainHand().getType().name() + ".name");
 
-        if (name.equals(plugin.getSetting().getString("staff-items.ICE.name"))) {
-            if (e.getRightClicked() instanceof Player) {
-//                Bukkit.dispatchCommand(player, "freeze ", e.getRightClicked().getName());
+        if (toggleCooldown.containsKey(player)) {
+            long cooldown = toggleCooldown.get(player);
+
+            if (cooldown >= System.currentTimeMillis()) {
+                debug("Updating the current time in millis.");
+                e.setCancelled(true);
+                debug(String.format("Cooldown time: %s", cooldown - System.currentTimeMillis()));
+                return;
+            }
+
+            if (cooldown <= System.currentTimeMillis()) {
+                debug("Removed the user from the list.");
+                toggleCooldown.remove(e.getPlayer());
+                // not return cuz I don't wanna double click to toggle :haha:
             }
         }
+
+        if (name.equals(plugin.getSetting().getString("staff-items.ICE.name"))) {
+            if (e.getRightClicked() instanceof Player) {
+                Player target = (Player) e.getRightClicked();
+
+                if (plugin.getPlayers().get(target).isFrozed()) {
+                    plugin.getPlayers().get(target).unfreeze(target, player);
+                    toggleCooldown.put(player, System.currentTimeMillis() + 1000);
+                    return;
+                }
+                plugin.getPlayers().get(target).freeze(target, player);
+                toggleCooldown.put(player, System.currentTimeMillis() + 1000);
+            }
+        }
+        debug(String.format("%s clicked on", e.getRightClicked()));
     }
 }
