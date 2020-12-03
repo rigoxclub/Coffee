@@ -91,9 +91,9 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>org.mongojack</groupId>
-            <artifactId>mongojack</artifactId>
-            <version>4.0.2</version>
+            <groupId>net.luckperms</groupId>
+            <artifactId>api</artifactId>
+            <version>5.2</version>
         </dependency>
     </dependencies>
 </project>

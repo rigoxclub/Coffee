@@ -1,14 +1,17 @@
 package club.rigox.vanillacore;
 
 import club.rigox.vanillacore.commands.*;
+import club.rigox.vanillacore.hooks.LuckpermsHook;
 import club.rigox.vanillacore.listeners.PlayerListener;
 import club.rigox.vanillacore.listeners.StaffListener;
 import club.rigox.vanillacore.models.PlayerModel;
-import club.rigox.vanillacore.placeholders.PlaceholderHook;
+import club.rigox.vanillacore.hooks.PlaceholderAPI;
 import club.rigox.vanillacore.player.FlyStatus;
 import club.rigox.vanillacore.player.Inventory;
 import club.rigox.vanillacore.player.scoreboard.ScoreBoardAPI;
-import me.clip.placeholderapi.PlaceholderAPI;
+import net.luckperms.api.LuckPerms;
+import net.luckperms.api.LuckPermsProvider;
+import net.luckperms.api.event.EventBus;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -32,6 +35,8 @@ public final class VanillaCore extends JavaPlugin {
     private FlyStatus flyStatus;
     private ScoreBoardAPI scoreBoardAPI;
 
+    private LuckPerms luckPerms;
+
     private FileConfiguration lang;
     private FileConfiguration setting;
     private FileConfiguration scoreboard;
@@ -39,6 +44,7 @@ public final class VanillaCore extends JavaPlugin {
     @Override
     public void onEnable() {
         instance = this;
+        this.luckPerms = getServer().getServicesManager().load(LuckPerms.class);
 
         this.lang = createConfig("lang");
         this.setting = createConfig("settings");
@@ -48,10 +54,13 @@ public final class VanillaCore extends JavaPlugin {
         this.flyStatus = new FlyStatus(this);
         this.scoreBoardAPI = new ScoreBoardAPI(this);
 
-        new PlaceholderHook(this).register();
+
+        new PlaceholderAPI(this).register();
 
         new PlayerListener(this);
         new StaffListener(this);
+        new LuckpermsHook(this, this.luckPerms).register();
+
         registerCommands();
 
         if (Bukkit.getPluginManager().getPlugin("PlaceholderAPI") == null) {
@@ -111,7 +120,7 @@ public final class VanillaCore extends JavaPlugin {
     }
 
     public String parseField(String field, Player p) {
-        return PlaceholderAPI.setPlaceholders(p, field);
+        return me.clip.placeholderapi.PlaceholderAPI.setPlaceholders(p, field);
     }
 
     public FlyStatus getFlyStatus() {

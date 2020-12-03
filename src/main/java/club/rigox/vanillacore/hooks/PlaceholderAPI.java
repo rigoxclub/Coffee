@@ -1,13 +1,13 @@
-package club.rigox.vanillacore.placeholders;
+package club.rigox.vanillacore.hooks;
 
 import club.rigox.vanillacore.VanillaCore;
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
 import org.bukkit.entity.Player;
 
-public class PlaceholderHook extends PlaceholderExpansion {
+public class PlaceholderAPI extends PlaceholderExpansion {
     private VanillaCore plugin;
 
-    public PlaceholderHook(VanillaCore plugin) {
+    public PlaceholderAPI(VanillaCore plugin) {
         this.plugin = plugin;
     }
 
