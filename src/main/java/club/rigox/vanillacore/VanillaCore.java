@@ -6,6 +6,7 @@ import club.rigox.vanillacore.models.PlayerModel;
 import club.rigox.vanillacore.listeners.PlayerListener;
 
 import club.rigox.vanillacore.placeholders.PlaceholderHook;
+import club.rigox.vanillacore.player.FlyStatus;
 import club.rigox.vanillacore.player.Inventory;
 import me.clip.placeholderapi.PlaceholderAPI;
 import org.bukkit.Bukkit;
@@ -28,6 +29,7 @@ public final class VanillaCore extends JavaPlugin {
     private Map<Player, PlayerModel> players = new LinkedHashMap<>();
 
     private Inventory inventoryUtils;
+    private FlyStatus flyStatus;
 
     private FileConfiguration lang;
     private FileConfiguration setting;
@@ -44,6 +46,7 @@ public final class VanillaCore extends JavaPlugin {
         this.inventories = createConfig("inventories");
 
         this.inventoryUtils = new Inventory(this);
+        this.flyStatus = new FlyStatus(this);
 
         new PlaceholderHook(this).register();
 
@@ -75,6 +78,7 @@ public final class VanillaCore extends JavaPlugin {
         new Unfreeze(this);
         new Staff(this);
         new Fly(this);
+        new Invsee(this);
     }
 
     public FileConfiguration createConfig(String configName) {
@@ -112,5 +116,9 @@ public final class VanillaCore extends JavaPlugin {
 
     public FileConfiguration getInventories() {
         return inventories;
+    }
+
+    public FlyStatus getFlyStatus() {
+        return flyStatus;
     }
 }

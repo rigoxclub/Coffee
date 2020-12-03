@@ -19,7 +19,6 @@ public class Staff implements CommandExecutor {
     private final ToggleVanish toggleVanish;
     private final StaffItems staffItems;
     private final ScoreBoardAPI scoreBoardAPI;
-    private final FlyStatus flyStatus;
 
     public Staff(VanillaCore plugin) {
         this.plugin = plugin;
@@ -27,7 +26,6 @@ public class Staff implements CommandExecutor {
         staffItems = new StaffItems(plugin);
         plugin.getServer().getPluginCommand("staff").setExecutor(this);
         scoreBoardAPI = new ScoreBoardAPI(plugin);
-        flyStatus = new FlyStatus(plugin);
     }
 
     @Override
@@ -64,11 +62,12 @@ public class Staff implements CommandExecutor {
             scoreBoardAPI.setScoreBoard(player, "general", true);
 
             player.setGameMode(GameMode.SURVIVAL);
-            flyStatus.disable(player);
+            plugin.getFlyStatus().disable(player);
 
             player.sendMessage(color(plugin.getLang().getString("staff-mode.disabled")));
             return true;
         }
+        
         toggleVanish.hideStaff(player);
 
         plugin.getPlayers().get(player).hide();
@@ -80,7 +79,7 @@ public class Staff implements CommandExecutor {
         scoreBoardAPI.setScoreBoard(player, "staff-mode", true);
 
         player.setGameMode(GameMode.ADVENTURE);
-        flyStatus.enable(player);
+        plugin.getFlyStatus().enable(player);
 
         player.sendMessage(color(plugin.getLang().getString("staff-mode.enabled")));
         return false;

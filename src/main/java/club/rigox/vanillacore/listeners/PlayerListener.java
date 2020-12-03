@@ -27,6 +27,10 @@ public class PlayerListener implements Listener {
         Player player = event.getPlayer();
         plugin.getPlayers().put(player, new PlayerModel());
         scoreBoardAPI.setScoreBoard(player, "general", true);
+
+        if (player.hasPermission("vanillacore.fly")) {
+            plugin.getFlyStatus().enable(player);
+        }
     }
 
     @EventHandler
@@ -46,8 +50,8 @@ public class PlayerListener implements Listener {
     public void onPlayerMove(PlayerMoveEvent event) {
         Player player = event.getPlayer();
 
-        if (plugin.getPlayers().get(player).isFlying() && player.isOnGround())
-            plugin.getPlayers().get(player).removeFly();
+//        if (plugin.getPlayers().get(player).isFlying() && player.isOnGround())
+//            plugin.getPlayers().get(player).removeFly();
 
         if (!plugin.getPlayers().get(player).isFrozed())
             return; // Al pedo todo lo demas si el tipo no esta freezeado xd

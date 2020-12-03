@@ -99,17 +99,21 @@ public class StaffListener implements Listener {
     public void onDamage(EntityDamageEvent event) {
         if (event.getEntity() instanceof Player) {
             Player player = (Player) event.getEntity();
-            if (plugin.getPlayers().get(player).isHidden() || plugin.getPlayers().get(player).isFrozed())
+            if (plugin.getPlayers().get(player).isHidden() || plugin.getPlayers().get(player).isFrozed()) {
                 event.setCancelled(true);
-
-//            No funca esto atm
-//            if (event.getCause().equals(EntityDamageEvent.DamageCause.FALL) && plugin.getPlayers().get(player).isFlying()) {
-            if (plugin.getPlayers().get(player).isFlying()) {
-                event.setCancelled(true);
-                plugin.getPlayers().get(player).removeFly();
+                return;
             }
 
+            if (event.getCause().equals(EntityDamageEvent.DamageCause.FALL) && plugin.getPlayers().get(player).isFlying()) {
+                event.setCancelled(true);
+                plugin.getPlayers().get(player).removeFly();
+                debug(String.format("Removed player from the isFlying method %s", player));
+                return;
+            }
+
+            debug(String.format("Value of player flying is %s for %s", plugin.getPlayers().get(player).isFlying(), player));
             debug(String.format("%s received Damage %s", player, event.getCause()));
+            return;
         }
     }
 

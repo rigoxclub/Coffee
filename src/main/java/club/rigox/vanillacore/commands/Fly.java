@@ -12,11 +12,9 @@ import static club.rigox.vanillacore.utils.MsgUtils.color;
 
 public class Fly implements CommandExecutor {
     private final VanillaCore plugin;
-    private final FlyStatus flyStatus;
 
     public Fly (VanillaCore plugin) {
         this.plugin = plugin;
-        flyStatus = new FlyStatus(plugin);
         plugin.getServer().getPluginCommand("fly").setExecutor(this);
     }
 
@@ -49,27 +47,28 @@ public class Fly implements CommandExecutor {
 
             if (target.equals(player)) {
                 player.sendMessage(color("&cOK WHAT THE FUCK? You can use only /FLY."));
+                return true;
             }
 
             if (target.isFlying()) {
-                flyStatus.disable(target);
+                plugin.getFlyStatus().disable(target);
                 target.sendMessage(color(String.format("&cYour fly has been deactivated by %s", player.getName())));
                 return true;
             }
 
-            flyStatus.enable(target);
+            plugin.getFlyStatus().enable(target);
             target.sendMessage(color(String.format("&aYour fly has been activated by %s", player.getName())));
             return true;
         }
 
         if (player.isFlying()) {
-            flyStatus.disable(player);
+            plugin.getFlyStatus().disable(player);
             player.sendMessage(color("&cFly disabled"));
 
             return true;
         }
 
-        flyStatus.enable(player);
+        plugin.getFlyStatus().enable(player);
         player.sendMessage(color("&aFly enabled"));
         return false;
     }

@@ -15,3 +15,5 @@ commands:
     description: Command unfreze
   fly:
     description: Command fly
+  invsee:
+    description: Command invsee
