@@ -12,6 +12,7 @@ import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityPickupItemEvent;
 import org.bukkit.event.entity.EntityTargetLivingEntityEvent;
 import org.bukkit.event.entity.FoodLevelChangeEvent;
+import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerPickupArrowEvent;
@@ -172,6 +173,7 @@ public class StaffListener implements Listener {
             toggleVanish.showStaff(player);
             player.sendMessage(color("&cVanish disabled!"));
             toggleCooldown.put(player, System.currentTimeMillis() + 1000);
+            plugin.getScoreBoardAPI().setScoreBoard(player, "staff-mode", true);
             return;
         }
 
@@ -181,7 +183,15 @@ public class StaffListener implements Listener {
             toggleVanish.hideStaff(player);
             player.sendMessage(color("&aVanish enabled!"));
             toggleCooldown.put(player, System.currentTimeMillis() + 1000);
-            return;
+            plugin.getScoreBoardAPI().setScoreBoard(player, "staff-mode", true);
+        }
+    }
+
+    @EventHandler
+    public void onClickSlot(InventoryClickEvent e) {
+        Player player = (Player) e.getWhoClicked();
+        if (plugin.getPlayers().get(player).isHidden()) {
+            e.setCancelled(true);
         }
     }
 
