@@ -25,7 +25,7 @@ public class PlayerListener implements Listener {
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
-        plugin.getPlayers().put(player, new PlayerModel());
+        plugin.getPlayers().put(player, new PlayerModel(plugin));
         scoreBoardAPI.setScoreBoard(player, "general", true);
 
         if (player.hasPermission("vanillacore.fly")) {

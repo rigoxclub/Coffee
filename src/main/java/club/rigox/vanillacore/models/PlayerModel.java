@@ -3,11 +3,22 @@ package club.rigox.vanillacore.models;
 import club.rigox.vanillacore.VanillaCore;
 import club.rigox.vanillacore.tasks.FreezeTask;
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitTask;
 
+import static club.rigox.vanillacore.utils.MsgUtils.color;
+
 public class PlayerModel {
+    private final VanillaCore plugin;
+
+    public PlayerModel (VanillaCore plugin) {
+        this.plugin = plugin;
+    }
+
     private float exp;
     private int expLevel;
     private int foodLevel;
@@ -49,11 +60,30 @@ public class PlayerModel {
     public void freeze(Player target, Player staff) {
         this.isFrozed = true;
         this.task = new FreezeTask(VanillaCore.instance, target, staff).runTaskTimer(VanillaCore.instance, 0L, 3 * 20);
+
+        target.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 99999, 50));
+        plugin.getInventoryUtils().storeAndClearInventory(target);
+        target.sendMessage(color(String.format(plugin.getLang().getString("freeze.player-frozed"), staff.getName())));
+        staff.sendMessage(color(String.format("&8&l* &fYou frozed &b%s", target.getName())));
+        target.getInventory().setHelmet(new ItemStack(Material.ICE));
+        plugin.getScoreBoardAPI().setScoreBoard(target, "freeze", true);
     }
 
-    public void unfreeze() {
+    public void unfreeze(Player target, Player staff) {
         this.isFrozed = false;
         Bukkit.getScheduler().cancelTask(this.task.getTaskId());
+        target.removePotionEffect(PotionEffectType.BLINDNESS);
+        plugin.getInventoryUtils().restoreInventory(target);
+        target.sendMessage(color(String.format(plugin.getLang().getString("unfreeze.player-unfrozed"), staff.getName())));
+        staff.sendMessage(color(String.format("&8&l* &fYou frozed &b%s", target.getName())));
+        plugin.getScoreBoardAPI().setScoreBoard(target, "general", true);
+
+        // TITLE AND SUBTITLE
+        target.sendTitle(color(plugin.getSetting().getString("titles.unfreeze.title")),
+                color(String.format(plugin.getSetting().getString("titles.unfreeze.subtitle"), staff.getName())),
+                plugin.getSetting().getInt("titles.unfreeze.options.fadein"),
+                plugin.getSetting().getInt("titles.unfreeze.options.stay"),
+                plugin.getSetting().getInt("titles.unfreeze.options.fadeout"));
     }
 
     public void setFoodLevel(int foodLevel) {

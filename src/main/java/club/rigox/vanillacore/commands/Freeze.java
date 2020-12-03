@@ -55,35 +55,14 @@ public class Freeze implements CommandExecutor {
         if (target.hasPermission("vanillacore.freeze.bypass")) {
             sender.sendMessage(color("&cYou can't freeze this player! This down has bypass :haha:"));
             return true;
-
         }
 
         if (plugin.getPlayers().get(target).isFrozed()) {
-            plugin.getPlayers().get(target).unfreeze();
-            target.removePotionEffect(PotionEffectType.BLINDNESS);
-            plugin.getInventoryUtils().restoreInventory(target);
-            target.sendMessage(color(String.format(plugin.getLang().getString("unfreeze.player-unfrozed"), staff.getName())));
-            staff.sendMessage(color(String.format("&8&l* &fYou frozed &b%s", target.getName())));
-            plugin.getScoreBoardAPI().setScoreBoard(target, "general", true);
-
-            // TITLE AND SUBTITLE
-            target.sendTitle(color(plugin.getSetting().getString("titles.unfreeze.title")),
-                    color(String.format(plugin.getSetting().getString("titles.unfreeze.subtitle"), staff.getName())),
-                    plugin.getSetting().getInt("titles.unfreeze.options.fadein"),
-                    plugin.getSetting().getInt("titles.unfreeze.options.stay"),
-                    plugin.getSetting().getInt("titles.unfreeze.options.fadeout"));
+            plugin.getPlayers().get(target).unfreeze(target, staff);
             return true;
         }
 
         plugin.getPlayers().get(target).freeze(target, staff);
-        target.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 99999, 50));
-        plugin.getInventoryUtils().storeAndClearInventory(target);
-        target.sendMessage(color(String.format(plugin.getLang().getString("freeze.player-frozed"), staff.getName())));
-        staff.sendMessage(color(String.format("&8&l* &fYou frozed &b%s", target.getName())));
-        target.getInventory().setHelmet(new ItemStack(Material.ICE));
-        plugin.getScoreBoardAPI().setScoreBoard(target, "freeze", true);
-
         return true;
-
     }
 }

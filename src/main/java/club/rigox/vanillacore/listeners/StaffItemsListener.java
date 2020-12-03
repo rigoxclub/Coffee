@@ -9,6 +9,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.inventory.ItemStack;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -87,7 +88,9 @@ public class StaffItemsListener implements Listener {
         String name = plugin.getSetting().getString("staff-items." + e.getPlayer().getInventory().getItemInMainHand().getType().name() + ".name");
 
         if (name.equals(plugin.getSetting().getString("staff-items.ICE.name"))) {
-//            player.getInventory().setItem();
+            if (e.getRightClicked() instanceof Player) {
+//                Bukkit.dispatchCommand(player, "freeze ", e.getRightClicked().getName());
+            }
         }
     }
 }
