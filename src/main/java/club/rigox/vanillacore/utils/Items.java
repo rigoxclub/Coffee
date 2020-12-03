@@ -8,16 +8,10 @@ import org.bukkit.inventory.meta.ItemMeta;
 import static club.rigox.vanillacore.utils.MsgUtils.color;
 
 public class Items {
-
-    private final VanillaCore plugin;
-
-
-    private ItemStack vanishEnableItem;
-    private ItemStack vanishDisableItem;
+    private final ItemStack vanishEnableItem;
+    private final ItemStack vanishDisableItem;
 
     public Items(VanillaCore plugin) {
-
-        this.plugin = plugin;
 
         //Enable item
         ItemStack i = new ItemStack(Material.GRAY_DYE);
