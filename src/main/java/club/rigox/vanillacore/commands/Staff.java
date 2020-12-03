@@ -35,7 +35,7 @@ public class Staff implements CommandExecutor {
             return true;
         }
 
-        if (!(player.hasPermission("staff.use"))) {
+        if (!(player.hasPermission("vanillacore.staff"))) {
             player.sendMessage(color(plugin.getLang().getString("no-staff-permission")));
             return true;
         }

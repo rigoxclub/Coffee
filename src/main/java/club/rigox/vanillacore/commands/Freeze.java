@@ -32,7 +32,7 @@ public class Freeze implements CommandExecutor {
 
         Player staff = (Player) sender;
 
-        if (!staff.hasPermission("staff.use")) {
+        if (!staff.hasPermission("vanillacore.freeze")) {
             sender.sendMessage(color(plugin.getLang().getString("no-staff-permission")));
            return true;
         }

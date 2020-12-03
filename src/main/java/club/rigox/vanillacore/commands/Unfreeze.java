@@ -27,7 +27,7 @@ public class Unfreeze implements CommandExecutor {
             return true;
         }
 
-        if (!staff.hasPermission("staff.use")) {
+        if (!staff.hasPermission("vanillacore.freeze")) {
             staff.sendMessage(color(plugin.getLang().getString("no-staff-permission")));
             return true;
         }
