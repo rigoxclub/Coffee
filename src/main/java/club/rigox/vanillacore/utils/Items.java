@@ -12,6 +12,8 @@ public class Items {
     private final ItemStack vanishEnableItem;
     private final ItemStack vanishDisableItem;
     private final ItemStack freezeItem;
+    private final ItemStack invSeeItem;
+    private final ItemStack launchItem;
 
     public Items(VanillaCore plugin) {
 
@@ -39,11 +41,28 @@ public class Items {
 
         this.freezeItem = freeze;
 
+        // Invsee item
+        ItemStack invSee = new ItemStack(Material.BOOK);
+        ItemMeta meta3 = invSee.getItemMeta();
+        meta3.setDisplayName(color(plugin.getSetting().getString("staff-items.BOOK.name")));
+        invSee.setItemMeta(meta3);
+
+        this.invSeeItem = invSee;
+
+        // Launch item
+        ItemStack launch = new ItemStack(Material.FIREWORK_ROCKET);
+        ItemMeta meta4 = launch.getItemMeta();
+        meta4.setDisplayName(color(plugin.getSetting().getString("staff-items.FIREWORK_ROCKET.name")));
+        launch.setItemMeta(meta4);
+
+        this.launchItem = launch;
     }
 
     public void giveItems(Player player) {
         player.getInventory().setItem(4, getVanishDisableItem());
         player.getInventory().setItem(1, getFreezeItem());
+        player.getInventory().setItem(8, getInvSeeItem());
+        player.getInventory().setItem(7, getLaunchItem());
     }
 
     public ItemStack getVanishEnableItem() {
@@ -56,5 +75,13 @@ public class Items {
 
     public ItemStack getFreezeItem() {
         return freezeItem;
+    }
+
+    public ItemStack getInvSeeItem() {
+        return invSeeItem;
+    }
+
+    public ItemStack getLaunchItem() {
+        return launchItem;
     }
 }

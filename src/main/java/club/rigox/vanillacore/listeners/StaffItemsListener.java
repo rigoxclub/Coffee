@@ -78,6 +78,11 @@ public class StaffItemsListener implements Listener {
             toggleCooldown.put(player, System.currentTimeMillis() + 1000);
             plugin.getScoreBoardAPI().setScoreBoard(player, "staff-mode", true);
         }
+
+        if (name.equals(plugin.getSetting().getString("staff-items.FIREWORK_ROCKET.name"))) {
+            player.setVelocity(player.getLocation().getDirection().multiply(1.5));
+            toggleCooldown.put(player, System.currentTimeMillis() + 200);
+        }
     }
 
     @EventHandler
@@ -105,10 +110,9 @@ public class StaffItemsListener implements Listener {
             }
         }
 
-        if (name.equals(plugin.getSetting().getString("staff-items.ICE.name"))) {
-            if (e.getRightClicked() instanceof Player) {
-                Player target = (Player) e.getRightClicked();
-
+        if (e.getRightClicked() instanceof Player) {
+            Player target = (Player) e.getRightClicked();
+            if (name.equals(plugin.getSetting().getString("staff-items.ICE.name"))) {
                 if (plugin.getPlayers().get(target).isFrozed()) {
                     plugin.getPlayers().get(target).unfreeze(target, player);
                     toggleCooldown.put(player, System.currentTimeMillis() + 1000);
@@ -117,7 +121,11 @@ public class StaffItemsListener implements Listener {
                 plugin.getPlayers().get(target).freeze(target, player);
                 toggleCooldown.put(player, System.currentTimeMillis() + 1000);
             }
+
+            if (name.equals(plugin.getSetting().getString("staff-items.BOOK.name"))) {
+                player.openInventory(target.getInventory());
+                player.sendMessage(color(String.format("&aOpening inventory of %s", target.getName())));
+            }
         }
-        debug(String.format("%s clicked on", e.getRightClicked()));
     }
 }

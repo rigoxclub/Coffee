@@ -22,4 +22,8 @@ staff-items:
   GRAY_DYE:
     name: "&cVanish Disabled &7(Right Click)"
   ICE:
-    name: "&cFreeze &7(Right Click)"
+    name: "&eFreeze &7(Right Click)"
+  BOOK:
+    name: "&eView Inventory &7(Right Click)"
+  FIREWORK_ROCKET:
+    name: "&eLaunch &7(Right Click)"
