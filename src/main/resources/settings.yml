@@ -27,3 +27,6 @@ staff-items:
     name: "&eView Inventory &7(Right Click)"
   FIREWORK_ROCKET:
     name: "&eLaunch &7(Right Click)"
+
+teleport-gui:
+  title: "&b%player%"
