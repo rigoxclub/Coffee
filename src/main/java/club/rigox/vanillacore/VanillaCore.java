@@ -10,7 +10,7 @@ import club.rigox.vanillacore.hooks.Placeholders;
 import club.rigox.vanillacore.player.FlyStatus;
 import club.rigox.vanillacore.player.Inventory;
 import club.rigox.vanillacore.player.scoreboard.ScoreBoardAPI;
-import club.rigox.vanillacore.utils.InventoryTeleport;
+import club.rigox.vanillacore.player.gui.TeleportGui;
 import me.clip.placeholderapi.PlaceholderAPI;
 import net.luckperms.api.LuckPerms;
 import org.bukkit.Bukkit;
@@ -35,7 +35,7 @@ public final class VanillaCore extends JavaPlugin {
     private Inventory inventoryUtils;
     private FlyStatus flyStatus;
     private ScoreBoardAPI scoreBoardAPI;
-    private InventoryTeleport inventoryTeleport;
+    private TeleportGui teleportGui;
 
     private LuckPerms luckPerms;
 
@@ -53,7 +53,7 @@ public final class VanillaCore extends JavaPlugin {
         this.inventoryUtils = new Inventory(this);
         this.flyStatus = new FlyStatus(this);
         this.scoreBoardAPI = new ScoreBoardAPI(this);
-        this.inventoryTeleport = new InventoryTeleport(this);
+        this.teleportGui = new TeleportGui(this);
 
         loadHooks();
         registerListeners();
@@ -130,8 +130,8 @@ public final class VanillaCore extends JavaPlugin {
         return scoreBoardAPI;
     }
 
-    public InventoryTeleport getInventoryTeleport() {
-        return inventoryTeleport;
+    public TeleportGui getInventoryTeleport() {
+        return teleportGui;
     }
 
     public FileConfiguration createConfig(String configName) {

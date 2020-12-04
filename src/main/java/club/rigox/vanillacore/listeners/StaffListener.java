@@ -1,8 +1,7 @@
 package club.rigox.vanillacore.listeners;
 
 import club.rigox.vanillacore.VanillaCore;
-import club.rigox.vanillacore.player.ToggleVanish;
-import club.rigox.vanillacore.utils.Items;
+import club.rigox.vanillacore.player.gui.TeleportGui;
 import com.destroystokyo.paper.event.player.PlayerPickupExperienceEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -12,21 +11,21 @@ import org.bukkit.event.entity.*;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
-import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerPickupArrowEvent;
-
-import java.util.LinkedHashMap;
-import java.util.Map;
+import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemStack;
 
 import static club.rigox.vanillacore.utils.ConsoleUtils.debug;
 import static club.rigox.vanillacore.utils.MsgUtils.color;
 
 public class StaffListener implements Listener {
     private final VanillaCore plugin;
+    private final TeleportGui teleportGui;
 
     public StaffListener(VanillaCore plugin) {
         Bukkit.getServer().getPluginManager().registerEvents(this, plugin);
         this.plugin = plugin;
+        this.teleportGui = new TeleportGui(plugin);
     }
 
     @EventHandler
@@ -134,8 +133,15 @@ public class StaffListener implements Listener {
     @EventHandler
     public void onClickSlot(InventoryClickEvent e) {
         Player player = (Player) e.getWhoClicked();
+//        ItemStack clicked = e.getCurrentItem();
+//        Inventory inventory = e.getInventory();
+
         if (plugin.getPlayers().get(player).hasGod()) {
             e.setCancelled(true);
         }
+
+//        if (inventory != teleportGui.getInvList()) return;
+//
+//        e.setCancelled(true);
     }
 }
