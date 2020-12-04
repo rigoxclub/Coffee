@@ -11,6 +11,8 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.SkullMeta;
 
+import java.util.Arrays;
+
 import static club.rigox.vanillacore.utils.MsgUtils.color;
 
 public class TeleportGui implements Listener {
@@ -29,6 +31,11 @@ public class TeleportGui implements Listener {
             SkullMeta meta = (SkullMeta) head.getItemMeta();
             meta.setOwningPlayer(p);
             meta.setDisplayName(color(String.format("&b%s", p.getName())));
+            meta.setLore(Arrays.asList(color(String.format("&7X%s/Y%s/Z%s",
+                    p.getLocation().getBlockX(),
+                    p.getLocation().getBlockY(),
+                    p.getLocation().getBlockZ()
+            ))));
             head.setItemMeta(meta);
             invList.setItem(slot, head);
             slot++;
@@ -40,11 +47,7 @@ public class TeleportGui implements Listener {
     @EventHandler
     public void onPlayerClick(InventoryClickEvent e) {
         if (!e.getInventory().equals(invList)) return;
-
         e.setCancelled(true);
     }
 
-    public Inventory getInvList() {
-        return invList;
-    }
 }
