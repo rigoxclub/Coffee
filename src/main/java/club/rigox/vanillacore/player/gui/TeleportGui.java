@@ -1,8 +1,6 @@
 package club.rigox.vanillacore.player.gui;
 
 import club.rigox.vanillacore.VanillaCore;
-import com.google.common.collect.BiMap;
-import com.google.common.collect.HashBiMap;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -13,11 +11,14 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.SkullMeta;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
+
 import static club.rigox.vanillacore.utils.MsgUtils.color;
 
 public class TeleportGui implements Listener {
     private final VanillaCore plugin;
-    private final BiMap<Player, Integer> listUsers = HashBiMap.create();
+    private final Map<Integer, Player> listUsers = new LinkedHashMap<>();
 
     private Inventory invList;
 
@@ -38,7 +39,7 @@ public class TeleportGui implements Listener {
                     .replaceAll("%player%", p.getName())));
             head.setItemMeta(meta);
             invList.setItem(slot, head);
-            listUsers.put(p, slot);
+            listUsers.put(slot, p);
             slot++;
         }
 
@@ -53,7 +54,7 @@ public class TeleportGui implements Listener {
         e.setCancelled(true);
 
         Player player = (Player) e.getWhoClicked();
-        Player target = listUsers.inverse().get(e.getRawSlot());
+        Player target = listUsers.get(e.getRawSlot());
         ItemStack clickedItem = e.getCurrentItem();
 
         if (clickedItem == null || clickedItem.equals(Material.AIR)) {

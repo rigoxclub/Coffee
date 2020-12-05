@@ -95,11 +95,11 @@
             <artifactId>api</artifactId>
             <version>5.2</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/com.google.guava/guava -->
+        <!-- https://mvnrepository.com/artifact/com.google.guava/guava
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
             <version>30.0-jre</version>
-        </dependency>
+        </dependency> -->
     </dependencies>
 </project>
