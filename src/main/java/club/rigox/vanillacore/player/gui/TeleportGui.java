@@ -1,6 +1,8 @@
 package club.rigox.vanillacore.player.gui;
 
 import club.rigox.vanillacore.VanillaCore;
+import com.google.common.collect.BiMap;
+import com.google.common.collect.HashBiMap;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.OfflinePlayer;
@@ -26,9 +28,8 @@ import static club.rigox.vanillacore.utils.MsgUtils.color;
 public class TeleportGui implements Listener {
     private final VanillaCore plugin;
     private Inventory invList;
-    private Map<Player, Integer> listUsers = new LinkedHashMap<>();
+    private BiMap<Player, Integer> listUsers = HashBiMap.create();
 
-    // TODO Make players on leave delete from the invList
     public TeleportGui(VanillaCore plugin) {
         this.plugin = plugin;
         plugin.getServer().getPluginManager().registerEvents(this, plugin);
@@ -39,9 +40,9 @@ public class TeleportGui implements Listener {
 
         int slot = 0;
         for(Player p: Bukkit.getOnlinePlayers()) {
-            if (p.equals(staff)) {
-                return;
-            }
+//            if (p.equals(staff)) {
+//                return;
+//            }
 
             ItemStack head = new ItemStack(Material.PLAYER_HEAD);
             SkullMeta meta = (SkullMeta) head.getItemMeta();
@@ -57,7 +58,7 @@ public class TeleportGui implements Listener {
         staff.openInventory(invList);
     }
 
-    public Map<Player, Integer> getListUsers() {
+    public BiMap<Player, Integer> getListUsers() {
         return listUsers;
     }
 
@@ -69,14 +70,14 @@ public class TeleportGui implements Listener {
         e.setCancelled(true);
 
         Player player = (Player) e.getWhoClicked();
-//        Player target = listUsers.get(e.getRawSlot());
+        Player target = listUsers.inverse().get(e.getRawSlot());
         ItemStack clickedItem = e.getCurrentItem();
 
         if (clickedItem == null || clickedItem.equals(Material.AIR)) {
             return;
         }
 
-        player.teleport(listUsers.get(e.getRawSlot());
+        player.teleport(target);
         player.sendMessage(color(String.format("&8&l* &fYou have been teleported to &b%s", target.getName())));
     }
 

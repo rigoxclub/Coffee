@@ -47,6 +47,10 @@ public class PlayerListener implements Listener {
             player.removePotionEffect(PotionEffectType.BLINDNESS);
             debug(String.format("%s has been removed of the getPlayerModel method", player.getName()));
         }
+
+        if (teleportGui.getListUsers().inverse().containsKey(player)) {
+
+        }
     }
 
     @EventHandler
