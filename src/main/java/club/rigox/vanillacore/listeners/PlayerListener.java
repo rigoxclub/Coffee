@@ -2,7 +2,6 @@ package club.rigox.vanillacore.listeners;
 
 import club.rigox.vanillacore.VanillaCore;
 import club.rigox.vanillacore.models.PlayerModel;
-import club.rigox.vanillacore.player.gui.TeleportGui;
 import club.rigox.vanillacore.player.scoreboard.ScoreBoardAPI;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;

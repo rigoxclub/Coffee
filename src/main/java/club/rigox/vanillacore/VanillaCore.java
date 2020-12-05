@@ -9,7 +9,7 @@ import club.rigox.vanillacore.listeners.StaffListener;
 import club.rigox.vanillacore.models.PlayerModel;
 import club.rigox.vanillacore.player.FlyStatus;
 import club.rigox.vanillacore.player.Inventory;
-import club.rigox.vanillacore.player.gui.TeleportGui;
+import club.rigox.vanillacore.player.gui.TeleportGUI;
 import club.rigox.vanillacore.player.scoreboard.ScoreBoardAPI;
 import net.luckperms.api.LuckPerms;
 import org.bukkit.Bukkit;
@@ -34,7 +34,7 @@ public final class VanillaCore extends JavaPlugin {
     private Inventory inventoryUtils;
     private FlyStatus flyStatus;
     private ScoreBoardAPI scoreBoardAPI;
-    private TeleportGui teleportGui;
+    private TeleportGUI teleportGui;
 
     private LuckPerms luckPerms;
 
@@ -52,7 +52,7 @@ public final class VanillaCore extends JavaPlugin {
         this.inventoryUtils = new Inventory(this);
         this.flyStatus = new FlyStatus(this);
         this.scoreBoardAPI = new ScoreBoardAPI(this);
-        this.teleportGui = new TeleportGui(this);
+        this.teleportGui = new TeleportGUI(this);
 
         loadHooks();
         registerListeners();
@@ -77,7 +77,7 @@ public final class VanillaCore extends JavaPlugin {
         new PlayerListener(this);
         new StaffListener(this);
         new StaffItemsListener(this);
-        new TeleportGui(this);
+        new TeleportGUI(this);
     }
 
     public void loadConfigs() {
@@ -127,7 +127,7 @@ public final class VanillaCore extends JavaPlugin {
         return scoreBoardAPI;
     }
 
-    public TeleportGui getInventoryTeleport() {
+    public TeleportGUI getInventoryTeleport() {
         return teleportGui;
     }
 

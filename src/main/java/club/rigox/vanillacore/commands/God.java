@@ -27,47 +27,47 @@ public class God implements CommandExecutor {
 
         Player player = (Player) sender;
         if (!player.hasPermission("vanillacore.god")) {
-            player.sendMessage(color(plugin.getLang().getString("no-permission")));
+            player.sendMessage(color(plugin.getLang().getString("permission.general-no")));
             return true;
         }
 
         if (args.length == 1) {
             if (!player.hasPermission("vanillacore.god.others")) {
-                player.sendMessage(color("&cYou don't have permission to enable god on others."));
+                player.sendMessage(color(plugin.getLang().getString("permission.god-others")));
                 return true;
             }
 
             Player target = plugin.getServer().getPlayer(args[0]);
 
             if (target == null) {
-                player.sendMessage(color("The player is not online!"));
+                player.sendMessage(color(plugin.getLang().getString("player.offline")));
                 return true;
             }
 
             if (target.equals(player)) {
-                player.sendMessage(color("&cOK WHAT THE FUCK? You can use only /GOD."));
+                player.sendMessage(color(plugin.getLang().getString("god.self")));
                 return true;
             }
 
             if (plugin.getPlayers().get(target).hasGod()) {
                 plugin.getPlayers().get(target).enableGod();
-                target.sendMessage(color(String.format("&cYour god has been deactivated by %s", player.getName())));
+                target.sendMessage(color(String.format(plugin.getLang().getString("god.disabled-other"), player.getName())));
                 return true;
             }
 
             plugin.getPlayers().get(target).enableGod();
-            target.sendMessage(color(String.format("&aYour god has been activated by %s", player.getName())));
+            target.sendMessage(color(String.format(plugin.getLang().getString("god.enabled-other"), player.getName())));
             return true;
         }
 
         if (plugin.getPlayers().get(player).hasGod()) {
             plugin.getPlayers().get(player).disableGod();
-            player.sendMessage(color("&cGod disabled"));
+            player.sendMessage(color(plugin.getLang().getString("god.disabled")));
             return true;
         }
 
         plugin.getPlayers().get(player).enableGod();
-        player.sendMessage(color("&aGod enabled"));
+        player.sendMessage(color(plugin.getLang().getString("god.enabled")));
         return false;
     }
 }

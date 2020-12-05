@@ -1,16 +1,17 @@
 only-users: "&cOnly users can execute this command."
 
+player:
+  offline: "&cThe player is offline!"
+
 permission:
   general-no: "&cYou don't have permission to perform this command."
   fly-others: "&cYou don't have permission to enable fly on others."
+  god-others: "&cYou don't have permission to enable god on others."
 
 command-usage:
   base: "&8&l* &fCommand usage: &b"
   freeze: "/freeze (player)"
   unfreeze: "/unfreeze (player)"
-
-player:
-  offline: "&cThe player is offline!"
 
 freeze:
   self: "&cCuesta eso eh"
@@ -29,3 +30,10 @@ fly:
   self: "&cOK WHAT THE FUCK? You can use only /FLY."
   disabled-other: "&cYour fly has been deactivated by %s"
   enabled-other: "&aYour fly has been activated by %s"
+
+god:
+  enabled: "&aGod enabled"
+  disabled: "&cGod disabled"
+  self: "&cOK WHAT THE FUCK? You can use only /GOD."
+  disabled-other: "&cYour god has been deactivated by %s"
+  enabled-other: "&aYour god has been activated by %s"

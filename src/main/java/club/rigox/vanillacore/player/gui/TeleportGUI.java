@@ -17,13 +17,13 @@ import java.util.Map;
 
 import static club.rigox.vanillacore.utils.MsgUtils.*;
 
-public class TeleportGui implements Listener {
+public class TeleportGUI implements Listener {
     private final VanillaCore plugin;
     private final Map<Integer, Player> listUsers = new LinkedHashMap<>();
 
     private Inventory invList;
 
-    public TeleportGui(VanillaCore plugin) {
+    public TeleportGUI(VanillaCore plugin) {
         this.plugin = plugin;
         plugin.getServer().getPluginManager().registerEvents(this, plugin);
     }
