@@ -24,23 +24,23 @@ public class Invsee implements CommandExecutor {
 
         if (args.length == 1) {
             if (!player.hasPermission("vanillacore.invsee")) {
-                player.sendMessage(color("&cYou don't have permission to enable fly on others."));
+                player.sendMessage(color(plugin.getLang().getString("permission.general-no")));
                 return true;
             }
 
             Player target = plugin.getServer().getPlayer(args[0]);
             if (target == null) {
-                sender.sendMessage(color("Player is offline!"));
+                sender.sendMessage(color(plugin.getLang().getString("player.offline")));
                 return true;
             }
 
             if (target.equals(sender)) {
-                sender.sendMessage(color("&cYou can't open your inventory!"));
+                sender.sendMessage(color(plugin.getLang().getString("invsee.self")));
                 return true;
             }
 
             player.openInventory(target.getInventory());
-            player.sendMessage(color(String.format("&aOpening inventory of %s", target.getName())));
+            player.sendMessage(color(String.format(plugin.getLang().getString("invsee.open"), target.getName())));
             return true;
         }
         return false;

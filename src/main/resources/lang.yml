@@ -15,7 +15,6 @@ command-usage:
 
 freeze:
   self: "&cCuesta eso eh"
-  # %s = Staff player who frozed the player.
   player-frozed: "&8&l* &fYou have been frozed by &c%s"
   player-unfrozed: "&8&l* &fYou have been unfrozed by &c%s"
   player-bypass: "&cYou can't freeze this player! This down has bypass :haha:"
@@ -25,15 +24,19 @@ staff-mode:
   disabled: "&cStaff mode disabled!"
 
 fly:
+  self: "&cOK WHAT THE FUCK? You can use only /FLY."
   enabled: "&aFly enabled"
   disabled: "&cFly disabled"
-  self: "&cOK WHAT THE FUCK? You can use only /FLY."
   disabled-other: "&cYour fly has been deactivated by %s"
   enabled-other: "&aYour fly has been activated by %s"
 
 god:
+  self: "&cOK WHAT THE FUCK? You can use only /GOD."
   enabled: "&aGod enabled"
   disabled: "&cGod disabled"
-  self: "&cOK WHAT THE FUCK? You can use only /GOD."
   disabled-other: "&cYour god has been deactivated by %s"
   enabled-other: "&aYour god has been activated by %s"
+
+invsee:
+  self: "&cYou can't open your inventory!"
+  open: "&aOpening inventory of %s"
