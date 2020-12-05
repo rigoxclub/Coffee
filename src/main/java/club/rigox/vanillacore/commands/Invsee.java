@@ -43,8 +43,6 @@ public class Invsee implements CommandExecutor {
             player.sendMessage(color(String.format("&aOpening inventory of %s", target.getName())));
             return true;
         }
-        player.sendMessage("Hmm");
-        plugin.getInventoryTeleport().openInventory(player);
         return false;
     }
 }

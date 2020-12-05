@@ -70,6 +70,7 @@ public final class VanillaCore extends JavaPlugin {
         new Fly(this);
         new Invsee(this);
         new God(this);
+        new PlayerTP(this);
     }
 
     public void registerListeners() {

@@ -18,3 +18,5 @@ commands:
     description: Command invsee
   god:
     description: Command god
+  playertp:
+    description: Command playertp
