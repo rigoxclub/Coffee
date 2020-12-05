@@ -29,7 +29,12 @@ staff-items:
     name: "&eLaunch &7(Right Click)"
 
 teleport-gui:
-  title: "&bPlayer %player%"
+  title: "&a%player_name%"
   lore:
-    - "Hola"
-    - "Buenas"
+    - ""
+    - "&7Coords"
+    - "&7X = &f%player_x%"
+    - "&7Y = &f%player_y%"
+    - "&7Z = &f%player_z%"
+    - ""
+    - "&eClick to teleport!"

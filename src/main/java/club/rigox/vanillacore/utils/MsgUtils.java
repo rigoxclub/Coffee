@@ -16,6 +16,6 @@ public class MsgUtils {
     }
 
     public static String parseField(String field, Player p) {
-        return PlaceholderAPI.setPlaceholders(p, field);
+        return ChatColor.translateAlternateColorCodes('&', PlaceholderAPI.setPlaceholders(p, field));
     }
 }

@@ -15,8 +15,7 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import static club.rigox.vanillacore.utils.MsgUtils.color;
-import static club.rigox.vanillacore.utils.MsgUtils.parseFieldList;
+import static club.rigox.vanillacore.utils.MsgUtils.*;
 
 public class TeleportGui implements Listener {
     private final VanillaCore plugin;
@@ -37,10 +36,8 @@ public class TeleportGui implements Listener {
             ItemStack head = new ItemStack(Material.PLAYER_HEAD);
             SkullMeta meta = (SkullMeta) head.getItemMeta();
             meta.setOwningPlayer(p);
-            meta.setDisplayName(color(plugin.getSetting().getString("teleport-gui.title")
-                    .replaceAll("%player%", p.getName())));
-
-            ArrayList<String> lore = (ArrayList<String>) parseFieldList(plugin.getSetting().getStringList("teleport-gui.lore"), p.getPlayer());
+            meta.setDisplayName(parseField(plugin.getSetting().getString("teleport-gui.title"), p.getPlayer()));
+            ArrayList<String> lore = (ArrayList<String>) parseFieldList(plugin.getSetting().getStringList(color("teleport-gui.lore")), p.getPlayer());
             meta.setLore(lore);
             head.setItemMeta(meta);
             invList.setItem(slot, head);
