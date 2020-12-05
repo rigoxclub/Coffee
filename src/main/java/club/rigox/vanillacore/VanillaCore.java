@@ -2,15 +2,14 @@ package club.rigox.vanillacore;
 
 import club.rigox.vanillacore.commands.*;
 import club.rigox.vanillacore.hooks.LuckpermsHook;
+import club.rigox.vanillacore.hooks.Placeholders;
 import club.rigox.vanillacore.listeners.PlayerListener;
 import club.rigox.vanillacore.listeners.StaffItemsListener;
 import club.rigox.vanillacore.listeners.StaffListener;
 import club.rigox.vanillacore.models.PlayerModel;
-import club.rigox.vanillacore.hooks.Placeholders;
 import club.rigox.vanillacore.player.FlyStatus;
 import club.rigox.vanillacore.player.Inventory;
 import club.rigox.vanillacore.player.scoreboard.ScoreBoardAPI;
-import club.rigox.vanillacore.player.gui.TeleportGui;
 import me.clip.placeholderapi.PlaceholderAPI;
 import net.luckperms.api.LuckPerms;
 import org.bukkit.Bukkit;
@@ -35,7 +34,6 @@ public final class VanillaCore extends JavaPlugin {
     private Inventory inventoryUtils;
     private FlyStatus flyStatus;
     private ScoreBoardAPI scoreBoardAPI;
-    private TeleportGui teleportGui;
 
     private LuckPerms luckPerms;
 
@@ -53,7 +51,6 @@ public final class VanillaCore extends JavaPlugin {
         this.inventoryUtils = new Inventory(this);
         this.flyStatus = new FlyStatus(this);
         this.scoreBoardAPI = new ScoreBoardAPI(this);
-        this.teleportGui = new TeleportGui(this);
 
         loadHooks();
         registerListeners();
@@ -128,10 +125,6 @@ public final class VanillaCore extends JavaPlugin {
 
     public ScoreBoardAPI getScoreBoardAPI() {
         return scoreBoardAPI;
-    }
-
-    public TeleportGui getInventoryTeleport() {
-        return teleportGui;
     }
 
     public FileConfiguration createConfig(String configName) {

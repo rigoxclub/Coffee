@@ -1,7 +1,6 @@
 package club.rigox.vanillacore.listeners;
 
 import club.rigox.vanillacore.VanillaCore;
-import club.rigox.vanillacore.player.gui.TeleportGui;
 import com.destroystokyo.paper.event.player.PlayerPickupExperienceEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
