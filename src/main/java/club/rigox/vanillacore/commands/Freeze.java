@@ -31,7 +31,7 @@ public class Freeze implements CommandExecutor {
         Player staff = (Player) sender;
 
         if (!staff.hasPermission("vanillacore.freeze")) {
-            sender.sendMessage(color(plugin.getLang().getString("no-staff-permission")));
+            sender.sendMessage(color(plugin.getLang().getString("permission.general-no")));
            return true;
         }
 
@@ -48,12 +48,12 @@ public class Freeze implements CommandExecutor {
         }
 
         if (target.equals(staff)) {
-            sender.sendMessage(color("&cCuesta eso eh"));
+            sender.sendMessage(color(plugin.getLang().getString("freeze.self")));
             return true;
         }
 
         if (target.hasPermission("vanillacore.freeze.bypass")) {
-            sender.sendMessage(color("&cYou can't freeze this player! This down has bypass :haha:"));
+            sender.sendMessage(color(plugin.getLang().getString("freeze.player-bypass")));
             return true;
         }
 

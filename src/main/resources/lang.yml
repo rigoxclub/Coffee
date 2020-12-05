@@ -13,12 +13,11 @@ player:
   offline: "&cThe player is offline!"
 
 freeze:
+  self: "&cCuesta eso eh"
   # %s = Staff player who frozed the player.
   player-frozed: "&8&l* &fYou have been frozed by &c%s"
-
-unfreeze:
-  # %s = Staff player who frozed the player.
   player-unfrozed: "&8&l* &fYou have been unfrozed by &c%s"
+  player-bypass: "&cYou can't freeze this player! This down has bypass :haha:"
 
 staff-mode:
   enabled: "&aStaff mode enabled!"

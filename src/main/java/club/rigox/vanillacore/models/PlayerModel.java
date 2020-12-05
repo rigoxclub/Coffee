@@ -74,7 +74,7 @@ public class PlayerModel {
         Bukkit.getScheduler().cancelTask(this.task.getTaskId());
         target.removePotionEffect(PotionEffectType.BLINDNESS);
         plugin.getInventoryUtils().restoreInventory(target);
-        target.sendMessage(color(String.format(plugin.getLang().getString("unfreeze.player-unfrozed"), staff.getName())));
+        target.sendMessage(color(String.format(plugin.getLang().getString("freeze.player-unfrozed"), staff.getName())));
         staff.sendMessage(color(String.format("&8&l* &fYou frozed &b%s", target.getName())));
         plugin.getScoreBoardAPI().setScoreBoard(target, "general", true);
 
