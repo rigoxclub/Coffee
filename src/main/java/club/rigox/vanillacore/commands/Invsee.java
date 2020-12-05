@@ -44,6 +44,7 @@ public class Invsee implements CommandExecutor {
             return true;
         }
         player.sendMessage("Hmm");
+        plugin.getInventoryTeleport().openInventory(player);
         return false;
     }
 }
