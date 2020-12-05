@@ -30,3 +30,6 @@ staff-items:
 
 teleport-gui:
   title: "&bPlayer %player%"
+  lore:
+    - "Hola"
+    - "Buenas"

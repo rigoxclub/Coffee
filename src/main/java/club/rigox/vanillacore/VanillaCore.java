@@ -2,16 +2,15 @@ package club.rigox.vanillacore;
 
 import club.rigox.vanillacore.commands.*;
 import club.rigox.vanillacore.hooks.LuckpermsHook;
+import club.rigox.vanillacore.hooks.Placeholders;
 import club.rigox.vanillacore.listeners.PlayerListener;
 import club.rigox.vanillacore.listeners.StaffItemsListener;
 import club.rigox.vanillacore.listeners.StaffListener;
 import club.rigox.vanillacore.models.PlayerModel;
-import club.rigox.vanillacore.hooks.Placeholders;
 import club.rigox.vanillacore.player.FlyStatus;
 import club.rigox.vanillacore.player.Inventory;
-import club.rigox.vanillacore.player.scoreboard.ScoreBoardAPI;
 import club.rigox.vanillacore.player.gui.TeleportGui;
-import me.clip.placeholderapi.PlaceholderAPI;
+import club.rigox.vanillacore.player.scoreboard.ScoreBoardAPI;
 import net.luckperms.api.LuckPerms;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.InvalidConfigurationException;
@@ -117,10 +116,6 @@ public final class VanillaCore extends JavaPlugin {
 
     public FileConfiguration getScoreboard() {
         return scoreboard;
-    }
-
-    public String parseField(String field, Player p) {
-        return PlaceholderAPI.setPlaceholders(p, field);
     }
 
     public FlyStatus getFlyStatus() {

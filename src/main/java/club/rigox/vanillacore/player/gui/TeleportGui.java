@@ -11,10 +11,12 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.SkullMeta;
 
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
 import static club.rigox.vanillacore.utils.MsgUtils.color;
+import static club.rigox.vanillacore.utils.MsgUtils.parseFieldList;
 
 public class TeleportGui implements Listener {
     private final VanillaCore plugin;
@@ -37,6 +39,9 @@ public class TeleportGui implements Listener {
             meta.setOwningPlayer(p);
             meta.setDisplayName(color(plugin.getSetting().getString("teleport-gui.title")
                     .replaceAll("%player%", p.getName())));
+
+            ArrayList<String> lore = (ArrayList<String>) parseFieldList(plugin.getSetting().getStringList("teleport-gui.lore"), p.getPlayer());
+            meta.setLore(lore);
             head.setItemMeta(meta);
             invList.setItem(slot, head);
             listUsers.put(slot, p);

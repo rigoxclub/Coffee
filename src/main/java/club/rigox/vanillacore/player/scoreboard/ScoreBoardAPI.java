@@ -6,6 +6,8 @@ import org.bukkit.entity.Player;
 
 import java.security.SecureRandom;
 
+import static club.rigox.vanillacore.utils.MsgUtils.parseField;
+
 public class ScoreBoardAPI {
     private final VanillaCore plugin;
 
@@ -24,7 +26,7 @@ public class ScoreBoardAPI {
 
         int i = plugin.getScoreboard().getStringList(type + ".body").size();
         for (String line : plugin.getScoreboard().getStringList(type + ".body")) {
-            scoreboard.lines(i, plugin.parseField(line, p));
+            scoreboard.lines(i, parseField(line, p));
             i--;
         }
 
