@@ -5,30 +5,21 @@ import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
-import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
-import java.util.Arrays;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-
-import static club.rigox.vanillacore.utils.ConsoleUtils.debug;
 import static club.rigox.vanillacore.utils.MsgUtils.color;
 
 public class TeleportGui implements Listener {
     private final VanillaCore plugin;
+    private final BiMap<Player, Integer> listUsers = HashBiMap.create();
+
     private Inventory invList;
-    private BiMap<Player, Integer> listUsers = HashBiMap.create();
 
     public TeleportGui(VanillaCore plugin) {
         this.plugin = plugin;
@@ -40,10 +31,6 @@ public class TeleportGui implements Listener {
 
         int slot = 0;
         for(Player p: Bukkit.getOnlinePlayers()) {
-//            if (p.equals(staff)) {
-//                return;
-//            }
-
             ItemStack head = new ItemStack(Material.PLAYER_HEAD);
             SkullMeta meta = (SkullMeta) head.getItemMeta();
             meta.setOwningPlayer(p);
@@ -58,10 +45,6 @@ public class TeleportGui implements Listener {
         staff.openInventory(invList);
     }
 
-    public BiMap<Player, Integer> getListUsers() {
-        return listUsers;
-    }
-
     @EventHandler
     public void onPlayerClick(InventoryClickEvent e) {
         if (!e.getInventory().equals(invList)) {
@@ -74,6 +57,12 @@ public class TeleportGui implements Listener {
         ItemStack clickedItem = e.getCurrentItem();
 
         if (clickedItem == null || clickedItem.equals(Material.AIR)) {
+            return;
+        }
+
+        if (target.equals(player)) {
+            player.closeInventory();
+            player.sendMessage(color("&cYou can't teleport on yourself!"));
             return;
         }
 
