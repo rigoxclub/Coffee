@@ -23,3 +23,10 @@ unfreeze:
 staff-mode:
   enabled: "&aStaff mode enabled!"
   disabled: "&cStaff mode disabled!"
+
+fly:
+  enabled: "&aFly enabled"
+  disabled: "&cFly disabled"
+  self: "&cOK WHAT THE FUCK? You can use only /FLY."
+  disabled-other: "&cYour fly has been deactivated by %s"
+  enabled-other: "&aYour fly has been activated by %s"
