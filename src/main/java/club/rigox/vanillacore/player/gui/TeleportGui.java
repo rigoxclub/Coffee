@@ -16,25 +16,33 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Arrays;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
+import static club.rigox.vanillacore.utils.ConsoleUtils.debug;
 import static club.rigox.vanillacore.utils.MsgUtils.color;
 
 public class TeleportGui implements Listener {
     private final VanillaCore plugin;
     private Inventory invList;
-    private OfflinePlayer headOwner;
-    
+    private Map<Player, Integer> listUsers = new LinkedHashMap<>();
+
+    // TODO Make players on leave delete from the invList
     public TeleportGui(VanillaCore plugin) {
         this.plugin = plugin;
         plugin.getServer().getPluginManager().registerEvents(this, plugin);
     }
     
     public void openInventory(Player staff) {
-        invList = Bukkit.createInventory(null, 54, "Listing all players...");
+        invList = Bukkit.createInventory(null, 54, "Player Teleport");
 
         int slot = 0;
         for(Player p: Bukkit.getOnlinePlayers()) {
+            if (p.equals(staff)) {
+                return;
+            }
+
             ItemStack head = new ItemStack(Material.PLAYER_HEAD);
             SkullMeta meta = (SkullMeta) head.getItemMeta();
             meta.setOwningPlayer(p);
@@ -42,32 +50,34 @@ public class TeleportGui implements Listener {
                     .replaceAll("%player%", p.getName())));
             head.setItemMeta(meta);
             invList.setItem(slot, head);
-
-            headOwner = meta.getOwningPlayer();
+            listUsers.put(p, slot);
             slot++;
         }
 
         staff.openInventory(invList);
     }
 
+    public Map<Player, Integer> getListUsers() {
+        return listUsers;
+    }
+
     @EventHandler
     public void onPlayerClick(InventoryClickEvent e) {
-        Player player = (Player) e.getWhoClicked();
-        ItemStack clickedItem = e.getCurrentItem();
-
-        if (!e.getInventory().equals(invList)) return;
-        e.setCancelled(true);
-
-        if (clickedItem == null || clickedItem.getType().equals(Material.AIR)) return;
-
-        if (!headOwner.isOnline()) {
-            player.closeInventory();
-            player.sendMessage(color("&cPlayer has disconnected"));
+        if (!e.getInventory().equals(invList)) {
             return;
         }
-        player.teleport(headOwner.getPlayer());
-        player.sendMessage(color(String.format("&8&l* &fTeleported to player %s", headOwner.getName())));
+        e.setCancelled(true);
 
+        Player player = (Player) e.getWhoClicked();
+//        Player target = listUsers.get(e.getRawSlot());
+        ItemStack clickedItem = e.getCurrentItem();
+
+        if (clickedItem == null || clickedItem.equals(Material.AIR)) {
+            return;
+        }
+
+        player.teleport(listUsers.get(e.getRawSlot());
+        player.sendMessage(color(String.format("&8&l* &fYou have been teleported to &b%s", target.getName())));
     }
 
 }

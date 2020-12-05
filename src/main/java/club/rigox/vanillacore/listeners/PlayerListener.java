@@ -2,6 +2,7 @@ package club.rigox.vanillacore.listeners;
 
 import club.rigox.vanillacore.models.PlayerModel;
 import club.rigox.vanillacore.VanillaCore;
+import club.rigox.vanillacore.player.gui.TeleportGui;
 import club.rigox.vanillacore.player.scoreboard.ScoreBoardAPI;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -14,12 +15,14 @@ import static club.rigox.vanillacore.utils.ConsoleUtils.debug;
 
 public class PlayerListener implements Listener {
     private final VanillaCore plugin;
-    private ScoreBoardAPI scoreBoardAPI;
+    private final ScoreBoardAPI scoreBoardAPI;
+    private final TeleportGui teleportGui;
 
     public PlayerListener(VanillaCore plugin) {
         Bukkit.getServer().getPluginManager().registerEvents(this, plugin);
         this.plugin = plugin;
         scoreBoardAPI = new ScoreBoardAPI(plugin);
+        teleportGui = new TeleportGui(plugin);
     }
 
     @EventHandler
