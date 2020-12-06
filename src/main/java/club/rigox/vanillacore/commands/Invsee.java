@@ -22,27 +22,29 @@ public class Invsee implements CommandExecutor {
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command cmd, @NotNull String s, @NotNull String[] args) {
         Player player = (Player) sender;
 
-        if (args.length == 1) {
-            if (!player.hasPermission("vanillacore.invsee")) {
-                player.sendMessage(color(plugin.getLang().getString("permission.general-no")));
-                return true;
-            }
-
-            Player target = plugin.getServer().getPlayer(args[0]);
-            if (target == null) {
-                sender.sendMessage(color(plugin.getLang().getString("player.offline")));
-                return true;
-            }
-
-            if (target.equals(sender)) {
-                sender.sendMessage(color(plugin.getLang().getString("invsee.self")));
-                return true;
-            }
-
-            player.openInventory(target.getInventory());
-            player.sendMessage(color(String.format(plugin.getLang().getString("invsee.open"), target.getName())));
+        if(args.length != 1){
+            sender.sendMessage(color(plugin.getLang().getString("command-usage.base") + plugin.getLang().getString("command-usage.invsee")));
             return true;
         }
+
+        if (!player.hasPermission("vanillacore.invsee")) {
+            player.sendMessage(color(plugin.getLang().getString("permission.general-no")));
+            return true;
+        }
+
+        Player target = plugin.getServer().getPlayer(args[0]);
+        if (target == null) {
+            sender.sendMessage(color(plugin.getLang().getString("player.offline")));
+            return true;
+        }
+
+        if (target.equals(sender)) {
+            sender.sendMessage(color(plugin.getLang().getString("invsee.self")));
+            return true;
+        }
+
+        player.openInventory(target.getInventory());
+        player.sendMessage(color(String.format(plugin.getLang().getString("invsee.open"), target.getName())));
         return false;
     }
 }

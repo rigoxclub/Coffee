@@ -60,6 +60,11 @@ public class God implements CommandExecutor {
             return true;
         }
 
+        if (args.length >= 2) {
+            player.sendMessage(color(plugin.getLang().getString("command-usage.base") + plugin.getLang().getString("command-usage.god")));
+            return true;
+        }
+
         if (plugin.getPlayers().get(player).hasGod()) {
             plugin.getPlayers().get(player).disableGod();
             player.sendMessage(color(plugin.getLang().getString("god.disabled")));

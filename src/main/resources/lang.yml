@@ -12,6 +12,10 @@ command-usage:
   base: "&8&l* &fCommand usage: &b"
   freeze: "/freeze (player)"
   unfreeze: "/unfreeze (player)"
+  fly: "/fly (player)"
+  god: "/god (player)"
+  playertp: "/playertp"
+  invsee: "/invsee (player)"
 
 freeze:
   self: "&cCuesta eso eh"
