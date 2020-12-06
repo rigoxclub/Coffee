@@ -20,8 +20,12 @@ public class PlayerTP implements CommandExecutor {
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command cmd, @NotNull String s, @NotNull String[] args) {
-        Player player = (Player) sender;
+        if (!(sender instanceof Player)) {
+            sender.sendMessage(color(plugin.getLang().getString("only-users")));
+            return true;
+        }
 
+        Player player = (Player) sender;
         if (args.length >= 1) {
             player.sendMessage(color(plugin.getLang().getString("command-usage.base") + plugin.getLang().getString("command-usage.playertp")));
             return true;

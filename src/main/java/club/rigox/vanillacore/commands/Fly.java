@@ -60,13 +60,13 @@ public class Fly implements CommandExecutor {
             return true;
         }
 
-        if (player.isFlying()) {
+        if (plugin.getPlayers().get(player).isFlying()) {
             plugin.getFlyStatus().disable(player);
             player.sendMessage(color(plugin.getLang().getString("fly.disabled")));
             return true;
         }
 
-        if (args.length >= 2    ) {
+        if (args.length >= 2) {
             player.sendMessage(color(plugin.getLang().getString("command-usage.base") + plugin.getLang().getString("command-usage.fly")));
             return true;
 
