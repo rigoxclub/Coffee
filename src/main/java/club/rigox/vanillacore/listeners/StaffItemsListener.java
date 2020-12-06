@@ -69,7 +69,7 @@ public class StaffItemsListener implements Listener {
 
             toggleVanish.showStaff(player);
             player.sendMessage(color("&cVanish disabled!"));
-            toggleCooldown.put(player, System.currentTimeMillis() + 75);
+            toggleCooldown.put(player, System.currentTimeMillis() + 150);
             plugin.getScoreBoardAPI().setScoreBoard(player, "staff-mode", true);
             return;
         }
@@ -79,13 +79,13 @@ public class StaffItemsListener implements Listener {
 
             toggleVanish.hideStaff(player);
             player.sendMessage(color("&aVanish enabled!"));
-            toggleCooldown.put(player, System.currentTimeMillis() + 75);
+            toggleCooldown.put(player, System.currentTimeMillis() + 150);
             plugin.getScoreBoardAPI().setScoreBoard(player, "staff-mode", true);
         }
 
         if (name.equals(plugin.getSetting().getString("staff-items.FIREWORK_ROCKET.name"))) {
             player.setVelocity(player.getLocation().getDirection().multiply(1.5));
-            toggleCooldown.put(player, System.currentTimeMillis() + 25);
+            toggleCooldown.put(player, System.currentTimeMillis() + 5);
         }
 
         if (name.equals(plugin.getSetting().getString("staff-items.COMPASS.name"))) {
