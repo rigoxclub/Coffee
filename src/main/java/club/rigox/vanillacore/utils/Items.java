@@ -14,6 +14,7 @@ public class Items {
     private final ItemStack freezeItem;
     private final ItemStack invSeeItem;
     private final ItemStack launchItem;
+    private final ItemStack playerTeleportItem;
 
     public Items(VanillaCore plugin) {
 
@@ -56,13 +57,22 @@ public class Items {
         launch.setItemMeta(meta4);
 
         this.launchItem = launch;
+
+        // PlayerTP item
+        ItemStack playerTp = new ItemStack(Material.COMPASS);
+        ItemMeta meta5 = playerTp.getItemMeta();
+        meta5.setDisplayName(color(plugin.getSetting().getString("staff-items.COMPASS.name")));
+        playerTp.setItemMeta(meta5);
+
+        this.playerTeleportItem = playerTp;
     }
 
     public void giveItems(Player player) {
-        player.getInventory().setItem(4, getVanishDisableItem());
+        player.getInventory().setItem(0, getPlayerTeleportItem());
         player.getInventory().setItem(1, getFreezeItem());
-        player.getInventory().setItem(8, getInvSeeItem());
+        player.getInventory().setItem(4, getVanishDisableItem());
         player.getInventory().setItem(7, getLaunchItem());
+        player.getInventory().setItem(8, getInvSeeItem());
     }
 
     public ItemStack getVanishEnableItem() {
@@ -83,5 +93,9 @@ public class Items {
 
     public ItemStack getLaunchItem() {
         return launchItem;
+    }
+
+    public ItemStack getPlayerTeleportItem() {
+        return playerTeleportItem;
     }
 }

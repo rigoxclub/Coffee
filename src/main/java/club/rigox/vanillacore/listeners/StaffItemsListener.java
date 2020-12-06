@@ -8,6 +8,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
@@ -40,8 +41,11 @@ public class StaffItemsListener implements Listener {
 
         if (!player.getInventory().getItemInMainHand().hasItemMeta()) return;
 
-        String name = plugin.getSetting().getString("staff-items." + e.getPlayer().getInventory().getItemInMainHand().getType().name() + ".name");
+        if (plugin.getPlayers().get(player).hasGod() && e.getAction().equals(Action.LEFT_CLICK_AIR) || e.getAction().equals(Action.LEFT_CLICK_BLOCK)) {
+            return;
+        }
 
+        String name = plugin.getSetting().getString("staff-items." + e.getPlayer().getInventory().getItemInMainHand().getType().name() + ".name");
         if (toggleCooldown.containsKey(player)) {
             long cooldown = toggleCooldown.get(player);
 
@@ -65,7 +69,7 @@ public class StaffItemsListener implements Listener {
 
             toggleVanish.showStaff(player);
             player.sendMessage(color("&cVanish disabled!"));
-            toggleCooldown.put(player, System.currentTimeMillis() + 1000);
+            toggleCooldown.put(player, System.currentTimeMillis() + 75);
             plugin.getScoreBoardAPI().setScoreBoard(player, "staff-mode", true);
             return;
         }
@@ -75,13 +79,19 @@ public class StaffItemsListener implements Listener {
 
             toggleVanish.hideStaff(player);
             player.sendMessage(color("&aVanish enabled!"));
-            toggleCooldown.put(player, System.currentTimeMillis() + 1000);
+            toggleCooldown.put(player, System.currentTimeMillis() + 75);
             plugin.getScoreBoardAPI().setScoreBoard(player, "staff-mode", true);
         }
 
         if (name.equals(plugin.getSetting().getString("staff-items.FIREWORK_ROCKET.name"))) {
             player.setVelocity(player.getLocation().getDirection().multiply(1.5));
-            toggleCooldown.put(player, System.currentTimeMillis() + 200);
+            toggleCooldown.put(player, System.currentTimeMillis() + 25);
+        }
+
+        if (name.equals(plugin.getSetting().getString("staff-items.COMPASS.name"))) {
+            player.sendMessage(color("&aLoading player list..."));
+            plugin.getInventoryTeleport().openInventory(player);
+            toggleCooldown.put(player, System.currentTimeMillis() + 1000);
         }
     }
 

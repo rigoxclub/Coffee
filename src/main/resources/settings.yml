@@ -27,6 +27,8 @@ staff-items:
     name: "&eView Inventory &7(Right Click)"
   FIREWORK_ROCKET:
     name: "&eLaunch &7(Right Click)"
+  COMPASS:
+    name: "&ePlayer Teleport &7(Right Click)"
 
 teleport-gui:
   title: "&a%player_name%"
@@ -38,3 +40,4 @@ teleport-gui:
     - "&7Z = &f%player_z%"
     - ""
     - "&eClick to teleport!"
+
