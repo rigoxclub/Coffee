@@ -1,4 +1,4 @@
-package club.rigox.vanillacore.commands;
+package club.rigox.vanillacore.commands.staff;
 
 import club.rigox.vanillacore.VanillaCore;
 import org.bukkit.command.Command;

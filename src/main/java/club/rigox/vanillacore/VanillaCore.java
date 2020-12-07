@@ -1,6 +1,10 @@
 package club.rigox.vanillacore;
 
 import club.rigox.vanillacore.commands.*;
+import club.rigox.vanillacore.commands.staff.Freeze;
+import club.rigox.vanillacore.commands.staff.Invsee;
+import club.rigox.vanillacore.commands.staff.PlayerTP;
+import club.rigox.vanillacore.commands.staff.Staff;
 import club.rigox.vanillacore.hooks.LuckpermsHook;
 import club.rigox.vanillacore.hooks.Placeholders;
 import club.rigox.vanillacore.listeners.PlayerListener;
@@ -71,6 +75,7 @@ public final class VanillaCore extends JavaPlugin {
         new Invsee(this);
         new God(this);
         new PlayerTP(this);
+        new CoffeeCore(this);
     }
 
     public void registerListeners() {

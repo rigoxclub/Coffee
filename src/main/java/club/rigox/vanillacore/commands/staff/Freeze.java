@@ -1,14 +1,10 @@
-package club.rigox.vanillacore.commands;
+package club.rigox.vanillacore.commands.staff;
 
 import club.rigox.vanillacore.VanillaCore;
-import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.potion.PotionEffect;
-import org.bukkit.potion.PotionEffectType;
 
 import static club.rigox.vanillacore.utils.MsgUtils.color;
 
