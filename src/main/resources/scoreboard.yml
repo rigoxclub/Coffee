@@ -5,7 +5,7 @@ general:
     - "&fPlayer: &b%player_name%"
     - ""
     - "Rank: &e%luckperms_primary_group_name%"
-    - "Credits: &e5,73k"
+    - "Credits: &e%cherry_credits%"
     - ""
     - "&fVoteParty: &a6&7/30"
     - ""

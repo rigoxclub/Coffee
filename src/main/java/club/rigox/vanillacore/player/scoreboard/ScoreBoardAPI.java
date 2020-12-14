@@ -5,7 +5,9 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 import java.security.SecureRandom;
+import java.util.Objects;
 
+import static club.rigox.vanillacore.utils.ConsoleUtils.debug;
 import static club.rigox.vanillacore.utils.MsgUtils.parseField;
 
 public class ScoreBoardAPI {
@@ -22,7 +24,7 @@ public class ScoreBoardAPI {
 
         ScoreboardCreator scoreboard = new ScoreboardCreator(randomString(8), health);
 
-        scoreboard.setName(plugin.getScoreboard().getString(type + ".title"));
+        scoreboard.setName(Objects.requireNonNull(plugin.getScoreboard().getString(type + ".title")));
 
         int i = plugin.getScoreboard().getStringList(type + ".body").size();
         for (String line : plugin.getScoreboard().getStringList(type + ".body")) {
@@ -34,7 +36,6 @@ public class ScoreBoardAPI {
 
         return scoreboard;
     }
-
 
     private String randomString(int length) {
         String AB = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";

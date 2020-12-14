@@ -28,7 +28,7 @@ public class ScoreboardCreator {
             this.tablingHealthObj.setDisplaySlot(DisplaySlot.PLAYER_LIST);
             this.nameHealthObj = this.scoreboard.registerNewObjective("namelife", "health", "test");
             this.nameHealthObj.setDisplaySlot(DisplaySlot.BELOW_NAME);
-            this.nameHealthObj.setDisplayName(ChatColor.DARK_RED + "\u2764");
+            this.nameHealthObj.setDisplayName(ChatColor.GRAY + "\u2764");
         }
 
     }
