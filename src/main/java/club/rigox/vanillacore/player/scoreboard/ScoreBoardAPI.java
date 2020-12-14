@@ -7,7 +7,6 @@ import org.bukkit.entity.Player;
 import java.security.SecureRandom;
 import java.util.Objects;
 
-import static club.rigox.vanillacore.utils.ConsoleUtils.debug;
 import static club.rigox.vanillacore.utils.MsgUtils.parseField;
 
 public class ScoreBoardAPI {

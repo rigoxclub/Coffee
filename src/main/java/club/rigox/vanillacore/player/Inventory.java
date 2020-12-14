@@ -1,7 +1,7 @@
 package club.rigox.vanillacore.player;
 
-import club.rigox.vanillacore.models.PlayerModel;
 import club.rigox.vanillacore.VanillaCore;
+import club.rigox.vanillacore.models.PlayerModel;
 import club.rigox.vanillacore.utils.ConsoleUtils;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;

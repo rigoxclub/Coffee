@@ -1,7 +1,6 @@
 package club.rigox.vanillacore.listeners;
 
 import club.rigox.vanillacore.VanillaCore;
-import club.rigox.vanillacore.models.PlayerModel;
 import club.rigox.vanillacore.player.ToggleVanish;
 import club.rigox.vanillacore.utils.Items;
 import org.bukkit.Bukkit;
@@ -11,7 +10,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.inventory.ItemStack;
 
 import java.util.LinkedHashMap;
 import java.util.Map;

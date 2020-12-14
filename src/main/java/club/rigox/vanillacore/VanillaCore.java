@@ -1,6 +1,8 @@
 package club.rigox.vanillacore;
 
-import club.rigox.vanillacore.commands.*;
+import club.rigox.vanillacore.commands.CoffeeCore;
+import club.rigox.vanillacore.commands.Fly;
+import club.rigox.vanillacore.commands.God;
 import club.rigox.vanillacore.commands.staff.Freeze;
 import club.rigox.vanillacore.commands.staff.Invsee;
 import club.rigox.vanillacore.commands.staff.PlayerTP;
