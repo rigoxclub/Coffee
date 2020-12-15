@@ -5,11 +5,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>club.rigox</groupId>
-    <artifactId>VanillaCore</artifactId>
+    <artifactId>Coffee</artifactId>
     <version>1.0</version>
     <packaging>jar</packaging>
 
-    <name>VanillaCore</name>
+    <name>Coffee</name>
 
     <properties>
         <java.version>1.8</java.version>
@@ -62,7 +62,6 @@
             <id>sonatype</id>
             <url>https://oss.sonatype.org/content/groups/public/</url>
         </repository>
-
         <repository>
             <id>glaremasters</id>
             <url>https://repo.glaremasters.me/repository/concuncan/</url>

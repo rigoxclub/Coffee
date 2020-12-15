@@ -1,6 +1,6 @@
-name: VanillaCore
+name: Coffee
 version: ${project.version}
-main: club.rigox.vanillacore.VanillaCore
+main: club.rigox.coffee.Coffee
 api-version: 1.16
 authors: [ sebastn_chan ]
 website: https://rigox.club
