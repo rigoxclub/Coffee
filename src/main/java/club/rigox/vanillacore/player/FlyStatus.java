@@ -1,14 +1,14 @@
 package club.rigox.vanillacore.player;
 
-import club.rigox.vanillacore.VanillaCore;
+import club.rigox.vanillacore.Coffee;
 import org.bukkit.entity.Player;
 
 import static club.rigox.vanillacore.utils.ConsoleUtils.debug;
 
 public class FlyStatus {
-    private final VanillaCore plugin;
+    private final Coffee plugin;
 
-    public FlyStatus (VanillaCore plugin) {
+    public FlyStatus (Coffee plugin) {
         this.plugin = plugin;
     }
 

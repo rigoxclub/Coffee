@@ -1,6 +1,6 @@
 package club.rigox.vanillacore.player.gui;
 
-import club.rigox.vanillacore.VanillaCore;
+import club.rigox.vanillacore.Coffee;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -18,12 +18,12 @@ import java.util.Map;
 import static club.rigox.vanillacore.utils.MsgUtils.*;
 
 public class TeleportGUI implements Listener {
-    private final VanillaCore plugin;
+    private final Coffee plugin;
     private final Map<Integer, Player> listUsers = new LinkedHashMap<>();
 
     private Inventory invList;
 
-    public TeleportGUI(VanillaCore plugin) {
+    public TeleportGUI(Coffee plugin) {
         this.plugin = plugin;
         plugin.getServer().getPluginManager().registerEvents(this, plugin);
     }

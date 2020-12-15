@@ -1,6 +1,6 @@
 package club.rigox.vanillacore.listeners;
 
-import club.rigox.vanillacore.VanillaCore;
+import club.rigox.vanillacore.Coffee;
 import com.destroystokyo.paper.event.player.PlayerPickupExperienceEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -16,9 +16,9 @@ import static club.rigox.vanillacore.utils.ConsoleUtils.debug;
 import static club.rigox.vanillacore.utils.MsgUtils.color;
 
 public class StaffListener implements Listener {
-    private final VanillaCore plugin;
+    private final Coffee plugin;
 
-    public StaffListener(VanillaCore plugin) {
+    public StaffListener(Coffee plugin) {
         Bukkit.getServer().getPluginManager().registerEvents(this, plugin);
         this.plugin = plugin;
     }

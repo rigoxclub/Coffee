@@ -1,6 +1,6 @@
 package club.rigox.vanillacore.models;
 
-import club.rigox.vanillacore.VanillaCore;
+import club.rigox.vanillacore.Coffee;
 import club.rigox.vanillacore.tasks.FreezeTask;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -13,9 +13,9 @@ import org.bukkit.scheduler.BukkitTask;
 import static club.rigox.vanillacore.utils.MsgUtils.color;
 
 public class PlayerModel {
-    private final VanillaCore plugin;
+    private final Coffee plugin;
 
-    public PlayerModel (VanillaCore plugin) {
+    public PlayerModel (Coffee plugin) {
         this.plugin = plugin;
     }
 
@@ -59,7 +59,7 @@ public class PlayerModel {
 
     public void freeze(Player target, Player staff) {
         this.isFrozed = true;
-        this.task = new FreezeTask(VanillaCore.instance, target, staff).runTaskTimer(VanillaCore.instance, 0L, 3 * 20);
+        this.task = new FreezeTask(Coffee.instance, target, staff).runTaskTimer(Coffee.instance, 0L, 3 * 20);
 
         target.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 99999, 50));
         plugin.getInventoryUtils().storeAndClearInventory(target);

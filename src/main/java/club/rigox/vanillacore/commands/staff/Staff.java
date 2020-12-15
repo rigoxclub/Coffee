@@ -1,6 +1,6 @@
 package club.rigox.vanillacore.commands.staff;
 
-import club.rigox.vanillacore.VanillaCore;
+import club.rigox.vanillacore.Coffee;
 import club.rigox.vanillacore.player.ToggleVanish;
 import club.rigox.vanillacore.utils.Items;
 import org.bukkit.GameMode;
@@ -13,11 +13,11 @@ import static club.rigox.vanillacore.utils.MsgUtils.color;
 
 
 public class Staff implements CommandExecutor {
-    private final VanillaCore plugin;
+    private final Coffee plugin;
     private final ToggleVanish toggleVanish;
     private final Items items;
 
-    public Staff(VanillaCore plugin) {
+    public Staff(Coffee plugin) {
         this.plugin = plugin;
         toggleVanish = new ToggleVanish(plugin);
         items = new Items(plugin);

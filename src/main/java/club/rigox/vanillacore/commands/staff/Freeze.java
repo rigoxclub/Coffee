@@ -1,6 +1,6 @@
 package club.rigox.vanillacore.commands.staff;
 
-import club.rigox.vanillacore.VanillaCore;
+import club.rigox.vanillacore.Coffee;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -10,9 +10,9 @@ import static club.rigox.vanillacore.utils.MsgUtils.color;
 
 
 public class Freeze implements CommandExecutor {
-    private final VanillaCore plugin;
+    private final Coffee plugin;
 
-    public Freeze(VanillaCore plugin) {
+    public Freeze(Coffee plugin) {
         this.plugin = plugin;
         plugin.getServer().getPluginCommand("freeze").setExecutor(this);
     }

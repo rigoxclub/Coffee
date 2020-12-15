@@ -1,6 +1,6 @@
 package club.rigox.vanillacore.utils;
 
-import club.rigox.vanillacore.VanillaCore;
+import club.rigox.vanillacore.Coffee;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -16,7 +16,7 @@ public class Items {
     private final ItemStack launchItem;
     private final ItemStack playerTeleportItem;
 
-    public Items(VanillaCore plugin) {
+    public Items(Coffee plugin) {
 
         // Vanish enable item
         ItemStack i = new ItemStack(Material.GRAY_DYE);

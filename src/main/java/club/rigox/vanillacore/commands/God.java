@@ -1,6 +1,6 @@
 package club.rigox.vanillacore.commands;
 
-import club.rigox.vanillacore.VanillaCore;
+import club.rigox.vanillacore.Coffee;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -10,9 +10,9 @@ import org.jetbrains.annotations.NotNull;
 import static club.rigox.vanillacore.utils.MsgUtils.color;
 
 public class God implements CommandExecutor {
-    private final VanillaCore plugin;
+    private final Coffee plugin;
 
-    public God (VanillaCore plugin) {
+    public God (Coffee plugin) {
         this.plugin = plugin;
         plugin.getServer().getPluginCommand("god").setExecutor(this);
     }

@@ -1,6 +1,6 @@
 package club.rigox.vanillacore.hooks;
 
-import club.rigox.vanillacore.VanillaCore;
+import club.rigox.vanillacore.Coffee;
 import net.luckperms.api.LuckPerms;
 import net.luckperms.api.event.EventBus;
 import net.luckperms.api.event.node.NodeAddEvent;
@@ -13,10 +13,10 @@ import org.bukkit.entity.Player;
 import static club.rigox.vanillacore.utils.MsgUtils.color;
 
 public class LuckpermsHook {
-    private final VanillaCore plugin;
+    private final Coffee plugin;
     private final LuckPerms luckPerms;
 
-    public LuckpermsHook(VanillaCore plugin, LuckPerms luckPerms) {
+    public LuckpermsHook(Coffee plugin, LuckPerms luckPerms) {
         this.plugin = plugin;
         this.luckPerms = luckPerms;
     }

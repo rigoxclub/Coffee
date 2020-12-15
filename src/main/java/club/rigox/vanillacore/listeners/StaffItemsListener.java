@@ -1,6 +1,6 @@
 package club.rigox.vanillacore.listeners;
 
-import club.rigox.vanillacore.VanillaCore;
+import club.rigox.vanillacore.Coffee;
 import club.rigox.vanillacore.player.ToggleVanish;
 import club.rigox.vanillacore.utils.Items;
 import org.bukkit.Bukkit;
@@ -18,12 +18,12 @@ import static club.rigox.vanillacore.utils.ConsoleUtils.debug;
 import static club.rigox.vanillacore.utils.MsgUtils.color;
 
 public class StaffItemsListener implements Listener {
-    private final VanillaCore plugin;
+    private final Coffee plugin;
 
     private final ToggleVanish toggleVanish;
     private final Items items;
 
-    public StaffItemsListener (VanillaCore plugin) {
+    public StaffItemsListener (Coffee plugin) {
         this.plugin = plugin;
         Bukkit.getServer().getPluginManager().registerEvents(this, plugin);
 

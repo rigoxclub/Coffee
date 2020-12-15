@@ -1,6 +1,6 @@
 package club.rigox.vanillacore.listeners;
 
-import club.rigox.vanillacore.VanillaCore;
+import club.rigox.vanillacore.Coffee;
 import club.rigox.vanillacore.models.PlayerModel;
 import club.rigox.vanillacore.player.scoreboard.ScoreBoardAPI;
 import org.bukkit.Bukkit;
@@ -15,10 +15,10 @@ import org.bukkit.potion.PotionEffectType;
 import static club.rigox.vanillacore.utils.ConsoleUtils.debug;
 
 public class PlayerListener implements Listener {
-    private final VanillaCore plugin;
+    private final Coffee plugin;
     private final ScoreBoardAPI scoreBoardAPI;
 
-    public PlayerListener(VanillaCore plugin) {
+    public PlayerListener(Coffee plugin) {
         Bukkit.getServer().getPluginManager().registerEvents(this, plugin);
         this.plugin = plugin;
         scoreBoardAPI = new ScoreBoardAPI(plugin);

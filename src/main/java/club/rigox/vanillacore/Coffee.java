@@ -32,8 +32,8 @@ import java.util.Map;
 
 import static club.rigox.vanillacore.utils.ConsoleUtils.warn;
 
-public final class VanillaCore extends JavaPlugin {
-    public static VanillaCore instance;
+public final class Coffee extends JavaPlugin {
+    public static Coffee instance;
 
     private Map<Player, PlayerModel> players = new LinkedHashMap<>();
 

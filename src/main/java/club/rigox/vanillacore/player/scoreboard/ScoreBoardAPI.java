@@ -1,6 +1,6 @@
 package club.rigox.vanillacore.player.scoreboard;
 
-import club.rigox.vanillacore.VanillaCore;
+import club.rigox.vanillacore.Coffee;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
@@ -10,10 +10,10 @@ import java.util.Objects;
 import static club.rigox.vanillacore.utils.MsgUtils.parseField;
 
 public class ScoreBoardAPI {
-    private final VanillaCore plugin;
+    private final Coffee plugin;
 
 
-    public ScoreBoardAPI(VanillaCore plugin) {
+    public ScoreBoardAPI(Coffee plugin) {
         this.plugin = plugin;
     }
 

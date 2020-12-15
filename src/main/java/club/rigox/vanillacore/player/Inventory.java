@@ -1,18 +1,18 @@
 package club.rigox.vanillacore.player;
 
-import club.rigox.vanillacore.VanillaCore;
+import club.rigox.vanillacore.Coffee;
 import club.rigox.vanillacore.models.PlayerModel;
 import club.rigox.vanillacore.utils.ConsoleUtils;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 public class Inventory {
-    private final VanillaCore plugin;
+    private final Coffee plugin;
 
     private final ItemStack[] armorEmpty = new ItemStack[4];
     private final ItemStack[] inventoryEmpty = new ItemStack[36];
 
-    public Inventory(VanillaCore plugin) {
+    public Inventory(Coffee plugin) {
         this.plugin = plugin;
     }
 

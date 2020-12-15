@@ -1,6 +1,6 @@
 package club.rigox.vanillacore.tasks;
 
-import club.rigox.vanillacore.VanillaCore;
+import club.rigox.vanillacore.Coffee;
 import org.bukkit.Effect;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -11,10 +11,10 @@ import static club.rigox.vanillacore.utils.MsgUtils.color;
 
 public class FreezeTask extends BukkitRunnable {
     private final Player target;
-    private final VanillaCore plugin;
+    private final Coffee plugin;
     private final Player staff;
 
-    public FreezeTask (VanillaCore plugin, Player target, Player staff) {
+    public FreezeTask (Coffee plugin, Player target, Player staff) {
         this.plugin = plugin;
         this.target = target;
         this.staff = staff;

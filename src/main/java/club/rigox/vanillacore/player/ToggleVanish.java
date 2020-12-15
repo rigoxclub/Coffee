@@ -1,13 +1,13 @@
 package club.rigox.vanillacore.player;
 
-import club.rigox.vanillacore.VanillaCore;
+import club.rigox.vanillacore.Coffee;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 public class ToggleVanish {
-    private final VanillaCore plugin;
+    private final Coffee plugin;
 
-    public ToggleVanish(VanillaCore plugin) {
+    public ToggleVanish(Coffee plugin) {
         this.plugin = plugin;
     }
 
