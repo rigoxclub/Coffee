@@ -21,14 +21,6 @@ public class CommandUtils {
         return false;
     }
 
-    public boolean hasPermission(CommandSender sender, String permission) {
-        if (sender.hasPermission(permission)) {
-            sender.sendMessage(color(plugin.getLang().getString("permission.general-no")));
-            return true;
-        }
-        return false;
-    }
-
     public boolean self(CommandSender sender, Player player) {
         if (sender.equals(player)) {
             sender.sendMessage(color("&cYou can't perform this action to yourself!"));

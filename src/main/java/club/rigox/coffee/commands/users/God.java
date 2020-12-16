@@ -23,28 +23,31 @@ public class God extends BaseCommand {
     @CommandPermission("coffee.god")
     @CommandCompletion("@players")
     public void onDefault(CommandSender sender, String[] args) {
-        if (plugin.getCommandUtils().isConsole(sender)) return;
-
-        Player player = (Player) sender;
         if (args.length == 1) {
-            if (!plugin.getCommandUtils().hasPermission(sender, "coffee.god.others")) return;
+            if (!sender.hasPermission("coffee.god.others")) {
+                sender.sendMessage(color(plugin.getLang().getString("permission.general-no")));
+                return;
+            }
 
             Player target = plugin.getServer().getPlayer(args[0]);
 
             if (plugin.getCommandUtils().playerOffline(sender, target)) return;
-            if (plugin.getCommandUtils().self(player, target)) return;
+            if (plugin.getCommandUtils().self(sender, target)) return;
 
             if (plugin.getPlayers().get(target).hasGod()) {
                 plugin.getPlayers().get(target).enableGod();
-                target.sendMessage(color(String.format(plugin.getLang().getString("god.disabled-other"), player.getName())));
+                target.sendMessage(color(String.format(plugin.getLang().getString("god.disabled-other"), sender.getName())));
                 return;
             }
 
             plugin.getPlayers().get(target).enableGod();
-            target.sendMessage(color(String.format(plugin.getLang().getString("god.enabled-other"), player.getName())));
+            target.sendMessage(color(String.format(plugin.getLang().getString("god.enabled-other"), sender.getName())));
             return;
         }
 
+        if (plugin.getCommandUtils().isConsole(sender)) return;
+
+        Player player = (Player) sender;
         if (plugin.getPlayers().get(player).hasGod()) {
             plugin.getPlayers().get(player).disableGod();
             player.sendMessage(color(plugin.getLang().getString("god.disabled")));

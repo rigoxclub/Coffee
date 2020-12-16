@@ -20,7 +20,7 @@ public class PlayerTP extends BaseCommand {
     }
 
     @Default
-    public void onDefault(CommandSender sender, String[] args) {
+    public void onDefault(CommandSender sender) {
         if (plugin.getCommandUtils().isConsole(sender)) return;
 
         Player player = (Player) sender;

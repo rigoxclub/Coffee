@@ -5,9 +5,6 @@ player:
 
 permission:
   general-no: "&cYou don't have permission to perform this command."
-  fly-others: "&cYou don't have permission to enable fly on others."
-  god-others: "&cYou don't have permission to enable god on others."
-  clear-others: "&cYou don't have permission to clear other players inventory!"
 
 command-usage:
   base: "&8&l* &fCommand usage: &b"

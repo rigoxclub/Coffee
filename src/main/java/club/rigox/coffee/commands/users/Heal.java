@@ -23,7 +23,10 @@ public class Heal extends BaseCommand {
     @CommandCompletion("@players")
     public void onHeal(CommandSender sender, String[] args) {
         if (args.length == 1) {
-            if (plugin.getCommandUtils().hasPermission(sender, "coffee.heal.others")) return;
+            if (!sender.hasPermission("coffee.heal.others")) {
+                sender.sendMessage(color(plugin.getLang().getString("permission.general-no")));
+                return;
+            }
 
             Player target = plugin.getServer().getPlayer(args[0]);
             if (plugin.getCommandUtils().playerOffline(sender, target)) return;

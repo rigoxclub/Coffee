@@ -31,7 +31,10 @@ public class Staff extends BaseCommand {
         if (plugin.getCommandUtils().isConsole(sender)) return;
 
         Player player = (Player) sender;
-        if (!(plugin.getCommandUtils().hasPermission(player, "coffee.staff")))
+        if (!sender.hasPermission("coffee.staff")) {
+            sender.sendMessage(color(plugin.getLang().getString("permission.general-no")));
+            return;
+        }
 
         if (plugin.getPlayers().get(player).hasGod()) {
             toggleVanish.showStaff(player);

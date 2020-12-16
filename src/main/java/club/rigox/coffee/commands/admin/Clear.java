@@ -26,8 +26,12 @@ public class Clear extends BaseCommand {
         if (args.length == 1) {
             Player target = plugin.getServer().getPlayer(args[0]);
 
+            if (!sender.hasPermission("coffee.clear.others")) {
+                sender.sendMessage(color(plugin.getLang().getString("permission.general-no")));
+                return;
+            }
+
             if (plugin.getCommandUtils().playerOffline(sender, target)) return;
-            if (!plugin.getCommandUtils().hasPermission(sender, "coffee.clear.others")) return;
             if (plugin.getCommandUtils().self(sender, target)) return;
 
             if (plugin.getPlayers().get(target).isOnStaffMode()) {
