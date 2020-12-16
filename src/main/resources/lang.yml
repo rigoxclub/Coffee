@@ -16,6 +16,9 @@ command-usage:
   god: "/god (player)"
   playertp: "/playertp"
   invsee: "/invsee (player)"
+  clear: "/clear (player)"
+  gamemode: "/gm (creative/survival/spectator/adventure)"
+  gamemode-others: "/gm (creative/survival/spectator/adventure) (player)"
 
 freeze:
   self: "&cCuesta eso eh"
@@ -44,3 +47,11 @@ god:
 invsee:
   self: "&cYou can't open your inventory!"
   open: "&aOpening inventory of %s"
+
+gamemode:
+  survival:
+    set: "&8&l* &fYour gamemode has been updated to &aSurvival&f!"
+    already: "&cYou're already in Survival mode!"
+  already-creative: "&cYou're already in Creative mode!"
+  already-adventure: "&cYou're already in Adventure mode!"
+  already-spectator: "&cYou're already in Spectator mode!"

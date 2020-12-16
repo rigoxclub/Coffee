@@ -14,7 +14,7 @@ import static club.rigox.coffee.utils.MsgUtils.color;
 @CommandAlias("clear")
 @CommandPermission("coffee.clear")
 public class Clear extends BaseCommand {
-    private Coffee plugin;
+    private final Coffee plugin;
 
     public Clear(Coffee plugin) {
         this.plugin = plugin;
@@ -23,10 +23,45 @@ public class Clear extends BaseCommand {
     @Default
     @CommandCompletion("@players")
     public void onDefault(CommandSender sender, String[] args) {
+        if (args.length == 1) {
+            if (!sender.hasPermission("coffee.clear.others")) {
+                sender.sendMessage("&cYou don't have permission to clear other players inventory!");
+                return;
+            }
+
+            Player target = plugin.getServer().getPlayer(args[0]);
+            if (target == null) {
+                sender.sendMessage(color("&cPlayer is offline!"));
+                return;
+            }
+
+            if (sender.equals(target)) {
+                sender.sendMessage("&cYou could just use /clear");
+                return;
+            }
+
+            if (plugin.getPlayers().get(target).isOnStaffMode()) {
+                sender.sendMessage(color(String.format("You can't clear %s inventory! Is on staff mode.", target.getName())));
+                return;
+            }
+
+            target.getInventory().clear();
+            target.sendMessage(color("&cYour inventory has been cleared."));
+            sender.sendMessage(color(String.format("&aYou cleared %s's inventory!", target.getName())));
+            return;
+        }
+
+        if (!(sender instanceof Player)) {
+            sender.sendMessage(color(plugin.getLang().getString("command-usage.base") + plugin.getLang().getString("command-usage.clear")));
+            return;
+        }
 
         Player player = (Player) sender;
+        if (plugin.getPlayers().get(player).isOnStaffMode()) {
+            player.sendMessage(color("&cYou can't clear your inventory while on Staff Mode!"));
+            return;
+        }
 
-        if (plugin.getPlayers().get(player).hasGod())
         player.getInventory().clear();
         player.sendMessage(color("&aYour inventory has been cleared!"));
     }

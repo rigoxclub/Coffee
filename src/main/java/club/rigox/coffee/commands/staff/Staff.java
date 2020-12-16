@@ -44,6 +44,7 @@ public class Staff extends BaseCommand {
 
             plugin.getPlayers().get(player).unVanish();
             plugin.getPlayers().get(player).disableGod();
+            plugin.getPlayers().get(player).removeStaffMode();
 
             plugin.getInventoryUtils().restoreInventory(player);
             plugin.getScoreBoardAPI().setScoreBoard(player, "general", true);
@@ -53,11 +54,12 @@ public class Staff extends BaseCommand {
             player.sendMessage(color(plugin.getLang().getString("staff-mode.disabled")));
             return;
         }
-        
+
         toggleVanish.hideStaff(player);
 
         plugin.getPlayers().get(player).enableGod();
         plugin.getPlayers().get(player).vanish();
+        plugin.getPlayers().get(player).setStaffMode();
 
         plugin.getInventoryUtils().storeAndClearInventory(player);
         items.giveItems(player);

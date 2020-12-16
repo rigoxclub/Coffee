@@ -2,6 +2,8 @@ package club.rigox.coffee;
 
 import club.rigox.coffee.commands.CoffeeCore;
 import club.rigox.coffee.commands.God;
+import club.rigox.coffee.commands.admin.Clear;
+import club.rigox.coffee.commands.admin.Gamemode;
 import club.rigox.coffee.commands.staff.Freeze;
 import club.rigox.coffee.commands.staff.Invsee;
 import club.rigox.coffee.commands.staff.PlayerTP;
@@ -75,6 +77,8 @@ public final class Coffee extends JavaPlugin {
         manager.registerCommand(new Staff(this));
         manager.registerCommand(new Invsee(this));
         manager.registerCommand(new PlayerTP(this));
+        manager.registerCommand(new Clear(this));
+        manager.registerCommand(new Gamemode(this));
     }
 
     public void registerListeners() {

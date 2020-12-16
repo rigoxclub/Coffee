@@ -27,6 +27,7 @@ public class PlayerModel {
     private boolean hasGod;
     private boolean isFrozed;
     private boolean isVanished;
+    private boolean isOnStaffMode;
 
     private ItemStack[] inventory;
     private ItemStack[] armor;
@@ -38,6 +39,14 @@ public class PlayerModel {
 
     public void disableGod() {
         this.hasGod = false;
+    }
+
+    public void setStaffMode() {
+        this.isOnStaffMode = true;
+    }
+
+    public void removeStaffMode() {
+        this.isOnStaffMode = false;
     }
 
     public void vanish() {
@@ -137,5 +146,9 @@ public class PlayerModel {
 
     public boolean isVanished() {
         return isVanished;
+    }
+
+    public boolean isOnStaffMode() {
+        return isOnStaffMode;
     }
 }
