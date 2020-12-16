@@ -31,7 +31,7 @@ import java.io.IOException;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import static club.rigox.coffee.utils.ConsoleUtils.warn;
+import static club.rigox.coffee.utils.ConsoleUtils.*;
 
 public final class Coffee extends JavaPlugin {
     public static Coffee instance;
@@ -79,6 +79,7 @@ public final class Coffee extends JavaPlugin {
         manager.registerCommand(new PlayerTP(this));
         manager.registerCommand(new Clear(this));
         manager.registerCommand(new Gamemode(this));
+        info("Plugin commands registered!");
     }
 
     public void registerListeners() {
@@ -86,12 +87,14 @@ public final class Coffee extends JavaPlugin {
         new StaffListener(this);
         new StaffItemsListener(this);
         new TeleportGUI(this);
+        info("Plugin listeners registered!");
     }
 
     public void loadConfigs() {
         this.lang = createConfig("lang");
         this.setting = createConfig("settings");
         this.scoreboard = createConfig("scoreboard");
+        info("Plugin configurations registered!");
     }
 
     public void loadHooks() {
@@ -99,12 +102,16 @@ public final class Coffee extends JavaPlugin {
         if (Bukkit.getPluginManager().getPlugin("PlaceholderAPI") == null) {
             warn("Could not find PlaceholderAPI! This plugin is required.");
             Bukkit.getPluginManager().disablePlugin(this);
+            return;
         }
+        info("Successfully hooked with PlaceholderAPI!");
 
         new LuckpermsHook(this, this.luckPerms).register();
         if (Bukkit.getPluginManager().getPlugin("LuckPerms") == null) {
             warn("Could not find LuckPerms! This plugin is required.");
+            return;
         }
+        info("Successfully hooked with LuckPerms!");
     }
 
     public Inventory getInventoryUtils() {
@@ -140,6 +147,7 @@ public final class Coffee extends JavaPlugin {
         if (!configFile.exists()) {
             configFile.getParentFile().mkdirs();
             saveResource(configName + ".yml", false);
+            debug(String.format("%s.yml configuration was created!", configName));
         }
 
         FileConfiguration cfg = new YamlConfiguration();
