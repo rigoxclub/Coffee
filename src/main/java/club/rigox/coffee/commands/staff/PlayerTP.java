@@ -27,11 +27,6 @@ public class PlayerTP extends BaseCommand {
         }
 
         Player player = (Player) sender;
-        if (args.length >= 1) {
-            player.sendMessage(color(plugin.getLang().getString("command-usage.base") + plugin.getLang().getString("command-usage.playertp")));
-            return;
-        }
-
         player.sendMessage(color("&aLoading player list..."));
         plugin.getInventoryTeleport().openInventory(player);
     }
