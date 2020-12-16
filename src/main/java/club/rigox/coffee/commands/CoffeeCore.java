@@ -3,6 +3,7 @@ package club.rigox.coffee.commands;
 import co.aikar.commands.BaseCommand;
 import co.aikar.commands.annotation.CommandAlias;
 import co.aikar.commands.annotation.Default;
+import co.aikar.commands.annotation.HelpCommand;
 import co.aikar.commands.annotation.Subcommand;
 import org.bukkit.command.CommandSender;
 
@@ -12,12 +13,13 @@ import static club.rigox.coffee.utils.MsgUtils.color;
 public class CoffeeCore extends BaseCommand {
 
     @Default
+    @HelpCommand
     public void onDefault(CommandSender sender) {
         header(sender);
         sender.sendMessage(color("&8&l* &b/fly (Player) &f- Enable fly"));
         sender.sendMessage(color("&8&l* &b/god (Player) &f- Enable god"));
         sender.sendMessage(color("&8&l* &b/coffee staff &f- Display staff commands"));
-        sender.sendMessage(color("&7&m------------------------------------------------"));
+        sender.sendMessage(color("&8&l* &c/coffee admin &f- Display admin commands"));
         footer(sender);
     }
 
@@ -35,6 +37,8 @@ public class CoffeeCore extends BaseCommand {
     public void adminCommand(CommandSender sender) {
         header(sender);
         sender.sendMessage(color("&8&l* &b/clear (Player) &f- Clear your inventory or to a player"));
+        sender.sendMessage(color("&8&l* &b/gm (Player) &f- Set gamemode to a player"));
+        sender.sendMessage(color("&8&l* &b/god (Player) &f- Set god to a player"));
         footer(sender);
     }
 
