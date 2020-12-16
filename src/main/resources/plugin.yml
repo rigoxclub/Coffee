@@ -20,5 +20,3 @@ commands:
     description: Command god
   playertp:
     description: Command playertp
-  coffee:
-    description: Command help

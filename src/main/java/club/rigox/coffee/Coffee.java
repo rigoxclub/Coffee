@@ -17,6 +17,7 @@ import club.rigox.coffee.player.FlyStatus;
 import club.rigox.coffee.player.Inventory;
 import club.rigox.coffee.player.gui.TeleportGUI;
 import club.rigox.coffee.player.scoreboard.ScoreBoardAPI;
+import co.aikar.commands.PaperCommandManager;
 import net.luckperms.api.LuckPerms;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.InvalidConfigurationException;
@@ -71,13 +72,15 @@ public final class Coffee extends JavaPlugin {
     }
 
     public void registerCommands() {
+        PaperCommandManager manager = new PaperCommandManager(this);
+        manager.registerCommand(new CoffeeCore());
+
         new Freeze(this);
         new Staff(this);
         new Fly(this);
         new Invsee(this);
         new God(this);
         new PlayerTP(this);
-        new CoffeeCore(this);
     }
 
     public void registerListeners() {
