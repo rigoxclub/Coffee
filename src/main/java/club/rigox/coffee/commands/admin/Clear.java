@@ -25,13 +25,13 @@ public class Clear extends BaseCommand {
     public void onDefault(CommandSender sender, String[] args) {
         if (args.length == 1) {
             if (!sender.hasPermission("coffee.clear.others")) {
-                sender.sendMessage("&cYou don't have permission to clear other players inventory!");
+                sender.sendMessage(color(plugin.getLang().getString("permission.clear-others")));
                 return;
             }
 
             Player target = plugin.getServer().getPlayer(args[0]);
             if (target == null) {
-                sender.sendMessage(color("&cPlayer is offline!"));
+                sender.sendMessage(color(plugin.getLang().getString("player.offline")));
                 return;
             }
 

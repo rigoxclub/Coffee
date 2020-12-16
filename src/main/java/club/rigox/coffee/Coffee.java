@@ -1,7 +1,7 @@
 package club.rigox.coffee;
 
 import club.rigox.coffee.commands.CoffeeCore;
-import club.rigox.coffee.commands.God;
+import club.rigox.coffee.commands.users.God;
 import club.rigox.coffee.commands.admin.Clear;
 import club.rigox.coffee.commands.admin.Gamemode;
 import club.rigox.coffee.commands.staff.Freeze;

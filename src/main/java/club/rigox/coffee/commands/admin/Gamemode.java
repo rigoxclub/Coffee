@@ -36,7 +36,7 @@ public class Gamemode extends BaseCommand {
             Player target = plugin.getServer().getPlayer(args[0]);
 
             if (target == null) {
-                sender.sendMessage(color("&cPlayer is offline!"));
+                sender.sendMessage(color(plugin.getLang().getString("player.offline")));
                 return;
             }
 
@@ -79,7 +79,7 @@ public class Gamemode extends BaseCommand {
             Player target = plugin.getServer().getPlayer(args[0]);
 
             if (target == null) {
-                sender.sendMessage(color("&cPlayer is offline!"));
+                sender.sendMessage(color(plugin.getLang().getString("player.offline")));
                 return;
             }
 
@@ -122,7 +122,7 @@ public class Gamemode extends BaseCommand {
             Player target = plugin.getServer().getPlayer(args[0]);
 
             if (target == null) {
-                sender.sendMessage(color("&cPlayer is offline!"));
+                sender.sendMessage(color(plugin.getLang().getString("player.offline")));
                 return;
             }
 
@@ -165,7 +165,7 @@ public class Gamemode extends BaseCommand {
             Player target = plugin.getServer().getPlayer(args[0]);
 
             if (target == null) {
-                sender.sendMessage(color("&cPlayer is offline!"));
+                sender.sendMessage(color(plugin.getLang().getString("player.offline")));
                 return;
             }
 

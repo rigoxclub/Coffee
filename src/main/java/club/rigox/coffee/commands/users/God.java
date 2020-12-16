@@ -1,4 +1,4 @@
-package club.rigox.coffee.commands;
+package club.rigox.coffee.commands.users;
 
 import club.rigox.coffee.Coffee;
 import co.aikar.commands.BaseCommand;
