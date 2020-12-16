@@ -21,10 +21,7 @@ public class PlayerTP extends BaseCommand {
 
     @Default
     public void onDefault(CommandSender sender, String[] args) {
-        if (!(sender instanceof Player)) {
-            sender.sendMessage(color(plugin.getLang().getString("only-users")));
-            return;
-        }
+        if (plugin.getCommandUtils().isConsole(sender)) return;
 
         Player player = (Player) sender;
         player.sendMessage(color("&aLoading player list..."));

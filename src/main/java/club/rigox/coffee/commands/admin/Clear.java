@@ -24,16 +24,10 @@ public class Clear extends BaseCommand {
     @CommandCompletion("@players")
     public void onDefault(CommandSender sender, String[] args) {
         if (args.length == 1) {
-            if (!sender.hasPermission("coffee.clear.others")) {
-                sender.sendMessage(color(plugin.getLang().getString("permission.clear-others")));
-                return;
-            }
-
             Player target = plugin.getServer().getPlayer(args[0]);
-            if (target == null) {
-                sender.sendMessage(color(plugin.getLang().getString("player.offline")));
-                return;
-            }
+
+            if (!plugin.getCommandUtils().hasPermission(sender, "coffee.clear.others")) return;
+            if (plugin.getCommandUtils().playerOffline(sender, target)) return;
 
             if (sender.equals(target)) {
                 sender.sendMessage("&cYou could just use /clear");
@@ -51,10 +45,7 @@ public class Clear extends BaseCommand {
             return;
         }
 
-        if (!(sender instanceof Player)) {
-            sender.sendMessage(color(plugin.getLang().getString("command-usage.base") + plugin.getLang().getString("command-usage.clear")));
-            return;
-        }
+        if (plugin.getCommandUtils().isConsole(sender)) return;
 
         Player player = (Player) sender;
         if (plugin.getPlayers().get(player).isOnStaffMode()) {

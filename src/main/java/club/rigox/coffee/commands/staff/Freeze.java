@@ -23,29 +23,19 @@ public class Freeze extends BaseCommand {
     @Default
     @CommandCompletion("@players")
     public void onDefault(CommandSender sender, String[] args) {
-        if (!(sender instanceof Player)) {
-            sender.sendMessage(color(plugin.getLang().getString("only-users")));
-            return;
-        }
+        if (plugin.getCommandUtils().isConsole(sender)) return;
 
         Player staff = (Player) sender;
 
-        if(args.length != 1){
+        if (args.length != 1){
             sender.sendMessage(color(plugin.getLang().getString("command-usage.base") + plugin.getLang().getString("command-usage.freeze")));
             return;
         }
 
         Player target = plugin.getServer().getPlayer(args[0]);
 
-        if (target == null) {
-            sender.sendMessage(color(plugin.getLang().getString("player.offline")));
-            return;
-        }
-
-        if (target.equals(staff)) {
-            sender.sendMessage(color(plugin.getLang().getString("freeze.self")));
-            return;
-        }
+        if (plugin.getCommandUtils().playerOffline(sender, target)) return;
+        if (plugin.getCommandUtils().self(sender, target)) return;
 
         if (target.hasPermission("coffee.freeze.bypass")) {
             sender.sendMessage(color(plugin.getLang().getString("freeze.player-bypass")));

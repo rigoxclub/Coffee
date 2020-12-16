@@ -35,15 +35,8 @@ public class Gamemode extends BaseCommand {
         if (args.length == 1) {
             Player target = plugin.getServer().getPlayer(args[0]);
 
-            if (target == null) {
-                sender.sendMessage(color(plugin.getLang().getString("player.offline")));
-                return;
-            }
-
-            if (target.equals(sender)) {
-                sender.sendMessage(color(plugin.getLang().getString("command-usage.base") + plugin.getLang().getString("command-usage.gamemode")));
-                return;
-            }
+            if (plugin.getCommandUtils().playerOffline(sender, target)) return;
+            if (plugin.getCommandUtils().self(sender, target)) return;
 
             if (target.getGameMode() == GameMode.SURVIVAL) {
                 sender.sendMessage(color(plugin.getLang().getString("gamemode.survival.other.already")));
@@ -78,15 +71,8 @@ public class Gamemode extends BaseCommand {
         if (args.length == 1) {
             Player target = plugin.getServer().getPlayer(args[0]);
 
-            if (target == null) {
-                sender.sendMessage(color(plugin.getLang().getString("player.offline")));
-                return;
-            }
-
-            if (target.equals(sender)) {
-                sender.sendMessage(color(plugin.getLang().getString("command-usage.base") + plugin.getLang().getString("command-usage.gamemode")));
-                return;
-            }
+            if (plugin.getCommandUtils().playerOffline(sender, target)) return;
+            if (plugin.getCommandUtils().self(sender, target)) return;
 
             if (target.getGameMode() == GameMode.CREATIVE) {
                 sender.sendMessage(color(plugin.getLang().getString("gamemode.creative.other.already")));
@@ -121,15 +107,8 @@ public class Gamemode extends BaseCommand {
         if (args.length == 1) {
             Player target = plugin.getServer().getPlayer(args[0]);
 
-            if (target == null) {
-                sender.sendMessage(color(plugin.getLang().getString("player.offline")));
-                return;
-            }
-
-            if (target.equals(sender)) {
-                sender.sendMessage(color(plugin.getLang().getString("command-usage.base") + plugin.getLang().getString("command-usage.gamemode")));
-                return;
-            }
+            if (plugin.getCommandUtils().playerOffline(sender, target)) return;
+            if (plugin.getCommandUtils().self(sender, target)) return;
 
             if (target.getGameMode() == GameMode.ADVENTURE) {
                 sender.sendMessage(color(plugin.getLang().getString("gamemode.adventure.other.already")));
@@ -164,15 +143,8 @@ public class Gamemode extends BaseCommand {
         if (args.length == 1) {
             Player target = plugin.getServer().getPlayer(args[0]);
 
-            if (target == null) {
-                sender.sendMessage(color(plugin.getLang().getString("player.offline")));
-                return;
-            }
-
-            if (target.equals(sender)) {
-                sender.sendMessage(color(plugin.getLang().getString("command-usage.base") + plugin.getLang().getString("command-usage.gamemode")));
-                return;
-            }
+            if (plugin.getCommandUtils().playerOffline(sender, target)) return;
+            if (plugin.getCommandUtils().self(sender, target)) return;
 
             if (target.getGameMode() == GameMode.SPECTATOR) {
                 sender.sendMessage(color(plugin.getLang().getString("gamemode.spectator.other.already")));
@@ -185,10 +157,7 @@ public class Gamemode extends BaseCommand {
             return;
         }
 
-        if (!(sender instanceof Player)) {
-            sender.sendMessage(color(plugin.getLang().getString("command-usage.base") + plugin.getLang().getString("command-usage.gamemode-others")));
-            return;
-        }
+        if (plugin.getCommandUtils().isConsole(sender)) return;
 
         Player player = (Player) sender;
         if (player.getGameMode() == GameMode.SPECTATOR) {

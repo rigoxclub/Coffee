@@ -23,10 +23,7 @@ public class Invsee extends BaseCommand {
     @Default
     @CommandCompletion("@players")
     public void onDefault(CommandSender sender, String[] args) {
-        if (!(sender instanceof Player)) {
-            sender.sendMessage(color(plugin.getLang().getString("only-users")));
-            return;
-        }
+        if (plugin.getCommandUtils().isConsole(sender)) return;
 
         Player player = (Player) sender;
         if(args.length != 1){
@@ -35,15 +32,9 @@ public class Invsee extends BaseCommand {
         }
 
         Player target = plugin.getServer().getPlayer(args[0]);
-        if (target == null) {
-            sender.sendMessage(color(plugin.getLang().getString("player.offline")));
-            return;
-        }
 
-        if (target.equals(sender)) {
-            sender.sendMessage(color(plugin.getLang().getString("invsee.self")));
-            return;
-        }
+        if (plugin.getCommandUtils().playerOffline(sender, target))
+        if (plugin.getCommandUtils().self(player, target)) return;
 
         player.openInventory(target.getInventory());
         player.sendMessage(color(String.format(plugin.getLang().getString("invsee.open"), target.getName())));

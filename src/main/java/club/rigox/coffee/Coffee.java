@@ -1,13 +1,13 @@
 package club.rigox.coffee;
 
 import club.rigox.coffee.commands.CoffeeCore;
-import club.rigox.coffee.commands.users.God;
 import club.rigox.coffee.commands.admin.Clear;
 import club.rigox.coffee.commands.admin.Gamemode;
 import club.rigox.coffee.commands.staff.Freeze;
 import club.rigox.coffee.commands.staff.Invsee;
 import club.rigox.coffee.commands.staff.PlayerTP;
 import club.rigox.coffee.commands.staff.Staff;
+import club.rigox.coffee.commands.users.God;
 import club.rigox.coffee.hooks.LuckpermsHook;
 import club.rigox.coffee.hooks.Placeholders;
 import club.rigox.coffee.listeners.PlayerListener;
@@ -17,6 +17,7 @@ import club.rigox.coffee.models.PlayerModel;
 import club.rigox.coffee.player.Inventory;
 import club.rigox.coffee.player.gui.TeleportGUI;
 import club.rigox.coffee.player.scoreboard.ScoreBoardAPI;
+import club.rigox.coffee.utils.CommandUtils;
 import co.aikar.commands.PaperCommandManager;
 import net.luckperms.api.LuckPerms;
 import org.bukkit.Bukkit;
@@ -39,6 +40,7 @@ public final class Coffee extends JavaPlugin {
     private Map<Player, PlayerModel> players = new LinkedHashMap<>();
 
     private Inventory inventoryUtils;
+    private CommandUtils commandUtils;
     private ScoreBoardAPI scoreBoardAPI;
     private TeleportGUI teleportGui;
 
@@ -58,6 +60,7 @@ public final class Coffee extends JavaPlugin {
         this.inventoryUtils = new Inventory(this);
         this.scoreBoardAPI = new ScoreBoardAPI(this);
         this.teleportGui = new TeleportGUI(this);
+        this.commandUtils = new CommandUtils(this);
 
         loadHooks();
         registerListeners();
@@ -140,6 +143,10 @@ public final class Coffee extends JavaPlugin {
 
     public TeleportGUI getInventoryTeleport() {
         return teleportGui;
+    }
+
+    public CommandUtils getCommandUtils() {
+        return commandUtils;
     }
 
     public FileConfiguration createConfig(String configName) {
