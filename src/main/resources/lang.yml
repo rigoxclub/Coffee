@@ -52,6 +52,24 @@ gamemode:
   survival:
     set: "&8&l* &fYour gamemode has been updated to &aSurvival&f!"
     already: "&cYou're already in Survival mode!"
-  already-creative: "&cYou're already in Creative mode!"
-  already-adventure: "&cYou're already in Adventure mode!"
-  already-spectator: "&cYou're already in Spectator mode!"
+    other:
+      sender: "&aSuccessfully set %s to survival mode."
+      already: "&cPlayer is already in Survival mode!"
+  creative:
+    set: "&8&l* &fYour gamemode has been updated to &bCreative&f!"
+    already: "&cYou're already in Creative mode!"
+    other:
+      sender: "&aSuccessfully set %s to creative mode."
+      already: "&cPlayer is already in Creative mode!"
+  adventure:
+    set: "&8&l* &fYour gamemode has been updated to &eAdventure&f!"
+    already: "&cYou're already in Adventure mode!"
+    other:
+      sender: "&aSuccessfully set %s to adventure mode."
+      already: "&cPlayer is already in Adventure mode!"
+  spectator:
+    set: "&8&l* &fYour gamemode has been updated to &cSpectator&f!"
+    already: "&cYou're already in Spectator mode!"
+    other:
+      sender: "&aSuccessfully set %s to spectator mode."
+      already: "&cPlayer is already in Spectator mode!"
