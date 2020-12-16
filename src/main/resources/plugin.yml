@@ -12,11 +12,7 @@ commands:
     description: Command 1.
   freeze:
     description: Command freeze
-  fly:
-    description: Command fly
   invsee:
     description: Command invsee
-  god:
-    description: Command god
   playertp:
     description: Command playertp

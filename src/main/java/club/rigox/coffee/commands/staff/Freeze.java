@@ -1,64 +1,62 @@
 package club.rigox.coffee.commands.staff;
 
 import club.rigox.coffee.Coffee;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
+import co.aikar.commands.BaseCommand;
+import co.aikar.commands.annotation.CommandAlias;
+import co.aikar.commands.annotation.CommandCompletion;
+import co.aikar.commands.annotation.CommandPermission;
+import co.aikar.commands.annotation.Default;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import static club.rigox.coffee.utils.MsgUtils.color;
 
-
-public class Freeze implements CommandExecutor {
+@CommandAlias("freeze")
+@CommandPermission("coffee.freeze")
+public class Freeze extends BaseCommand {
     private final Coffee plugin;
 
     public Freeze(Coffee plugin) {
         this.plugin = plugin;
-        plugin.getServer().getPluginCommand("freeze").setExecutor(this);
     }
 
-    @Override
-    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+    @Default
+    @CommandCompletion("@players")
+    public void onDefault(CommandSender sender, String[] args) {
         if (!(sender instanceof Player)) {
             sender.sendMessage(color(plugin.getLang().getString("only-users")));
-            return true;
+            return;
         }
 
         Player staff = (Player) sender;
 
-        if (!staff.hasPermission("vanillacore.freeze")) {
-            sender.sendMessage(color(plugin.getLang().getString("permission.general-no")));
-           return true;
-        }
-
         if(args.length != 1){
             sender.sendMessage(color(plugin.getLang().getString("command-usage.base") + plugin.getLang().getString("command-usage.freeze")));
-            return true;
+            return;
         }
 
         Player target = plugin.getServer().getPlayer(args[0]);
 
         if (target == null) {
             sender.sendMessage(color(plugin.getLang().getString("player.offline")));
-            return true;
+            return;
         }
 
         if (target.equals(staff)) {
             sender.sendMessage(color(plugin.getLang().getString("freeze.self")));
-            return true;
+            return;
         }
 
-        if (target.hasPermission("vanillacore.freeze.bypass")) {
+        if (target.hasPermission("coffee.freeze.bypass")) {
             sender.sendMessage(color(plugin.getLang().getString("freeze.player-bypass")));
-            return true;
+            return;
         }
 
         if (plugin.getPlayers().get(target).isFrozed()) {
             plugin.getPlayers().get(target).unfreeze(target, staff);
-            return true;
+            return;
         }
 
         plugin.getPlayers().get(target).freeze(target, staff);
-        return true;
     }
 }

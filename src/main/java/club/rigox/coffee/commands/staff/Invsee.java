@@ -1,54 +1,51 @@
 package club.rigox.coffee.commands.staff;
 
 import club.rigox.coffee.Coffee;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
+import co.aikar.commands.BaseCommand;
+import co.aikar.commands.annotation.CommandAlias;
+import co.aikar.commands.annotation.CommandCompletion;
+import co.aikar.commands.annotation.CommandPermission;
+import co.aikar.commands.annotation.Default;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.jetbrains.annotations.NotNull;
 
 import static club.rigox.coffee.utils.MsgUtils.color;
 
-public class Invsee implements CommandExecutor {
+@CommandAlias("invsee")
+@CommandPermission("coffee.invsee")
+public class Invsee extends BaseCommand {
     private final Coffee plugin;
 
     public Invsee (Coffee plugin) {
         this.plugin = plugin;
-        plugin.getServer().getPluginCommand("invsee").setExecutor(this);
-
     }
 
-    @Override
-    public boolean onCommand(@NotNull CommandSender sender, @NotNull Command cmd, @NotNull String s, @NotNull String[] args) {
+    @Default
+    @CommandCompletion("@players")
+    public void onDefault(CommandSender sender, String[] args) {
         if (!(sender instanceof Player)) {
             sender.sendMessage(color(plugin.getLang().getString("only-users")));
-            return true;
+            return;
         }
 
         Player player = (Player) sender;
         if(args.length != 1){
             sender.sendMessage(color(plugin.getLang().getString("command-usage.base") + plugin.getLang().getString("command-usage.invsee")));
-            return true;
-        }
-
-        if (!player.hasPermission("vanillacore.invsee")) {
-            player.sendMessage(color(plugin.getLang().getString("permission.general-no")));
-            return true;
+            return;
         }
 
         Player target = plugin.getServer().getPlayer(args[0]);
         if (target == null) {
             sender.sendMessage(color(plugin.getLang().getString("player.offline")));
-            return true;
+            return;
         }
 
         if (target.equals(sender)) {
             sender.sendMessage(color(plugin.getLang().getString("invsee.self")));
-            return true;
+            return;
         }
 
         player.openInventory(target.getInventory());
         player.sendMessage(color(String.format(plugin.getLang().getString("invsee.open"), target.getName())));
-        return false;
     }
 }

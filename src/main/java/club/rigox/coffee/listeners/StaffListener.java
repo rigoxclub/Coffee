@@ -12,7 +12,6 @@ import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerPickupArrowEvent;
 
-import static club.rigox.coffee.utils.ConsoleUtils.debug;
 import static club.rigox.coffee.utils.MsgUtils.color;
 
 public class StaffListener implements Listener {

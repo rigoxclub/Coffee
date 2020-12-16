@@ -70,12 +70,11 @@ public final class Coffee extends JavaPlugin {
     public void registerCommands() {
         PaperCommandManager manager = new PaperCommandManager(this);
         manager.registerCommand(new CoffeeCore());
-
-        new Freeze(this);
-        new Staff(this);
-        new Invsee(this);
-        new God(this);
-        new PlayerTP(this);
+        manager.registerCommand(new God(this));
+        manager.registerCommand(new Freeze(this));
+        manager.registerCommand(new Staff(this));
+        manager.registerCommand(new Invsee(this));
+        manager.registerCommand(new PlayerTP(this));
     }
 
     public void registerListeners() {
