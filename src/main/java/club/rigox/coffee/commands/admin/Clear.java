@@ -26,16 +26,12 @@ public class Clear extends BaseCommand {
         if (args.length == 1) {
             Player target = plugin.getServer().getPlayer(args[0]);
 
-            if (!plugin.getCommandUtils().hasPermission(sender, "coffee.clear.others")) return;
             if (plugin.getCommandUtils().playerOffline(sender, target)) return;
-
-            if (sender.equals(target)) {
-                sender.sendMessage("&cYou could just use /clear");
-                return;
-            }
+            if (!plugin.getCommandUtils().hasPermission(sender, "coffee.clear.others")) return;
+            if (plugin.getCommandUtils().self(sender, target)) return;
 
             if (plugin.getPlayers().get(target).isOnStaffMode()) {
-                sender.sendMessage(color(String.format("You can't clear %s inventory! Is on staff mode.", target.getName())));
+                sender.sendMessage(color(String.format("&cYou can't clear %s inventory! Is on staff mode.", target.getName())));
                 return;
             }
 

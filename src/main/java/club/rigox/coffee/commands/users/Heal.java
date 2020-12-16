@@ -23,21 +23,11 @@ public class Heal extends BaseCommand {
     @CommandCompletion("@players")
     public void onHeal(CommandSender sender, String[] args) {
         if (args.length == 1) {
-            if (!sender.hasPermission("coffee.heal.others")) {
-                sender.sendMessage(color(plugin.getLang().getString("permission.clear-others")));
-                return;
-            }
+            if (plugin.getCommandUtils().hasPermission(sender, "coffee.heal.others")) return;
 
             Player target = plugin.getServer().getPlayer(args[0]);
-            if (target == null) {
-                sender.sendMessage(color(plugin.getLang().getString("player.offline")));
-                return;
-            }
-
-            if (target.equals(sender)) {
-                sender.sendMessage(color("&cJust use /heal."));
-                return;
-            }
+            if (plugin.getCommandUtils().playerOffline(sender, target)) return;
+            if (plugin.getCommandUtils().self(sender, target)) return;
 
             target.setHealth(20.0);
             target.sendMessage(color(String.format("&aYou have been healed by %s", sender.getName())));
@@ -45,10 +35,7 @@ public class Heal extends BaseCommand {
             return;
         }
 
-        if (!(sender instanceof Player)) {
-            sender.sendMessage(color(plugin.getLang().getString("command-usage.base") + plugin.getLang().getString("command-usage.heal-others")));
-            return;
-        }
+        if (plugin.getCommandUtils().isConsole(sender)) return;
 
         Player player = (Player) sender;
         player.setHealth(20.0);

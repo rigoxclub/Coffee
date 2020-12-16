@@ -23,30 +23,16 @@ public class God extends BaseCommand {
     @CommandPermission("coffee.god")
     @CommandCompletion("@players")
     public void onDefault(CommandSender sender, String[] args) {
-
-        if (!(sender instanceof Player)) {
-            sender.sendMessage(color(plugin.getLang().getString("only-users")));
-            return;
-        }
+        if (plugin.getCommandUtils().isConsole(sender)) return;
 
         Player player = (Player) sender;
         if (args.length == 1) {
-            if (!player.hasPermission("coffee.god.others")) {
-                player.sendMessage(color(plugin.getLang().getString("permission.god-others")));
-                return;
-            }
+            if (!plugin.getCommandUtils().hasPermission(sender, "coffee.god.others")) return;
 
             Player target = plugin.getServer().getPlayer(args[0]);
 
-            if (target == null) {
-                player.sendMessage(color(plugin.getLang().getString("player.offline")));
-                return;
-            }
-
-            if (target.equals(player)) {
-                player.sendMessage(color(plugin.getLang().getString("god.self")));
-                return;
-            }
+            if (plugin.getCommandUtils().playerOffline(sender, target)) return;
+            if (plugin.getCommandUtils().self(player, target)) return;
 
             if (plugin.getPlayers().get(target).hasGod()) {
                 plugin.getPlayers().get(target).enableGod();
