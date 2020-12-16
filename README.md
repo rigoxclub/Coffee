@@ -1,11 +1,12 @@
-# VanillaCore
+![](https://i.imgur.com/tTUy0M1.png "Banner")
+# VanillaCore 
 
 Command & permissions List:
 - **/staff** - vanillacore.staff
 - **/freeze** - vanillacore.freeze
-- **/fly** - vanillacore.fly *(vanillacofre.fly.others to set fly on other players)*
+- **/fly** - vanillacore.fly
 - **/invsee** - vanillacore.invsee
-- **/god** - vanillacore.god *(vanillacore.god.others.to set god on other players)*
+- **/god** - vanillacore.god
 
 Non-command permission List:
 - **vanillacore.fly.others** - Toggle fly to other players
