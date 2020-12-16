@@ -1,7 +1,6 @@
 package club.rigox.coffee;
 
 import club.rigox.coffee.commands.CoffeeCore;
-import club.rigox.coffee.commands.Fly;
 import club.rigox.coffee.commands.God;
 import club.rigox.coffee.commands.staff.Freeze;
 import club.rigox.coffee.commands.staff.Invsee;
@@ -13,7 +12,6 @@ import club.rigox.coffee.listeners.PlayerListener;
 import club.rigox.coffee.listeners.StaffItemsListener;
 import club.rigox.coffee.listeners.StaffListener;
 import club.rigox.coffee.models.PlayerModel;
-import club.rigox.coffee.player.FlyStatus;
 import club.rigox.coffee.player.Inventory;
 import club.rigox.coffee.player.gui.TeleportGUI;
 import club.rigox.coffee.player.scoreboard.ScoreBoardAPI;
@@ -39,7 +37,6 @@ public final class Coffee extends JavaPlugin {
     private Map<Player, PlayerModel> players = new LinkedHashMap<>();
 
     private Inventory inventoryUtils;
-    private FlyStatus flyStatus;
     private ScoreBoardAPI scoreBoardAPI;
     private TeleportGUI teleportGui;
 
@@ -57,7 +54,6 @@ public final class Coffee extends JavaPlugin {
         loadConfigs();
 
         this.inventoryUtils = new Inventory(this);
-        this.flyStatus = new FlyStatus(this);
         this.scoreBoardAPI = new ScoreBoardAPI(this);
         this.teleportGui = new TeleportGUI(this);
 
@@ -77,7 +73,6 @@ public final class Coffee extends JavaPlugin {
 
         new Freeze(this);
         new Staff(this);
-        new Fly(this);
         new Invsee(this);
         new God(this);
         new PlayerTP(this);
@@ -127,10 +122,6 @@ public final class Coffee extends JavaPlugin {
 
     public FileConfiguration getScoreboard() {
         return scoreboard;
-    }
-
-    public FlyStatus getFlyStatus() {
-        return flyStatus;
     }
 
     public ScoreBoardAPI getScoreBoardAPI() {

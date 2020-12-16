@@ -27,7 +27,6 @@ public class PlayerModel {
     private boolean hasGod;
     private boolean isFrozed;
     private boolean isVanished;
-    private boolean isFlying;
 
     private ItemStack[] inventory;
     private ItemStack[] armor;
@@ -47,14 +46,6 @@ public class PlayerModel {
 
     public void unVanish() {
         this.isVanished = false;
-    }
-
-    public void setFly() {
-        this.isFlying = true;
-    }
-
-    public void removeFly() {
-        this.isFlying = false;
     }
 
     public void freeze(Player target, Player staff) {
@@ -146,9 +137,5 @@ public class PlayerModel {
 
     public boolean isVanished() {
         return isVanished;
-    }
-
-    public boolean isFlying() {
-        return isFlying;
     }
 }

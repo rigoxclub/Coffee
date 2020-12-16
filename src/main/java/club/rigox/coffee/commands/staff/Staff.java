@@ -58,7 +58,6 @@ public class Staff implements CommandExecutor {
             plugin.getScoreBoardAPI().setScoreBoard(player, "general", true);
 
             player.setGameMode(GameMode.SURVIVAL);
-            plugin.getFlyStatus().disable(player);
 
             player.sendMessage(color(plugin.getLang().getString("staff-mode.disabled")));
             return true;
@@ -75,7 +74,6 @@ public class Staff implements CommandExecutor {
         plugin.getScoreBoardAPI().setScoreBoard(player, "staff-mode", true);
 
         player.setGameMode(GameMode.ADVENTURE);
-        plugin.getFlyStatus().enable(player);
 
         player.sendMessage(color(plugin.getLang().getString("staff-mode.enabled")));
         return false;

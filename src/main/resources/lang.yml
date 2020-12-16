@@ -27,12 +27,12 @@ staff-mode:
   enabled: "&aStaff mode enabled!"
   disabled: "&cStaff mode disabled!"
 
-fly:
-  self: "&cOK WHAT THE FUCK? You can use only /FLY."
-  enabled: "&aFly enabled"
-  disabled: "&cFly disabled"
-  disabled-other: "&cYour fly has been deactivated by %s"
-  enabled-other: "&aYour fly has been activated by %s"
+#fly:
+#  self: "&cOK WHAT THE FUCK? You can use only /FLY."
+#  enabled: "&aFly enabled"
+#  disabled: "&cFly disabled"
+#  disabled-other: "&cYour fly has been deactivated by %s"
+#  enabled-other: "&aYour fly has been activated by %s"
 
 god:
   self: "&cOK WHAT THE FUCK? You can use only /GOD."
