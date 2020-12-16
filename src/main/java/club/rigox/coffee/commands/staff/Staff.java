@@ -27,14 +27,14 @@ public class Staff extends BaseCommand {
     }
 
     @Default
-    public void onDefault(CommandSender sender, String[] args) {
+    public void onDefault(CommandSender sender) {
         if (!(sender instanceof Player)) {
             sender.sendMessage(color(plugin.getLang().getString("only-users")));
             return;
         }
 
         Player player = (Player) sender;
-        if (!(player.hasPermission("vanillacore.staff"))) {
+        if (!(player.hasPermission("coffee.staff"))) {
             player.sendMessage(color(plugin.getLang().getString("no-staff-permission")));
             return;
         }
