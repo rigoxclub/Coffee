@@ -50,10 +50,12 @@ public class PlayerListener implements Listener {
         Player player = event.getPlayer();
 
         if (!plugin.getPlayers().get(player).isFrozed())
-            return; // Al pedo todo lo demas si el tipo no esta freezeado xd
+            return;
 
-        if (event.getTo().getX() == event.getFrom().getX() && event.getFrom().getZ() == event.getTo().getZ())
-            return; // No canceles al pedo cuando mueven la cabeza xd
+        if (event.getTo().getX() == event.getFrom().getX() &&
+                event.getFrom().getZ() == event.getTo().getZ() &&
+                event.getTo().getY() == event.getFrom().getY())
+            return;
 
         if (plugin.getPlayers().get(player).isFrozed()) {
             event.setCancelled(true);

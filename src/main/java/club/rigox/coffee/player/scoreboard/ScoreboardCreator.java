@@ -26,9 +26,9 @@ public class ScoreboardCreator {
         if (health) {
             this.tablingHealthObj = this.scoreboard.registerNewObjective("tablife", "dummy", "test");
             this.tablingHealthObj.setDisplaySlot(DisplaySlot.PLAYER_LIST);
-            this.nameHealthObj = this.scoreboard.registerNewObjective("namelife", "health", "test");
-            this.nameHealthObj.setDisplaySlot(DisplaySlot.BELOW_NAME);
-            this.nameHealthObj.setDisplayName(ChatColor.GRAY + "\u2764");
+//            this.nameHealthObj = this.scoreboard.registerNewObjective("namelife", "health", "test");
+//            this.nameHealthObj.setDisplaySlot(DisplaySlot.BELOW_NAME);
+//            this.nameHealthObj.setDisplayName(ChatColor.GRAY + "\u2764");
         }
 
     }
@@ -192,14 +192,14 @@ public class ScoreboardCreator {
         String string = "";
         for (int i = 0; i < sb.toString().length(); ++i) {
             if (sb.toString().charAt(i) == '§' && i < sb.toString().length() - 1) {
-                string = String.valueOf(String.valueOf(string)) + "§" + sb.toString().charAt(i + 1);
+                string = string + "§" + sb.toString().charAt(i + 1);
             }
         }
         String string2 = new StringBuilder().append((Object) sb2).toString();
         if (sb.length() > 14) {
-            string2 = (string.isEmpty() ? ("§" + string2) : (String.valueOf(String.valueOf(String.valueOf(string))) + string2));
+            string2 = (string.isEmpty() ? ("§" + string2) : (string + string2));
         }
-        return new String[]{(sb.toString().length() > 16) ? sb.toString().substring(0, 16) : sb.toString(), (string2.toString().length() > 16) ? string2.toString().substring(0, 16) : string2.toString()};
+        return new String[]{(sb.toString().length() > 16) ? sb.substring(0, 16) : sb.toString(), (string2.length() > 16) ? string2.toString().substring(0, 16) : string2.toString()};
     }
 
 }

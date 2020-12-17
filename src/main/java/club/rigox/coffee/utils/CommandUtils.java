@@ -1,6 +1,7 @@
 package club.rigox.coffee.utils;
 
 import club.rigox.coffee.Coffee;
+import org.bukkit.Location;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
@@ -35,5 +36,24 @@ public class CommandUtils {
             return true;
         }
         return false;
+    }
+
+    public void setSpawn(Location location) {
+        String worldName = location.getWorld().getName();
+        
+        double x = location.getX();
+        double y = location.getY();
+        double z = location.getZ();
+
+        float yaw = location.getYaw();
+        float pitch = location.getPitch();
+
+        plugin.getSetting().set("spawn.world", worldName);
+        plugin.getSetting().set("spawn.x", x);
+        plugin.getSetting().set("spawn.y", y);
+        plugin.getSetting().set("spawn.z", z);
+
+        plugin.getSetting().set("spawn.yaw", yaw);
+        plugin.getSetting().set("spawn.pitch", pitch);
     }
 }
