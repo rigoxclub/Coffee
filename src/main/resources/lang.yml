@@ -18,6 +18,7 @@ command-usage:
   gamemode: "/gm (creative/survival/spectator/adventure)"
   gamemode-others: "/gm (creative/survival/spectator/adventure) (player)"
   heal-others: "/heal (player)"
+  spawn-others: "/spawn tp (player)"
 
 freeze:
   self: "&cCuesta eso eh"

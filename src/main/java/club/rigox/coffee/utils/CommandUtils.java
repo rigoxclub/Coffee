@@ -63,8 +63,6 @@ public class CommandUtils {
         float yaw = Float.parseFloat(split[4]);
         float pitch = Float.parseFloat(split[5]);
 
-        Location loc = new Location(Bukkit.getWorld(world), x, y, z, yaw, pitch);
-
-        return loc;
+        return new Location(Bukkit.getWorld(world), x, y, z, yaw, pitch);
     }
 }
