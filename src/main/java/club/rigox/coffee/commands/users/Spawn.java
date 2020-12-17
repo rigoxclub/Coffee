@@ -39,6 +39,7 @@ public class Spawn extends BaseCommand {
             Location spawn = plugin.getCommandUtils().getSpawn(plugin.getSetting().getString("spawn.location"));
 
             if (plugin.getCommandUtils().playerOffline(sender, target)) return;
+            if (plugin.getCommandUtils().self(sender, target)) return;
 
             target.teleport(spawn);
             target.sendMessage(color(String.format("&aYou have been teleported to spawn by %s!", sender.getName())));
