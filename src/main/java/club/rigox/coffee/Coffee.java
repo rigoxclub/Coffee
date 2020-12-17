@@ -9,6 +9,7 @@ import club.rigox.coffee.commands.staff.Invsee;
 import club.rigox.coffee.commands.staff.PlayerTP;
 import club.rigox.coffee.commands.staff.Staff;
 import club.rigox.coffee.commands.users.God;
+import club.rigox.coffee.commands.users.Spawn;
 import club.rigox.coffee.hooks.LuckpermsHook;
 import club.rigox.coffee.hooks.Placeholders;
 import club.rigox.coffee.listeners.PlayerListener;
@@ -84,6 +85,7 @@ public final class Coffee extends JavaPlugin {
         manager.registerCommand(new Clear(this));
         manager.registerCommand(new Gamemode(this));
         manager.registerCommand(new SetSpawn(this));
+        manager.registerCommand(new Spawn(this));
         info("Plugin commands registered!");
     }
 
