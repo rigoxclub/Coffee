@@ -19,6 +19,7 @@ import club.rigox.coffee.player.Inventory;
 import club.rigox.coffee.player.gui.TeleportGUI;
 import club.rigox.coffee.player.scoreboard.ScoreBoardAPI;
 import club.rigox.coffee.utils.CommandUtils;
+import club.rigox.coffee.utils.ConsoleUtils;
 import co.aikar.commands.PaperCommandManager;
 import net.luckperms.api.LuckPerms;
 import org.bukkit.Bukkit;
@@ -57,7 +58,6 @@ public final class Coffee extends JavaPlugin {
         this.luckPerms = getServer().getServicesManager().load(LuckPerms.class);
 
         loadConfigs();
-
         this.inventoryUtils = new Inventory(this);
         this.scoreBoardAPI = new ScoreBoardAPI(this);
         this.teleportGui = new TeleportGUI(this);
@@ -99,7 +99,7 @@ public final class Coffee extends JavaPlugin {
         this.lang = createConfig("lang");
         this.setting = createConfig("settings");
         this.scoreboard = createConfig("scoreboard");
-        info("Plugin configurations registered!");
+        info("Plugin configurations loaded!");
     }
 
     public void loadHooks() {
@@ -156,7 +156,7 @@ public final class Coffee extends JavaPlugin {
         if (!configFile.exists()) {
             configFile.getParentFile().mkdirs();
             saveResource(configName + ".yml", false);
-            debug(String.format("%s.yml configuration was created!", configName));
+//            debug(String.format("%s.yml configuration was created!", configName));
         }
 
         FileConfiguration cfg = new YamlConfiguration();
@@ -167,5 +167,14 @@ public final class Coffee extends JavaPlugin {
             e.printStackTrace();
         }
         return cfg;
+    }
+
+    public void saveSetting() {
+        try {
+            getSetting().save(new File(getDataFolder(), "settings.yml"));
+        } catch (IOException e) {
+            warn(String.format("A error ocurred while saving settings.yml to the plugin data folder. Error", e));
+            e.printStackTrace();
+        }
     }
 }

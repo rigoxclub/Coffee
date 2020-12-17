@@ -1,6 +1,7 @@
 package club.rigox.coffee.utils;
 
 import club.rigox.coffee.Coffee;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -38,7 +39,7 @@ public class CommandUtils {
         return false;
     }
 
-    public void setSpawn(Location location) {
+    public String setSpawn(Location location) {
         String worldName = location.getWorld().getName();
         
         double x = location.getX();
@@ -48,12 +49,22 @@ public class CommandUtils {
         float yaw = location.getYaw();
         float pitch = location.getPitch();
 
-        plugin.getSetting().set("spawn.world", worldName);
-        plugin.getSetting().set("spawn.x", x);
-        plugin.getSetting().set("spawn.y", y);
-        plugin.getSetting().set("spawn.z", z);
+        return String.format("%s:%s:%s:%s:%s:%s", worldName, x, y, z, yaw, pitch);
+    }
 
-        plugin.getSetting().set("spawn.yaw", yaw);
-        plugin.getSetting().set("spawn.pitch", pitch);
+    public Location getSpawn(String location) {
+        String[] split = location.split(":");
+        String world = split[0];
+
+        double x = Double.parseDouble(split[1]);
+        double y = Double.parseDouble(split[2]);
+        double z = Double.parseDouble(split[3]);
+
+        float yaw = Float.parseFloat(split[4]);
+        float pitch = Float.parseFloat(split[5]);
+
+        Location loc = new Location(Bukkit.getWorld(world), x, y, z, yaw, pitch);
+
+        return loc;
     }
 }
